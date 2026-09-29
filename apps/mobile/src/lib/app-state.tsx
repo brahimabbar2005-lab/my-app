@@ -62,26 +62,22 @@ interface AppState {
 
 const AppContext = createContext<AppState | null>(null);
 
-function applyDirection(rtl: boolean): boolean {
+function applyDirection(rtl: boolean): void {
   if (Platform.OS === 'web') {
     if (typeof document !== 'undefined') {
       document.documentElement.dir = rtl ? 'rtl' : 'ltr';
       document.documentElement.lang = rtl ? 'ar' : document.documentElement.lang;
     }
-    return false;
+    return;
   }
   I18nManager.allowRTL(true);
-  if (I18nManager.isRTL !== rtl) {
-    I18nManager.forceRTL(rtl);
-    return true; // takes effect on the next launch
-  }
-  return false;
+  // Native layout direction switches on the next launch.
+  if (I18nManager.isRTL !== rtl) I18nManager.forceRTL(rtl);
 }
 
 export function AppStateProvider({ children }: { children: ReactNode }) {
   const [prefs, setPrefs] = useState<Preferences>(DEFAULTS);
   const [ready, setReady] = useState(false);
-  const [rtlRestartNeeded, setRtlRestartNeeded] = useState(false);
   const systemScheme = useColorScheme();
 
   useEffect(() => {
@@ -103,9 +99,10 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const rtl = localeIsRTL(locale);
 
   useEffect(() => {
-    if (!ready) return;
-    setRtlRestartNeeded(applyDirection(rtl));
+    if (ready) applyDirection(rtl);
   }, [ready, rtl]);
+  // I18nManager.isRTL keeps the direction the app launched with.
+  const rtlRestartNeeded = ready && Platform.OS !== 'web' && I18nManager.isRTL !== rtl;
 
   const scheme: ColorScheme =
     prefs.theme === 'system' ? (systemScheme === 'dark' ? 'dark' : 'light') : prefs.theme;

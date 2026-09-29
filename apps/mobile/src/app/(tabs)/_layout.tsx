@@ -10,9 +10,9 @@ import { useAuth } from '@/lib/auth';
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
 function tabIcon(active: IconName, inactive: IconName) {
-  return ({ color, focused, size }: { color: ColorValue; focused: boolean; size: number }) => (
-    <Ionicons name={focused ? active : inactive} size={size} color={color} />
-  );
+  return function TabIcon({ color, focused, size }: { color: ColorValue; focused: boolean; size: number }) {
+    return <Ionicons name={focused ? active : inactive} size={size} color={color} />;
+  };
 }
 
 function ProfileButton() {
@@ -45,7 +45,7 @@ export default function TabsLayout() {
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.tabInactive,
         tabBarStyle: { backgroundColor: colors.surface, borderTopColor: colors.border },
-        tabBarLabelStyle: { fontWeight: '600' },
+        tabBarLabelStyle: { fontWeight: '600', fontSize: 11 },
       }}>
       <Tabs.Screen
         name="index"

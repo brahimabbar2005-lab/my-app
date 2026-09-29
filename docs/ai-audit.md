@@ -51,6 +51,15 @@ A Python 3.11 FastAPI service (≈5,500 lines in `app/`) that answers Morocco tr
 5. Dependencies use `>=` ranges with no lockfile. Pin them (`pip-compile` or `uv lock`) before production.
 6. There were no user accounts: sessions were anonymous ids only. This is addressed below.
 
+### Found while testing the app end to end (open, Phase 4)
+7. **French questions retrieve English pages poorly.** BM25 matches tokens literally, so "désert" does not
+   match "desert" and "excursion" does not match "tour". Asked in French for a desert tour from Marrakech,
+   the service linked a hammam guide and offered no partner cards; the same question in English links the
+   Sahara tour guide and two desert tours. Fix direction: accent folding plus a small FR/ES→EN query
+   expansion before retrieval, with French golden questions added to the eval first.
+8. **The fallback message is English only.** `safety.fallback()` ignores the detected language, so a
+   French or Arabic traveller sees an English "couldn't get that answer" message when models are down.
+
 ### Architecture gaps relative to the Master Plan
 - Only one provider was active at a time, with no fallback (§12). **Addressed.**
 - The service had no concept of a signed-in user (§18, §38). **Addressed** for identity and limits. Linking chats to Supabase `ai_sessions` is Phase 4.
