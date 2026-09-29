@@ -1,0 +1,545 @@
+{
+ "_generated_by": "scripts/generate_catalog.py",
+ "links": {
+  "AFF-003": {
+   "kind": "program",
+   "partner": "localrent",
+   "program_id": "AFF-003",
+   "url": "https://localrent.tpx.li/9dMe1bKa"
+  },
+  "AFF-004": {
+   "kind": "program",
+   "partner": "tpx",
+   "program_id": "AFF-004",
+   "url": "https://tpx.li/UCD3SE15"
+  },
+  "AFF-008": {
+   "kind": "program",
+   "partner": "qeeq",
+   "program_id": "AFF-008",
+   "url": "https://qeeq.tpx.li/168HLIEc"
+  },
+  "AFF-012": {
+   "kind": "program",
+   "partner": "getrentacar",
+   "program_id": "AFF-012",
+   "url": "https://getrentacar.tpx.li/DR8xPPkm"
+  },
+  "AFF-013": {
+   "kind": "program",
+   "partner": "booking",
+   "program_id": "AFF-013",
+   "url": "https://booking.tpx.li/XkezrIhu"
+  },
+  "AFF-016": {
+   "kind": "program",
+   "partner": "kiwitaxi",
+   "program_id": "AFF-016",
+   "url": "https://kiwitaxi.tpx.li/8oyINvb4"
+  },
+  "AFF-017": {
+   "kind": "program",
+   "partner": "wegotrip",
+   "program_id": "AFF-017",
+   "url": "https://wegotrip.tpx.li/LjaY557n"
+  },
+  "AFF-018": {
+   "kind": "program",
+   "partner": "viator",
+   "program_id": "AFF-018",
+   "url": "https://viator.tpx.li/5q0L8alm"
+  },
+  "AFF-019": {
+   "kind": "program",
+   "partner": "hostelworld",
+   "program_id": "AFF-019",
+   "url": "https://hostelworld.tpx.li/2spOlqJq"
+  },
+  "AFF-021": {
+   "kind": "program",
+   "partner": "discovercars",
+   "program_id": "AFF-021",
+   "url": "https://discovercars.tpx.li/P7HL5u4i"
+  },
+  "AFF-022": {
+   "kind": "program",
+   "partner": "klook",
+   "program_id": "AFF-022",
+   "url": "https://klook.tpx.li/o3g2El95"
+  },
+  "AFF-023": {
+   "kind": "program",
+   "partner": "tiqets",
+   "program_id": "AFF-023",
+   "url": "https://tiqets.tpx.li/8Qz6nrJl"
+  },
+  "AFF-026": {
+   "kind": "program",
+   "partner": "intui",
+   "program_id": "AFF-026",
+   "url": "https://intui.tpx.li/ppGqSOi1"
+  },
+  "AFF-027": {
+   "kind": "program",
+   "partner": "getyourguide",
+   "program_id": "AFF-027",
+   "url": "https://www.getyourguide.com/marrakesh-l208/marrakech-camel-ride-in-the-oasis-palmeraie-t38164/?partner_id=7BARAIK&utm_medium=online_publisher"
+  },
+  "GYG-001": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/9UF2ENzy"
+  },
+  "GYG-002": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/8wy7wkvD"
+  },
+  "GYG-003": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/Xft3Renv"
+  },
+  "GYG-004": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/kqQocVj2"
+  },
+  "GYG-005": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/UFNhSwjM"
+  },
+  "GYG-006": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/J1GuturO"
+  },
+  "GYG-007": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/UFNhSwjM"
+  },
+  "GYG-008": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/g1fuBxbi"
+  },
+  "GYG-009": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/Kto06TKl"
+  },
+  "GYG-010": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/lguomVfh"
+  },
+  "GYG-011": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/idlfa9w6"
+  },
+  "GYG-012": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/0uHwbk0B"
+  },
+  "GYG-013": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/HMzbdhU7"
+  },
+  "GYG-014": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/F5LbBKJC"
+  },
+  "GYG-015": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/IXPVdolL"
+  },
+  "GYG-017": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/P7C6yMPl"
+  },
+  "GYG-018": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/jAS3YyIn"
+  },
+  "GYG-019": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/DaTDgd4Q"
+  },
+  "GYG-020": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/qWHfPVjU"
+  },
+  "GYG-021": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/IinwT8s5"
+  },
+  "GYG-022": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/J1GuturO"
+  },
+  "GYG-023": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/C05HKKgL"
+  },
+  "GYG-024": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/yJwlrrk5"
+  },
+  "GYG-025": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/C05HKKgL"
+  },
+  "GYG-026": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/Tgb2S5qC"
+  },
+  "GYG-027": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/qfb4mVAa"
+  },
+  "GYG-028": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/sMNDpK1r"
+  },
+  "GYG-029": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/idlfa9w6"
+  },
+  "GYG-030": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/nDVekk0X"
+  },
+  "GYG-031": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/FxbBMVx9"
+  },
+  "GYG-032": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/q1xSODzG"
+  },
+  "GYG-033": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/3SSoCC0H"
+  },
+  "GYG-034": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/tJFBpqnT"
+  },
+  "GYG-035": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/ZYZyeV9o"
+  },
+  "GYG-036": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/FxbBMVx9"
+  },
+  "GYG-037": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/IrRgu3sN"
+  },
+  "GYG-038": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/myJFjmiW"
+  },
+  "GYG-039": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/3SSoCC0H"
+  },
+  "GYG-040": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/nDVekk0X"
+  },
+  "GYG-041": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/BKSjOCMX"
+  },
+  "GYG-042": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/g2hzuVsg"
+  },
+  "GYG-043": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/Nmo6UeAB"
+  },
+  "GYG-044": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/4UiGggCn"
+  },
+  "GYG-045": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/nNzm4orf"
+  },
+  "GYG-046": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/H4jokpqW"
+  },
+  "GYG-047": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/YxHg9jR2"
+  },
+  "GYG-048": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/XOx1uZc8"
+  },
+  "GYG-049": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/Mz6qiq9n"
+  },
+  "GYG-050": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/IlEZCaNw"
+  },
+  "GYG-051": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/7YGR3eC3"
+  },
+  "GYG-052": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/ln4PggFk"
+  },
+  "GYG-053": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/yJwlrrk5"
+  },
+  "GYG-054": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/KNssbakQ"
+  },
+  "GYG-055": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/gbJHrs4i"
+  },
+  "GYG-056": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/qVTQoiI6"
+  },
+  "GYG-057": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/tX7yJSJN"
+  },
+  "GYG-058": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/fxpeSXUc"
+  },
+  "GYG-059": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/gbJHrs4i"
+  },
+  "GYG-060": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/jlSoYYkV"
+  },
+  "GYG-061": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/URKgRJTY"
+  },
+  "GYG-062": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/0jKlCHBo"
+  },
+  "GYG-063": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/zy3TNILA"
+  },
+  "GYG-064": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/wWHizLXD"
+  },
+  "GYG-065": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/H4jokpqW"
+  },
+  "GYG-066": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/v5dCHWGr"
+  },
+  "GYG-067": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/H4jokpqW"
+  },
+  "GYG-068": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/VWwGwAZZ"
+  },
+  "GYG-069": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/EGyhPhT0"
+  },
+  "GYG-070": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/3dzlxF3U"
+  },
+  "GYG-071": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/YWsi9Kes"
+  },
+  "GYG-072": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/YxHg9jR2"
+  },
+  "GYG-073": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/dS7JqtkV"
+  },
+  "GYG-074": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/6nNIPVL9"
+  },
+  "GYG-075": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/kqQocVj2"
+  },
+  "GYG-076": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/GZ3HS8AS"
+  },
+  "GYG-077": {
+   "kind": "activity",
+   "partner": "getyourguide",
+   "program_id": null,
+   "url": "https://gyg.me/lD47A6MH"
+  }
+ }
+}

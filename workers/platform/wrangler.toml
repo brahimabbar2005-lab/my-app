@@ -1,0 +1,14 @@
+name = "comemorocco-platform"
+main = "src/index.ts"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+SITE_URL = "https://comemorocco.com"
+WORDPRESS_URL = "https://comemorocco.com"
+# Comma-separated origins allowed to call /v1/* from a browser (Expo web, the site).
+ALLOWED_ORIGINS = "https://comemorocco.com,http://localhost:8081"
+
+# Secrets — set with `wrangler secret put <NAME>`, never in this file:
+#   SUPABASE_URL
+#   SUPABASE_SERVICE_ROLE_KEY   (server-side only; never shipped to the app)

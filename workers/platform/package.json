@@ -1,0 +1,23 @@
+{
+  "name": "@comemorocco/worker-platform",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cloudflare Worker: affiliate redirects (/go), content ingestion (/v1/content), health",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@comemorocco/shared": "workspace:*",
+    "hono": "^4.13.11"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260929.1",
+    "@comemorocco/config": "workspace:*",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.2",
+    "wrangler": "^4.143.1"
+  }
+}

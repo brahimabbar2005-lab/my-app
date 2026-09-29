@@ -1,0 +1,4 @@
+# Copy to .dev.vars for `wrangler dev`. Leave empty to run without Supabase:
+# clicks are then logged to the console and links come from the generated map.
+SUPABASE_URL=
+SUPABASE_SERVICE_ROLE_KEY=
