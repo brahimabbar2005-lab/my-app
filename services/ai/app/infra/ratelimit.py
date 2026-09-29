@@ -79,7 +79,7 @@ IP_LIMIT_MULTIPLIER = 5
 _limiter = SlidingWindowLimiter()
 
 
-def check_rate(session_key: str, ip_key: str | None = None) -> LimitVerdict:
+def check_rate(session_key: str, ip_key: str | None = None, user_id: str | None = None) -> LimitVerdict:
     """Check the session and the IP independently.
 
     Combining both into one key looked right but was not: session ids are
@@ -89,12 +89,22 @@ def check_rate(session_key: str, ip_key: str | None = None) -> LimitVerdict:
 
     The IP bucket is given a higher ceiling because households, offices and
     mobile carriers legitimately share one address.
+
+    Signed-in callers (a verified Supabase user id) are limited per account,
+    at SIGNED_IN_RATE_MULTIPLIER times the guest limits.
     """
-    verdict = _limiter.check(f"s:{session_key}")
+    if user_id:
+        # A verified account is a stronger identity than a client-chosen
+        # session id, so it is the bucket, and it gets a higher ceiling.
+        multiplier = max(1, get_settings().signed_in_rate_multiplier)
+        verdict = _limiter.check(f"u:{user_id}", multiplier=multiplier)
+    else:
+        multiplier = 1
+        verdict = _limiter.check(f"s:{session_key}")
     if not verdict.allowed:
         return verdict
     if ip_key:
-        return _limiter.check(f"i:{ip_key}", multiplier=IP_LIMIT_MULTIPLIER)
+        return _limiter.check(f"i:{ip_key}", multiplier=IP_LIMIT_MULTIPLIER * multiplier)
     return verdict
 
 

@@ -174,6 +174,14 @@ async def content_changed(payload: dict | None = None):
     return {"ok": True, **counts}
 
 
+@admin.get("/providers")
+async def providers():
+    """Model provider chain and the health the router has recorded for each."""
+    from app.core.providers.router import get_router
+
+    return {"chain": get_router().snapshot()}
+
+
 @admin.get("/config")
 async def config():
     """Effective configuration, with secrets redacted."""
@@ -192,5 +200,8 @@ async def config():
         "rate_limit_per_day": settings.rate_limit_per_day,
         "conversation_retention_days": settings.conversation_retention_days,
         "model_key_set": bool(settings.model_key),
+        "llm_chain": settings.llm_chain,
+        "workers_ai_configured": settings.workers_ai_configured,
+        "app_key_set": bool(settings.app_key),
         "widget_key_set": bool(settings.widget_key),
     }

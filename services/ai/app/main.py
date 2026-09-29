@@ -13,6 +13,7 @@ from app.api import routes_admin, routes_chat
 from app.config import ROOT, get_settings
 from app.core import safety
 from app.core.llm import available as model_available
+from app.core.providers.router import get_router
 from app.db.models import init_db
 from app.infra.logging import configure_logging
 from app.knowledge.retriever import get_retriever
@@ -63,7 +64,7 @@ app.add_middleware(
     allow_origins=_settings.cors_origins,
     allow_credentials=False,
     allow_methods=["GET", "POST", "OPTIONS"],
-    allow_headers=["Content-Type", "X-Widget-Key", "X-Admin-Key"],
+    allow_headers=["Content-Type", "X-Widget-Key", "X-App-Key", "X-Admin-Key", "Authorization"],
     max_age=3600,
 )
 
@@ -97,6 +98,7 @@ async def health():
         "model_configured": model_available(),
         "provider": get_settings().llm_provider,
         "model": get_settings().active_answer_model,
+        "providers": [p.key for p in get_router().providers],
         "knowledge": retriever.kb.health(),
     }
 

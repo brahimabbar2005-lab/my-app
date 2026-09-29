@@ -24,6 +24,7 @@ from app.config import get_settings
 from app.core import safety
 from app.core.orchestrator import get_orchestrator
 from app.db import repo
+from app.infra.auth import caller_from_authorization
 from app.infra.ratelimit import check_rate, validate_message
 from app.schemas import ChatRequest, ChatResponse
 
@@ -56,7 +57,8 @@ def _prepare(db: OrmSession, request: Request, payload: ChatRequest):
         db, session, payload.conversation_id, entry_page=payload.page_url
     )
 
-    verdict = check_rate(session.id, repo.hash_ip(ip))
+    caller = caller_from_authorization(request.headers.get("authorization"))
+    verdict = check_rate(session.id, repo.hash_ip(ip), user_id=caller.user_id)
     if not verdict.allowed:
         repo.record_event(db, "error_occurred", session_id=session.id,
                           conversation_id=conversation.id, properties={"reason": verdict.reason})

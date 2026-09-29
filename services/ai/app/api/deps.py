@@ -30,18 +30,24 @@ def client_ip(request: Request) -> str | None:
     return request.client.host if request.client else None
 
 
-def require_widget_key(x_widget_key: str | None = Header(default=None)) -> None:
-    """Shared secret between the WordPress plugin and this API.
+def require_widget_key(
+    x_widget_key: str | None = Header(default=None),
+    x_app_key: str | None = Header(default=None),
+) -> None:
+    """Shared client key: WIDGET_KEY for the WordPress widget, APP_KEY for the
+    mobile app.
 
-    Not a security boundary on its own — the key ships to the browser — but it
-    keeps casual scripted abuse off the endpoint and lets the key be rotated
-    without changing CORS.
+    Not a security boundary on its own — both keys ship inside their clients —
+    but it keeps casual scripted abuse off the endpoint and lets each key be
+    rotated independently without changing CORS.
     """
     settings = get_settings()
-    if not settings.widget_key:
+    expected = {k for k in (settings.widget_key, settings.app_key) if k}
+    if not expected:
         return  # unset in development
-    if x_widget_key != settings.widget_key:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="invalid widget key")
+    if x_widget_key in expected or x_app_key in expected:
+        return
+    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="invalid client key")
 
 
 def require_admin_key(x_admin_key: str | None = Header(default=None)) -> None:

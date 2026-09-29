@@ -24,13 +24,17 @@ from app.core.orchestrator import Orchestrator  # noqa: E402
 
 async def main() -> int:
     settings = get_settings()
-    if not settings.model_key:
+    if not llm.available():
         print("No model key found. Add OPENROUTER_API_KEY=... (or ANTHROPIC_API_KEY=...) to .env")
         return 1
+    from app.core.providers.router import get_router
+
+    router = get_router()
 
     calls = 1 + (2 if settings.model_classification_enabled else 0) + (1 if settings.quality_check_enabled else 0)
     print(f"provider   {settings.llm_provider}")
     print(f"model      {settings.active_answer_model}")
+    print("chain      " + " → ".join(p.key for p in router.providers))
     print(f"calls/question  {calls}" + ("   (free tier: optional calls off)" if settings.on_free_tier else ""))
     print()
 
@@ -50,6 +54,9 @@ async def main() -> int:
     for resource in result.resources:
         print(f"  [link] {resource.title}")
     print(f"\n{elapsed:.1f}s  ·  {result.usage.input_tokens} tokens in, {result.usage.output_tokens} out")
+    for health in router.snapshot():
+        state = "ok" if health["successes"] else (health["last_error_kind"] or "not tried")
+        print(f"  {health['provider']:<60} {state}")
 
     issues = [i for i in result.quality_issues if i.get("severity") == "major"]
     if issues:

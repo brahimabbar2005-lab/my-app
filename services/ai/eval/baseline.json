@@ -1,0 +1,7 @@
+{
+  "_comment": "Offline eval scores recorded when comemorocco-ai was imported (docs/ai-audit.md). CI fails if any score drops below these. Raise them when a change improves a score; lowering one needs explicit approval.",
+  "affiliate_discipline": 0.958,
+  "link_discipline": 1.0,
+  "live_data_detection": 0.638,
+  "retrieval": 0.378
+}

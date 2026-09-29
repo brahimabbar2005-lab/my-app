@@ -1,10 +1,14 @@
 """Model access: the one place that talks to a model provider.
 
-Two providers behind the same three functions — `complete`, `stream`,
+Providers sit behind the same three functions — `complete`, `stream`,
 `complete_json` — so nothing else in the app knows which one is in use:
 
   anthropic    the Anthropic SDK
   openrouter   OpenRouter's OpenAI-compatible HTTP API, called with httpx
+  workers_ai   Cloudflare Workers AI (app/core/providers/workers_ai.py)
+
+Which provider answers is decided by app/core/providers/router.py, which
+walks the configured fallback chain.
 
 OpenRouter is called directly rather than through the OpenAI SDK: httpx is
 already a dependency, and the request is small enough that a second SDK would
@@ -27,7 +31,20 @@ log = logging.getLogger(__name__)
 
 
 class ModelUnavailable(RuntimeError):
-    """Raised when the model cannot be reached. Callers show a fallback."""
+    """Raised when the model cannot be reached. Callers show a fallback.
+
+    `kind` tells the provider router how to treat the failure:
+    rate_limit | quota | auth | timeout | network | provider_error | empty | config.
+    """
+
+    def __init__(self, message: str, *, kind: str = "provider_error", status: int | None = None):
+        super().__init__(message)
+        self.kind = kind
+        self.status = status
+
+
+def _kind_for_http_error(exc: httpx.HTTPError) -> str:
+    return "timeout" if isinstance(exc, httpx.TimeoutException) else "network"
 
 
 @dataclass
@@ -50,6 +67,7 @@ class Completion:
     usage: Usage = field(default_factory=Usage)
     model: str = ""
     stop_reason: str | None = None
+    provider: str = ""
 
 
 # Reasoning models sometimes put their thinking inline instead of in a separate
@@ -89,7 +107,9 @@ def _messages(history: list[dict[str, str]], message: str) -> list[dict[str, Any
 
 
 def available() -> bool:
-    return bool(get_settings().model_key)
+    from app.core.providers.router import get_router
+
+    return get_router().available()
 
 
 def provider_name() -> str:
@@ -111,7 +131,7 @@ async def _anthropic_client():
         if _anthropic is None:
             settings = get_settings()
             if not settings.anthropic_api_key:
-                raise ModelUnavailable("ANTHROPIC_API_KEY is not configured")
+                raise ModelUnavailable("ANTHROPIC_API_KEY is not configured", kind="config")
             try:
                 from anthropic import AsyncAnthropic
             except ImportError as exc:  # pragma: no cover
@@ -132,7 +152,7 @@ async def _anthropic_complete(system, messages, model, max_tokens, temperature) 
             system=system, messages=messages,
         )
     except Exception as exc:  # noqa: BLE001
-        raise ModelUnavailable(str(exc)) from exc
+        raise _anthropic_error(exc) from exc
     text = "".join(b.text for b in response.content if getattr(b, "type", "") == "text")
     return Completion(
         text=text.strip(),
@@ -158,7 +178,23 @@ async def _anthropic_stream(system, messages, model, max_tokens, temperature):
     except ModelUnavailable:
         raise
     except Exception as exc:  # noqa: BLE001
-        raise ModelUnavailable(str(exc)) from exc
+        raise _anthropic_error(exc) from exc
+
+
+def _anthropic_error(exc: Exception) -> ModelUnavailable:
+    status = getattr(exc, "status_code", None)
+    name = type(exc).__name__
+    if status == 429 or name == "RateLimitError":
+        kind = "rate_limit"
+    elif status in (401, 403) or name in {"AuthenticationError", "PermissionDeniedError"}:
+        kind = "auth"
+    elif name in {"APITimeoutError"}:
+        kind = "timeout"
+    elif name in {"APIConnectionError"}:
+        kind = "network"
+    else:
+        kind = "provider_error"
+    return ModelUnavailable(str(exc), kind=kind, status=status)
 
 
 # ===========================================================================
@@ -193,7 +229,7 @@ def _openrouter_payload(system, messages, model, max_tokens, temperature, stream
 def _openrouter_headers() -> dict[str, str]:
     settings = get_settings()
     if not settings.openrouter_api_key:
-        raise ModelUnavailable("OPENROUTER_API_KEY is not configured")
+        raise ModelUnavailable("OPENROUTER_API_KEY is not configured", kind="config")
     return {
         "Authorization": f"Bearer {settings.openrouter_api_key}",
         "Content-Type": "application/json",
@@ -208,16 +244,20 @@ def _openrouter_error(response: httpx.Response) -> ModelUnavailable:
         detail = response.json().get("error", {}).get("message") or response.text[:300]
     except ValueError:
         detail = response.text[:300]
-    if response.status_code == 429:
+    code = response.status_code
+    if code == 429:
         return ModelUnavailable(
             f"OpenRouter rate limit reached (429): {detail}. Free models allow 20 requests a "
-            "minute and 50 a day without purchased credits; failed attempts also count."
+            "minute and 50 a day without purchased credits; failed attempts also count.",
+            kind="rate_limit", status=code,
         )
-    if response.status_code == 402:
-        return ModelUnavailable(f"OpenRouter reports insufficient credit (402): {detail}")
-    if response.status_code == 401:
-        return ModelUnavailable("OpenRouter rejected the API key (401). Check OPENROUTER_API_KEY in .env.")
-    return ModelUnavailable(f"OpenRouter error {response.status_code}: {detail}")
+    if code == 402:
+        return ModelUnavailable(f"OpenRouter reports insufficient credit (402): {detail}", kind="quota", status=code)
+    if code == 401:
+        return ModelUnavailable(
+            "OpenRouter rejected the API key (401). Check OPENROUTER_API_KEY in .env.", kind="auth", status=code
+        )
+    return ModelUnavailable(f"OpenRouter error {code}: {detail}", kind="provider_error", status=code)
 
 
 def _openrouter_client() -> httpx.AsyncClient:
@@ -235,7 +275,7 @@ async def _openrouter_complete(system, messages, model, max_tokens, temperature)
         async with _openrouter_client() as client:
             response = await client.post("/chat/completions", json=payload, headers=_openrouter_headers())
     except httpx.HTTPError as exc:
-        raise ModelUnavailable(f"could not reach OpenRouter: {exc}") from exc
+        raise ModelUnavailable(f"could not reach OpenRouter: {exc}", kind=_kind_for_http_error(exc)) from exc
 
     if response.status_code != 200:
         raise _openrouter_error(response)
@@ -251,7 +291,8 @@ async def _openrouter_complete(system, messages, model, max_tokens, temperature)
         raise ModelUnavailable(
             "OpenRouter returned an empty answer "
             f"(finish_reason={choice.get('finish_reason')}); the model may have spent its "
-            "budget reasoning."
+            "budget reasoning.",
+            kind="empty",
         )
     usage = data.get("usage") or {}
     return Completion(
@@ -340,13 +381,15 @@ async def _openrouter_stream(system, messages, model, max_tokens, temperature):
     except ModelUnavailable:
         raise
     except httpx.HTTPError as exc:
-        raise ModelUnavailable(f"could not reach OpenRouter: {exc}") from exc
+        raise ModelUnavailable(f"could not reach OpenRouter: {exc}", kind=_kind_for_http_error(exc)) from exc
 
     if pending and not in_think:
         emitted = True
         yield "delta", pending
     if not emitted:
-        raise ModelUnavailable("OpenRouter streamed no answer text; the model may have spent its budget reasoning.")
+        raise ModelUnavailable(
+            "OpenRouter streamed no answer text; the model may have spent its budget reasoning.", kind="empty"
+        )
     yield "usage", usage
 
 
@@ -368,9 +411,11 @@ async def complete(
     max_tokens = max_tokens or settings.max_answer_tokens
     temperature = settings.temperature if temperature is None else temperature
 
-    if settings.llm_provider == "openrouter":
-        return await _openrouter_complete(system, messages, model, max_tokens, temperature)
-    return await _anthropic_complete(system, messages, model, max_tokens, temperature)
+    from app.core.providers.router import get_router
+
+    return await get_router().complete(
+        system, messages, model=model, max_tokens=max_tokens, temperature=temperature
+    )
 
 
 async def stream(
@@ -389,11 +434,11 @@ async def stream(
     max_tokens = max_tokens or settings.max_answer_tokens
     temperature = settings.temperature if temperature is None else temperature
 
-    if settings.llm_provider == "openrouter":
-        source = _openrouter_stream(system, messages, model, max_tokens, temperature)
-    else:
-        source = _anthropic_stream(system, messages, model, max_tokens, temperature)
-    async for item in source:
+    from app.core.providers.router import get_router
+
+    async for item in get_router().stream(
+        system, messages, model=model, max_tokens=max_tokens, temperature=temperature
+    ):
         yield item
 
 

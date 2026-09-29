@@ -74,9 +74,15 @@ class Settings:
     log_level: str
     cors_origins: list[str]
     widget_key: str | None
+    # Sent by the mobile app. Like WIDGET_KEY it ships inside the client, so it
+    # is abuse friction, not a secret. Either key is accepted on /api/*.
+    app_key: str | None
     admin_key: str | None
     sync_secret: str | None
     wordpress_url: str
+    # Verifying signed-in app users (app/infra/auth.py). Either is enough.
+    supabase_url: str | None
+    supabase_jwt_secret: str | None
 
     # model
     # "anthropic" or "openrouter". Chosen automatically from whichever key is
@@ -96,6 +102,17 @@ class Settings:
     # on top of the rules. Each call costs one request against a provider's
     # rate limit; the rules alone are a working fallback.
     model_classification_enabled: bool
+    # Provider fallback chain, e.g.
+    #   openrouter:model-a:free,openrouter:model-b:free,workers_ai:@cf/...
+    # Empty means "derive from the keys that are set" (see providers/router.py).
+    llm_chain: list[str]
+    openrouter_fallback_model: str | None
+    cloudflare_account_id: str | None
+    cloudflare_api_token: str | None
+    # No default model on purpose: Cloudflare changes which models the free
+    # plan can use, so the model is always named in configuration.
+    workers_ai_model: str | None
+    workers_ai_base_url: str
     max_answer_tokens: int
     temperature: float
     request_timeout_seconds: int
@@ -115,6 +132,8 @@ class Settings:
     # limits
     rate_limit_per_minute: int
     rate_limit_per_day: int
+    # Signed-in users get this many times the guest limits.
+    signed_in_rate_multiplier: int
     daily_token_budget: int
 
     # behaviour
@@ -136,6 +155,10 @@ class Settings:
     @property
     def model_key(self) -> str | None:
         return self.openrouter_api_key if self.llm_provider == "openrouter" else self.anthropic_api_key
+
+    @property
+    def workers_ai_configured(self) -> bool:
+        return bool(self.cloudflare_account_id and self.cloudflare_api_token and self.workers_ai_model)
 
     @property
     def active_answer_model(self) -> str:
@@ -175,6 +198,9 @@ def load_settings() -> Settings:
         log_level=_str("LOG_LEVEL", "INFO"),
         cors_origins=_list("CORS_ORIGINS", ["http://localhost:8000", "https://comemorocco.com"]),
         widget_key=_str("WIDGET_KEY"),
+        app_key=_str("APP_KEY"),
+        supabase_url=_str("SUPABASE_URL"),
+        supabase_jwt_secret=_str("SUPABASE_JWT_SECRET"),
         admin_key=_str("ADMIN_KEY"),
         sync_secret=_str("SYNC_SECRET"),
         wordpress_url=_str("WORDPRESS_URL", "https://comemorocco.com"),
@@ -188,6 +214,12 @@ def load_settings() -> Settings:
         openrouter_base_url=_str("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1"),
         openrouter_reasoning_effort=(_str("OPENROUTER_REASONING_EFFORT", "low") or "low").lower(),
         model_classification_enabled=_bool("MODEL_CLASSIFICATION_ENABLED", not free_tier),
+        llm_chain=_list("LLM_CHAIN", []),
+        openrouter_fallback_model=_str("OPENROUTER_FALLBACK_MODEL"),
+        cloudflare_account_id=_str("CLOUDFLARE_ACCOUNT_ID"),
+        cloudflare_api_token=_str("CLOUDFLARE_API_TOKEN"),
+        workers_ai_model=_str("WORKERS_AI_MODEL"),
+        workers_ai_base_url=_str("WORKERS_AI_BASE_URL", "https://api.cloudflare.com/client/v4"),
         max_answer_tokens=_int("MAX_ANSWER_TOKENS", 1400),
         temperature=_float("TEMPERATURE", 0.7),
         request_timeout_seconds=_int("REQUEST_TIMEOUT_SECONDS", 60),
@@ -201,6 +233,7 @@ def load_settings() -> Settings:
         conversation_retention_days=_int("CONVERSATION_RETENTION_DAYS", 90),
         rate_limit_per_minute=_int("RATE_LIMIT_PER_MINUTE", 8),
         rate_limit_per_day=_int("RATE_LIMIT_PER_DAY", 60),
+        signed_in_rate_multiplier=_int("SIGNED_IN_RATE_MULTIPLIER", 3),
         daily_token_budget=_int("DAILY_TOKEN_BUDGET", 4_000_000),
         quality_check_enabled=_bool("QUALITY_CHECK_ENABLED", not free_tier),
         affiliates_enabled=_bool("AFFILIATES_ENABLED", True),

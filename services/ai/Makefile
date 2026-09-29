@@ -1,4 +1,4 @@
-.PHONY: help install build run test eval eval-full eval-model check-model lint sync purge clean
+.PHONY: help install build run test eval eval-gate eval-full eval-model check-model lint sync purge clean
 
 help:
 	@echo "install     install dependencies"
@@ -6,6 +6,7 @@ help:
 	@echo "run         start the API on http://localhost:8000"
 	@echo "test        run the test suite (no API key needed)"
 	@echo "eval        offline evaluation over the golden set (no API key needed)"
+	@echo "eval-gate   fail if eval scores drop below eval/baseline.json"
 	@echo "check-model one real request to confirm the key and model work"
 	@echo "eval-model  evaluation with real answers (uses model requests)"
 	@echo "lint        ruff"
@@ -29,6 +30,10 @@ test:
 
 eval:
 	python -m eval.harness --offline --full
+
+eval-gate:
+	-python -m eval.harness --offline --full > /dev/null
+	python scripts/check_eval_baseline.py
 
 check-model:
 	python scripts/check_model.py
