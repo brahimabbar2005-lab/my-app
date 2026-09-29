@@ -51,14 +51,24 @@ A Python 3.11 FastAPI service (≈5,500 lines in `app/`) that answers Morocco tr
 5. Dependencies use `>=` ranges with no lockfile. Pin them (`pip-compile` or `uv lock`) before production.
 6. There were no user accounts: sessions were anonymous ids only. This is addressed below.
 
-### Found while testing the app end to end (open, Phase 4)
-7. **French questions retrieve English pages poorly.** BM25 matches tokens literally, so "désert" does not
-   match "desert" and "excursion" does not match "tour". Asked in French for a desert tour from Marrakech,
-   the service linked a hammam guide and offered no partner cards; the same question in English links the
-   Sahara tour guide and two desert tours. Fix direction: accent folding plus a small FR/ES→EN query
-   expansion before retrieval, with French golden questions added to the eval first.
-8. **The fallback message is English only.** `safety.fallback()` ignores the detected language, so a
-   French or Arabic traveller sees an English "couldn't get that answer" message when models are down.
+### Found while testing the app end to end — fixed in v0.2
+7. ~~**French questions retrieve English pages poorly.**~~ **Fixed.** BM25 and the intent/affiliate rules
+   matched English tokens literally, so "Où réserver une excursion dans le désert depuis Marrakech ?"
+   linked a hammam guide and opened no partner options. `app/core/lexicon.py` now folds accents and
+   appends English equivalents of known FR/ES travel phrases (and "de X à Y" routes) — only when the
+   message is detected as French or Spanish — and the retrieval query keeps only words the corpus
+   knows. `tests/test_multilingual.py`: 7 annotated FR/ES retrieval cases, FR/ES booking vs advice
+   gating. All failed before the change and pass after it.
+8. ~~**The fallback message is English only.**~~ **Fixed.** `safety.fallback(reason, language)` has
+   fr/es/ar(+Darija) versions; the orchestrator passes the detected language, the API the request locale.
+9. **English bug found on the way — fixed.** "Where can I book a desert tour from Marrakech?" offered
+   *waterfall day trips*: "from marrakech" (Day Trip) outscored the single word "desert". It only
+   worked when "Merzouga" was also in the question. Desert Tour now also matches two-word phrases
+   ("desert tour", "sahara trip"…). Regression test added.
+
+After the changes: 171 tests pass and the offline eval is unchanged (affiliate 0.958, link 1.000,
+live-data 0.638, retrieval 0.378). The bridge never touches English messages, which is why the
+English eval could not move.
 
 ### Architecture gaps relative to the Master Plan
 - Only one provider was active at a time, with no fallback (§12). **Addressed.**

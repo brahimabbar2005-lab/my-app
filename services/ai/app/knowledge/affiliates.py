@@ -25,6 +25,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from app.schemas import AffiliateCard, Classification, TripState
+from app.core.lexicon import bridge
 
 DISCLOSURE = "Partner link — ComeMorocco may earn a commission if you book through it."
 
@@ -141,7 +142,10 @@ SUPPRESSES: dict[str, set[str]] = {
 
 # Activity category → the words that mean the traveller wants that thing.
 ACTIVITY_KEYWORDS: dict[str, tuple[str, ...]] = {
-    "Desert Tour": ("desert", "sahara", "merzouga", "erg chebbi", "erg chigaga", "agafay", "dunes"),
+    # Two-word phrases outweigh "from marrakech" (a Day Trip signal), so "desert
+    # tour from Marrakech" is not answered with waterfall day trips.
+    "Desert Tour": ("desert", "sahara", "merzouga", "erg chebbi", "erg chigaga", "agafay", "dunes",
+                    "desert tour", "desert trip", "desert excursion", "sahara tour", "sahara trip"),
     "Camel Ride": ("camel", "camel ride", "camel trek"),
     "Cooking Class": ("cooking class", "cooking", "learn to cook", "tagine class"),
     "Day Trip": ("day trip", "excursion", "from marrakech", "from agadir", "ourika", "ouzoud",
@@ -239,6 +243,7 @@ def select_affiliates(
     if blocked_intents & set(classification.intents):
         return AffiliateDecision(reason_blocked="intent category never carries an affiliate")
 
+    question = bridge(question, classification.language)
     text = question.lower()
     categories = detect_categories(question, classification)
     if not categories:

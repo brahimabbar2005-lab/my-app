@@ -34,7 +34,7 @@ jobs:
       - name: Shared contract examples are up to date
         run: python scripts/export_contract_examples.py --check
       - name: Lint new modules
-        run: ruff check app/core/providers app/infra/auth.py tests/test_provider_router.py tests/test_app_clients.py tests/test_contract.py
+        run: ruff check app/core/providers app/core/lexicon.py app/infra/auth.py tests/test_provider_router.py tests/test_app_clients.py tests/test_contract.py tests/test_multilingual.py
 
   typescript:
     name: TypeScript (typecheck, lint, tests)

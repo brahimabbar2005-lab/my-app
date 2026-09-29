@@ -35,11 +35,11 @@ router = APIRouter(prefix="/api", tags=["chat"], dependencies=[Depends(require_w
 
 
 
-def _too_many(reason: str, retry_after: int) -> JSONResponse:
+def _too_many(reason: str, retry_after: int, locale: str | None = None) -> JSONResponse:
     return JSONResponse(
         status_code=429,
         headers={"Retry-After": str(retry_after)},
-        content={"error": reason, "answer": safety.fallback("rate_limited")},
+        content={"error": reason, "answer": safety.fallback("rate_limited", locale)},
     )
 
 
@@ -62,17 +62,17 @@ def _prepare(db: OrmSession, request: Request, payload: ChatRequest):
     if not verdict.allowed:
         repo.record_event(db, "error_occurred", session_id=session.id,
                           conversation_id=conversation.id, properties={"reason": verdict.reason})
-        return session, conversation, _too_many(verdict.reason or "rate_limited", verdict.retry_after_seconds)
+        return session, conversation, _too_many(verdict.reason or "rate_limited", verdict.retry_after_seconds, payload.locale)
 
     if repo.over_token_budget(db):
         log.error("daily token budget exhausted")
-        return session, conversation, _too_many("budget_exhausted", 3600)
+        return session, conversation, _too_many("budget_exhausted", 3600, payload.locale)
 
     check = validate_message(payload.message)
     if not check.ok:
         return session, conversation, JSONResponse(
             status_code=400,
-            content={"error": check.reason, "answer": safety.fallback(check.reason or "empty")},
+            content={"error": check.reason, "answer": safety.fallback(check.reason or "empty", payload.locale)},
         )
     if check.reason == "possible_injection":
         repo.record_event(db, "error_occurred", session_id=session.id,
@@ -196,7 +196,7 @@ async def chat_stream(payload: ChatRequest, request: Request, db: OrmSession = D
             log.exception("stream failed: %s", exc)
             repo.record_event(db, "error_occurred", session_id=session.id,
                               conversation_id=conversation.id, properties={"reason": "stream_failed"})
-            yield _sse("error", {"answer": safety.fallback("model_unavailable")})
+            yield _sse("error", {"answer": safety.fallback("model_unavailable", payload.locale)})
 
     return StreamingResponse(
         events(),

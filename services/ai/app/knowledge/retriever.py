@@ -9,6 +9,7 @@ from app.config import get_settings
 from app.knowledge.index import ContentIndex, ScoredItem
 from app.knowledge.loader import KnowledgeBase, get_knowledge_base
 from app.schemas import Classification
+from app.core.lexicon import retrieval_query
 
 log = logging.getLogger(__name__)
 
@@ -38,6 +39,7 @@ class Retriever:
         limit = limit or settings.retrieval_candidates
         with self._lock:
             index = self._index
+        query = retrieval_query(query, classification.language, index.known_terms)
 
         results = index.search(
             query,

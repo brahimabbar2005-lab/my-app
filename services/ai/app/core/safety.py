@@ -169,5 +169,53 @@ FALLBACKS = {
 }
 
 
-def fallback(reason: str) -> str:
-    return FALLBACKS.get(reason, FALLBACKS["model_unavailable"])
+# The same messages in the other languages the assistant answers in, so a
+# traveller who wrote in French is not told in English that something failed.
+LOCALISED_FALLBACKS: dict[str, dict[str, str]] = {
+    "fr": {
+        "model_unavailable": (
+            "Je n'arrive pas à préparer cette réponse pour le moment — réessayez dans un instant. "
+            "Si cela continue, les guides Maroc du site répondent à la plupart des questions courantes."
+        ),
+        "rate_limited": (
+            "Vous avez posé beaucoup de questions en peu de temps, je dois faire une courte pause. "
+            "Réessayez dans une minute."
+        ),
+        "message_too_long": (
+            "C'est beaucoup d'un coup. Pouvez-vous m'envoyer l'essentiel — combien de temps vous avez, "
+            "qui voyage, et ce que vous attendez du voyage ?"
+        ),
+        "empty": "Que préparez-vous ? Dites-moi à peu près combien de temps vous avez et je vous aide.",
+    },
+    "es": {
+        "model_unavailable": (
+            "Ahora mismo no consigo preparar esa respuesta; inténtalo de nuevo en un momento. "
+            "Si sigue pasando, las guías de Marruecos del sitio responden a las preguntas más comunes."
+        ),
+        "rate_limited": (
+            "Has hecho muchas preguntas en poco tiempo, necesito una breve pausa. Inténtalo en un minuto."
+        ),
+        "message_too_long": (
+            "Es mucho a la vez. ¿Puedes enviarme lo esencial: cuánto tiempo tienes, quién viaja "
+            "y qué esperas del viaje?"
+        ),
+        "empty": "¿Qué estás planeando? Dime más o menos cuánto tiempo tienes y te ayudo.",
+    },
+    "ar": {
+        "model_unavailable": (
+            "لم أتمكن من تحضير هذه الإجابة الآن — حاول مرة أخرى بعد لحظة. "
+            "إذا استمر ذلك، فأدلة المغرب على الموقع تجيب عن معظم الأسئلة الشائعة."
+        ),
+        "rate_limited": "لقد طرحت أسئلة كثيرة في وقت قصير، أحتاج إلى استراحة قصيرة. حاول بعد دقيقة.",
+        "message_too_long": "هذا كثير دفعة واحدة. هل يمكنك إرسال الأهم: كم لديك من الوقت، ومن يسافر، وماذا تريد من الرحلة؟",
+        "empty": "ماذا تخطط؟ أخبرني تقريبًا كم لديك من الوقت وسأساعدك.",
+    },
+}
+# Darija speakers read Arabic script.
+LOCALISED_FALLBACKS["ary"] = LOCALISED_FALLBACKS["ar"]
+
+
+def fallback(reason: str, language: str | None = None) -> str:
+    base = (language or "en").split("-")[0].lower() if language not in ("ary",) else "ary"
+    localised = LOCALISED_FALLBACKS.get(base, {})
+    return localised.get(reason) or FALLBACKS.get(reason, FALLBACKS["model_unavailable"])

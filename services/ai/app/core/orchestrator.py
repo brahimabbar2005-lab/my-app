@@ -185,7 +185,7 @@ class Orchestrator:
         verdict = safety.check_input(message, classification)
         if not verdict.allow:
             return AnswerResult(
-                answer=verdict.refusal or safety.fallback("model_unavailable"),
+                answer=verdict.refusal or safety.fallback("model_unavailable", classification.language),
                 classification=classification,
                 trip=trip,
                 latency_ms=int((time.perf_counter() - started) * 1000),
@@ -219,7 +219,7 @@ class Orchestrator:
             # "you can browse our Morocco guides" a real offer rather than a
             # dead end (Project outline §50).
             return AnswerResult(
-                answer=safety.fallback("model_unavailable"),
+                answer=safety.fallback("model_unavailable", classification.language),
                 classification=classification,
                 trip=trip,
                 resources=resources,
@@ -292,7 +292,7 @@ class Orchestrator:
 
         verdict = safety.check_input(message, classification)
         if not verdict.allow:
-            refusal = verdict.refusal or safety.fallback("model_unavailable")
+            refusal = verdict.refusal or safety.fallback("model_unavailable", classification.language)
             yield "meta", {"resources": [], "affiliates": [], "notices": [],
                            "intents": classification.intents, "language": classification.language}
             yield "delta", refusal
@@ -335,7 +335,7 @@ class Orchestrator:
                     usage.add(payload)
         except ModelUnavailable as exc:
             log.error("streaming failed: %s", exc)
-            message_text = safety.fallback("model_unavailable")
+            message_text = safety.fallback("model_unavailable", classification.language)
             yield "delta", message_text if not chunks else "\n\n" + message_text
             yield "done", AnswerResult(
                 answer="".join(chunks) or message_text, classification=classification,

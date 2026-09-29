@@ -17,6 +17,7 @@ import re
 from typing import Any
 
 from app.core.language import detect_language
+from app.core.lexicon import bridge
 from app.schemas import Classification, TripState
 
 log = logging.getLogger(__name__)
@@ -210,6 +211,8 @@ def _complexity(text: str, intents: list[str]) -> str:
 def classify_rules(text: str, language_hint: str | None = None) -> Classification:
     """Deterministic first pass. Always runs."""
     language = detect_language(text, language_hint)
+    # French/Spanish travel phrases gain English equivalents for the rules below.
+    text = bridge(text, language)
 
     if GREETING.match(text):
         return Classification(intents=["GREETING"], language=language, complexity="simple")

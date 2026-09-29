@@ -23,6 +23,8 @@ from collections import Counter
 from dataclasses import dataclass
 from typing import Any, Iterable
 
+from app.core.lexicon import fold
+
 TOKEN_RE = re.compile(r"[a-z0-9]+")
 
 STOPWORDS = {
@@ -106,7 +108,8 @@ SYNONYMS: dict[str, tuple[str, ...]] = {
 
 
 def tokenise(text: str) -> list[str]:
-    return [t for t in TOKEN_RE.findall(text.lower()) if t not in STOPWORDS and len(t) > 2]
+    # Accents are folded so "désert" and "Fès" meet "desert" and "Fes".
+    return [t for t in TOKEN_RE.findall(fold(text)) if t not in STOPWORDS and len(t) > 2]
 
 
 def expand(tokens: Iterable[str]) -> list[str]:
@@ -303,6 +306,9 @@ class ContentIndex:
     def __init__(self, items: list[dict[str, Any]]):
         self.items = items
         self.bm25 = BM25Index(items)
+        # Every term that exists somewhere in the corpus (used to keep only
+        # meaningful words from non-English queries, see core/lexicon.py).
+        self.known_terms: set[str] = set(self.bm25.idf)
         self.title_tokens: list[set[str]] = [set(tokenise(item.get("title") or "")) for item in items]
         self.title_topics: list[set[str]] = [title_topics(item.get("title") or "") for item in items]
 
