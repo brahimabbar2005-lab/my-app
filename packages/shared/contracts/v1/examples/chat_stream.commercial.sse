@@ -1,0 +1,9 @@
+event: meta
+data: {"affiliates": [{"affiliate_id": "GYG-008", "category": "Desert Tour", "disclosure": "Partner link — ComeMorocco may earn a commission if you book through it.", "label": "Merzouga 3-Day Desert Safari with Food from Marrakech", "name": "Merzouga 3-Day Desert Safari with Food from Marrakech", "reason": "matches Desert Tour in Merzouga — from Marrakech", "url": "https://gyg.me/g1fuBxbi"}, {"affiliate_id": "GYG-012", "category": "Desert Tour", "disclosure": "Partner link — ComeMorocco may earn a commission if you book through it.", "label": "Shared 3-day desert tour from Marrakech to Merzouga (all-inclusive)", "name": "Shared 3-day desert tour from Marrakech to Merzouga (all-inclusive)", "reason": "matches Desert Tour in Merzouga — from Marrakech", "url": "https://gyg.me/0uHwbk0B"}], "conversation_id": "<conversation_id>", "intents": ["ACTIVITY", "DESERT", "BOOKING"], "language": "en", "notices": [], "resources": [{"anchor_text": "our Marrakech guide", "content_id": "4079", "reason": "title match, destination match, intent match, topic in title", "score": 2.248, "title": "Best Sahara Desert Tour from Marrakech: 2026 Guide", "url": "https://comemorocco.com/best-sahara-desert-tour-from-marrakech-2026-guide/"}], "session_id": "<session_id>", "trip_state": {"destinations": ["Marrakech", "Merzouga", "Sahara Desert"], "interests": ["desert"]}}
+
+event: delta
+data: {"text": "I couldn't get that answer together just now — try again in a moment. If it keeps happening, the Morocco guides on the site cover most of the common questions."}
+
+event: done
+data: {"conversation_id": "<conversation_id>", "latency_ms": 0, "message_id": "<message_id>", "trip_state": {"destinations": ["Marrakech", "Merzouga", "Sahara Desert"], "interests": ["desert"]}}
+

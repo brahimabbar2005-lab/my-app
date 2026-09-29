@@ -1,0 +1,2869 @@
+{
+ "_generated_by": "scripts/generate_catalog.py",
+ "destinations": [
+  {
+   "id": "marrakech",
+   "name": {
+    "en": "Marrakech",
+    "fr": "Marrakech",
+    "ar": "مراكش",
+    "es": "Marrakech"
+   },
+   "region": "Marrakech-Safi",
+   "lat": 31.6295,
+   "lng": -7.9811,
+   "hue": "#B4462F",
+   "tagline": "Souks, riads and the Atlas on the horizon",
+   "guide_url": "https://comemorocco.com/destinations/marrakech/",
+   "listing_count": 18,
+   "article_count": 74
+  },
+  {
+   "id": "fes",
+   "name": {
+    "en": "Fes",
+    "fr": "Fès",
+    "ar": "فاس",
+    "es": "Fez"
+   },
+   "region": "Fès-Meknès",
+   "lat": 34.0181,
+   "lng": -5.0078,
+   "hue": "#3450A1",
+   "tagline": "The world's largest living medina",
+   "guide_url": "https://comemorocco.com/destinations/fes/",
+   "listing_count": 1,
+   "article_count": 7
+  },
+  {
+   "id": "chefchaouen",
+   "name": {
+    "en": "Chefchaouen",
+    "fr": "Chefchaouen",
+    "ar": "شفشاون",
+    "es": "Chefchaouen"
+   },
+   "region": "Tanger-Tétouan-Al Hoceïma",
+   "lat": 35.1688,
+   "lng": -5.2636,
+   "hue": "#4F7BC8",
+   "tagline": "The blue city in the Rif mountains",
+   "guide_url": "https://comemorocco.com/destinations/chefchaouen/",
+   "listing_count": 1,
+   "article_count": 3
+  },
+  {
+   "id": "merzouga",
+   "name": {
+    "en": "Merzouga & Sahara",
+    "fr": "Merzouga et Sahara",
+    "ar": "مرزوكة والصحراء",
+    "es": "Merzouga y Sáhara"
+   },
+   "region": "Drâa-Tafilalet",
+   "lat": 31.0802,
+   "lng": -4.0134,
+   "hue": "#C9832E",
+   "tagline": "Dunes of Erg Chebbi and nights under the stars",
+   "guide_url": "https://comemorocco.com/destinations/merzouga/",
+   "listing_count": 6,
+   "article_count": 12
+  },
+  {
+   "id": "essaouira",
+   "name": {
+    "en": "Essaouira",
+    "fr": "Essaouira",
+    "ar": "الصويرة",
+    "es": "Esauira"
+   },
+   "region": "Marrakech-Safi",
+   "lat": 31.5085,
+   "lng": -9.7595,
+   "hue": "#1F7A63",
+   "tagline": "Windswept ramparts, surf and seafood",
+   "guide_url": "https://comemorocco.com/destinations/essaouira/",
+   "listing_count": 3,
+   "article_count": 3
+  },
+  {
+   "id": "casablanca",
+   "name": {
+    "en": "Casablanca",
+    "fr": "Casablanca",
+    "ar": "الدار البيضاء",
+    "es": "Casablanca"
+   },
+   "region": "Casablanca-Settat",
+   "lat": 33.5731,
+   "lng": -7.5898,
+   "hue": "#4A403A",
+   "tagline": "Art deco, the Atlantic and Hassan II Mosque",
+   "guide_url": "https://comemorocco.com/destinations/casablanca/",
+   "listing_count": 2,
+   "article_count": 11
+  },
+  {
+   "id": "rabat",
+   "name": {
+    "en": "Rabat",
+    "fr": "Rabat",
+    "ar": "الرباط",
+    "es": "Rabat"
+   },
+   "region": "Rabat-Salé-Kénitra",
+   "lat": 34.0209,
+   "lng": -6.8416,
+   "hue": "#2A3F8F",
+   "tagline": "The calm, green capital by the sea",
+   "guide_url": "https://comemorocco.com/destinations/rabat/",
+   "listing_count": 3,
+   "article_count": 3
+  },
+  {
+   "id": "tangier",
+   "name": {
+    "en": "Tangier",
+    "fr": "Tanger",
+    "ar": "طنجة",
+    "es": "Tánger"
+   },
+   "region": "Tanger-Tétouan-Al Hoceïma",
+   "lat": 35.7595,
+   "lng": -5.834,
+   "hue": "#6A4C93",
+   "tagline": "Where Africa meets Europe",
+   "guide_url": "https://comemorocco.com/destinations/tangier/",
+   "listing_count": 1,
+   "article_count": 3
+  },
+  {
+   "id": "agadir",
+   "name": {
+    "en": "Agadir & Taghazout",
+    "fr": "Agadir et Taghazout",
+    "ar": "أكادير وتغازوت",
+    "es": "Agadir y Taghazout"
+   },
+   "region": "Souss-Massa",
+   "lat": 30.4278,
+   "lng": -9.5981,
+   "hue": "#E0A526",
+   "tagline": "Year-round sun and world-class surf",
+   "guide_url": "https://comemorocco.com/agadir-morocco-beach-guide-best-resorts-activities/",
+   "listing_count": 9,
+   "article_count": 4
+  },
+  {
+   "id": "ouarzazate",
+   "name": {
+    "en": "Ouarzazate",
+    "fr": "Ouarzazate",
+    "ar": "ورزازات",
+    "es": "Uarzazat"
+   },
+   "region": "Drâa-Tafilalet",
+   "lat": 30.9335,
+   "lng": -6.937,
+   "hue": "#9C3B26",
+   "tagline": "Kasbahs, film sets and the road to the desert",
+   "guide_url": null,
+   "listing_count": 4,
+   "article_count": 0
+  },
+  {
+   "id": "dakhla",
+   "name": {
+    "en": "Dakhla",
+    "fr": "Dakhla",
+    "ar": "الداخلة",
+    "es": "Dajla"
+   },
+   "region": "Dakhla-Oued Ed-Dahab",
+   "lat": 23.6848,
+   "lng": -15.9579,
+   "hue": "#2B8C9E",
+   "tagline": "Lagoon kitesurfing where the desert meets the ocean",
+   "guide_url": "https://comemorocco.com/destinations/dakhla/",
+   "listing_count": 1,
+   "article_count": 0
+  }
+ ],
+ "listings": [
+  {
+   "id": "AFF-003",
+   "kind": "program",
+   "category": "car",
+   "title": "Localrent",
+   "subtitle": "Car Rental",
+   "destination": null,
+   "partner": "Localrent"
+  },
+  {
+   "id": "AFF-004",
+   "kind": "program",
+   "category": "transfer",
+   "title": "Welcome Pickups",
+   "subtitle": "Airport Transfer",
+   "destination": null,
+   "partner": "Welcome Pickups"
+  },
+  {
+   "id": "AFF-008",
+   "kind": "program",
+   "category": "car",
+   "title": "Qeeq",
+   "subtitle": "Car Rental",
+   "destination": null,
+   "partner": "Qeeq"
+  },
+  {
+   "id": "AFF-012",
+   "kind": "program",
+   "category": "car",
+   "title": "GetRentacar.com",
+   "subtitle": "Car Rental",
+   "destination": null,
+   "partner": "GetRentacar.com"
+  },
+  {
+   "id": "AFF-013",
+   "kind": "program",
+   "category": "stay",
+   "title": "Booking.com",
+   "subtitle": "Accommodation",
+   "destination": null,
+   "partner": "Booking.com"
+  },
+  {
+   "id": "AFF-016",
+   "kind": "program",
+   "category": "transfer",
+   "title": "Kiwitaxi",
+   "subtitle": "Private Transfer",
+   "destination": null,
+   "partner": "Kiwitaxi"
+  },
+  {
+   "id": "AFF-017",
+   "kind": "program",
+   "category": "experience",
+   "title": "WeGoTrip",
+   "subtitle": "Tours & Activities",
+   "destination": null,
+   "partner": "WeGoTrip"
+  },
+  {
+   "id": "AFF-018",
+   "kind": "program",
+   "category": "experience",
+   "title": "Viator",
+   "subtitle": "Tours & Activities",
+   "destination": null,
+   "partner": "Viator"
+  },
+  {
+   "id": "AFF-019",
+   "kind": "program",
+   "category": "stay",
+   "title": "Hostelworld",
+   "subtitle": "Hostels",
+   "destination": null,
+   "partner": "Hostelworld"
+  },
+  {
+   "id": "AFF-021",
+   "kind": "program",
+   "category": "car",
+   "title": "DiscoverCars",
+   "subtitle": "Car Rental",
+   "destination": null,
+   "partner": "DiscoverCars"
+  },
+  {
+   "id": "AFF-022",
+   "kind": "program",
+   "category": "experience",
+   "title": "Klook",
+   "subtitle": "Tours & Activities",
+   "destination": null,
+   "partner": "Klook"
+  },
+  {
+   "id": "AFF-023",
+   "kind": "program",
+   "category": "experience",
+   "title": "Tiqets",
+   "subtitle": "Attractions",
+   "destination": null,
+   "partner": "Tiqets"
+  },
+  {
+   "id": "AFF-026",
+   "kind": "program",
+   "category": "transfer",
+   "title": "intui.travel",
+   "subtitle": "Private Transfer",
+   "destination": null,
+   "partner": "intui.travel"
+  },
+  {
+   "id": "AFF-027",
+   "kind": "program",
+   "category": "experience",
+   "title": "getyourguide",
+   "subtitle": "Tours & Activities",
+   "destination": null,
+   "partner": "getyourguide"
+  },
+  {
+   "id": "GYG-001",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Cooking class in Berber village with hike and home-cooked lunch",
+   "subtitle": "Cooking Class",
+   "destination": null,
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-002",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Berber village tour, cooking class & lunch from Agadir",
+   "subtitle": "Cooking Class",
+   "destination": "agadir",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-003",
+   "kind": "activity",
+   "category": "experience",
+   "title": "2-day trek in High Atlas virgin villages",
+   "subtitle": "Mountain Activity",
+   "destination": null,
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-004",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Anima Garden & Ourika Valley Berber village day trip",
+   "subtitle": "Day Trip",
+   "destination": null,
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-005",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Ourika Valley, Berber villages & waterfall tour",
+   "subtitle": "Day Trip",
+   "destination": null,
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-006",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Ouzoud Waterfalls guided hike & boat trip from Marrakech",
+   "subtitle": "Day Trip",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-008",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Merzouga 3-Day Desert Safari with Food from Marrakech",
+   "subtitle": "Desert Tour",
+   "destination": "merzouga",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-009",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Agadir: Taghazout Beach Surf Lesson with Lunch & Transfer",
+   "subtitle": "Water Activity",
+   "destination": "agadir",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-010",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Essaouira: Surf Lesson with changing rooms & hot showers (budget-friendly activity)",
+   "subtitle": "Water Activity",
+   "destination": "essaouira",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-011",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Half-Day Sand Boarding Experience near Agadir with Dinner",
+   "subtitle": "Adventure",
+   "destination": "agadir",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-012",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Shared 3-day desert tour from Marrakech to Merzouga (all-inclusive)",
+   "subtitle": "Desert Tour",
+   "destination": "merzouga",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-013",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Ait Benhaddou & Ouarzazate Day Trip from Marrakech by land",
+   "subtitle": "Day Trip",
+   "destination": "ouarzazate",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-014",
+   "kind": "activity",
+   "category": "transfer",
+   "title": "Airport transfer in Marrakech (pre-booked on GYG)",
+   "subtitle": "Airport Transfer",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-015",
+   "kind": "activity",
+   "category": "experience",
+   "title": "3-Day Desert Tour including flights (if available; otherwise select combo tour)",
+   "subtitle": "Desert Tour",
+   "destination": "merzouga",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-017",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Tour starting from train station (e.g., Rabat city tour from station)",
+   "subtitle": "Cultural Tour",
+   "destination": "rabat",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-018",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Marrakech City Tour: Souks, Palaces & Hidden Gems",
+   "subtitle": "Cultural Tour",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-019",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Overnight Camel Trek over Erg Chebbi Dunes (from Merzouga)",
+   "subtitle": "Camel Ride",
+   "destination": "merzouga",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-020",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Marrakech: Agafay Desert Dinner Show + Camel Ride + Buggy",
+   "subtitle": "Desert Tour",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-021",
+   "kind": "activity",
+   "category": "experience",
+   "title": "5-Day Surf Camp in Taghazout with lessons & excursions",
+   "subtitle": "Water Activity",
+   "destination": "agadir",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-023",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Marrakesh: Agafay Desert Sunset, Camel Ride & Dinner Show",
+   "subtitle": "Desert Tour",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-024",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Marrakech: Agafay Desert Tour with Quad, Camel Ride & Dinner",
+   "subtitle": "Desert Tour",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-026",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Marrakech Quad Bike Experience: Desert and Palmeraie",
+   "subtitle": "Adventure",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-027",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Marrakesh: Agafay Desert Quad or Camel Trip with Dinner Show",
+   "subtitle": "Desert Tour",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-028",
+   "kind": "activity",
+   "category": "experience",
+   "title": "From Marrakesh: Essaouira Full-Day Trip",
+   "subtitle": "Day Trip",
+   "destination": "essaouira",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-030",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Marrakech: Cocktail Tasting Mixology & Moroccan Tapas",
+   "subtitle": "Food Tour",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-031",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Agadir: Atlas Mountains Cross Berber Villages Tour",
+   "subtitle": "Day Trip",
+   "destination": "agadir",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-032",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Sandboarding in the Small Sahara at Sunset (from Agadir/Taghazout)",
+   "subtitle": "Adventure",
+   "destination": "merzouga",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-033",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Dakhla: City Excursion with Lagoon, White Dune & Oyster Farm",
+   "subtitle": "Excursion",
+   "destination": "dakhla",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-034",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Agadir: Quad Bike and Sandboarding Tour",
+   "subtitle": "Adventure",
+   "destination": "agadir",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-035",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Sunset Timlalin Desert Experience – Camel Ride & Fire Show",
+   "subtitle": "Desert Tour",
+   "destination": "agadir",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-037",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Agadir: Traditional Moroccan Cooking Class",
+   "subtitle": "Cooking Class",
+   "destination": "agadir",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-038",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Marrakech: 3-Hour Hammam Experience with Massage & Pickup",
+   "subtitle": "Hammam / Wellness",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-041",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Todra Gorge Hiking Tour",
+   "subtitle": "Mountain Activity",
+   "destination": "ouarzazate",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-042",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Dades Valley Day Trip",
+   "subtitle": "Day Trip",
+   "destination": "ouarzazate",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-043",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Toubkal Summit Trek",
+   "subtitle": "Mountain Activity",
+   "destination": null,
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-044",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Legzira Beach Day Trip",
+   "subtitle": "Day Trip",
+   "destination": "agadir",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-045",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Ifrane & Cedar Forest Tour",
+   "subtitle": "Day Trip",
+   "destination": null,
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-046",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Fes Medina Guided Tour",
+   "subtitle": "Cultural Tour",
+   "destination": "fes",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-047",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Volubilis & Meknes Day Trip",
+   "subtitle": "Historical / Sightseeing",
+   "destination": null,
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-048",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Chefchaouen Blue City Tour",
+   "subtitle": "Cultural Tour",
+   "destination": "chefchaouen",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-049",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Casablanca Half-Day Tour",
+   "subtitle": "Cultural Tour",
+   "destination": "casablanca",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-050",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Rabat City Tour",
+   "subtitle": "Cultural Tour",
+   "destination": "rabat",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-051",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Star Gazing in the Sahara Desert",
+   "subtitle": "Excursion",
+   "destination": "merzouga",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-052",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Pottery Workshop in Safi",
+   "subtitle": "Other",
+   "destination": null,
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-054",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Hot Air Balloon Ride over Marrakech",
+   "subtitle": "Adventure",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-055",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Jewish Heritage Tour in Marrakech",
+   "subtitle": "Historical / Sightseeing",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-056",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Marrakech Horse Carriage Ride",
+   "subtitle": "Other",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-057",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Camel Ride & Picnic in the Palmeraie",
+   "subtitle": "Camel Ride",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-058",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Aquapark Day Pass in Marrakech",
+   "subtitle": "Other",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-060",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Private Sunset Cruise in Essaouira",
+   "subtitle": "Water Activity",
+   "destination": "essaouira",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-061",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Luxury Spa Day in Marrakech",
+   "subtitle": "Hammam / Wellness",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-062",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Private Dinner in a Riad Courtyard",
+   "subtitle": "Other",
+   "destination": null,
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-063",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Hot Air Balloon & Champagne Breakfast",
+   "subtitle": "Adventure",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-064",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Free Walking Tour of Marrakech Medina",
+   "subtitle": "Walking Tour",
+   "destination": "marrakech",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-066",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Self-Guided Audio Tour of Casablanca",
+   "subtitle": "Walking Tour",
+   "destination": "casablanca",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-068",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Tagine Cooking Workshop in Tangier",
+   "subtitle": "Cooking Class",
+   "destination": "tangier",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-069",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Moroccan Pastry Class in Rabat",
+   "subtitle": "Cooking Class",
+   "destination": "rabat",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-070",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Atlas Mountains Paragliding Experience",
+   "subtitle": "Adventure",
+   "destination": null,
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-071",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Draa Valley Oasis Tour",
+   "subtitle": "Day Trip",
+   "destination": "ouarzazate",
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-073",
+   "kind": "activity",
+   "category": "experience",
+   "title": "El Jadida Portuguese City Tour",
+   "subtitle": "Cultural Tour",
+   "destination": null,
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-074",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Sidi Ifni Coastal Adventure",
+   "subtitle": "Excursion",
+   "destination": null,
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-076",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Taza Hidden Gem Tour",
+   "subtitle": "Cultural Tour",
+   "destination": null,
+   "partner": "GetYourGuide"
+  },
+  {
+   "id": "GYG-077",
+   "kind": "activity",
+   "category": "experience",
+   "title": "Oujda & Eastern Morocco Discovery",
+   "subtitle": "Cultural Tour",
+   "destination": null,
+   "partner": "GetYourGuide"
+  }
+ ],
+ "articles": [
+  {
+   "id": "wp-2143",
+   "wordpress_post_id": 2143,
+   "title": "Ultimate Guide to Sahara Desert Tours Morocco 2025 How to Choose the Best Experience",
+   "excerpt": "Discover how to choose the best Sahara Desert tours Morocco offers. Compare Morocco desert trips, top Sahara camel tours, and expert tips for an unforgettable adventure",
+   "canonical_url": "https://comemorocco.com/sahara-desert-tours-morocco-guide/",
+   "destination": "merzouga",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-2274",
+   "wordpress_post_id": 2274,
+   "title": "10 Unmissable Moroccan Festivals 2026: Ultimate Guide to Culture and Events",
+   "excerpt": "Discover the best Moroccan festivals and events 2024. Enjoy vibrant culture, travel tips, and must-see celebrations across Morocco.",
+   "canonical_url": "https://comemorocco.com/moroccan-festivals-2025-guide/",
+   "destination": "fes",
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-2295",
+   "wordpress_post_id": 2295,
+   "title": "Ultimate Guide to Food Tours Marrakech for Authentic Cuisine",
+   "excerpt": "Discover the best food tours Marrakech offers. Explore markets, taste authentic Moroccan dishes, and enjoy insider tips for an unforgettable journey",
+   "canonical_url": "https://comemorocco.com/food-tours-marrakech-ultimate-guide/",
+   "destination": "marrakech",
+   "topic": "Food"
+  },
+  {
+   "id": "wp-2306",
+   "wordpress_post_id": 2306,
+   "title": "7 Breathtaking Ancient Cities Morocco: Ultimate Explorer's Guide",
+   "excerpt": "Discover 7 breathtaking ancient cities Morocco offers, from Fes to Marrakech. Explore Morocco historical cities and old towns with our ultimate guide to North Africa's living treasures.",
+   "canonical_url": "https://comemorocco.com/ancient-cities-morocco-historical-treasures/",
+   "destination": "marrakech",
+   "topic": "Food"
+  },
+  {
+   "id": "wp-2356",
+   "wordpress_post_id": 2356,
+   "title": "Religious Festivals Morocco Ultimate Guide to Celebrations",
+   "excerpt": "Discover religious festivals Morocco from Eid to local moussems. Explore Morocco religious holidays, Islamic festivals, and Eid traditions in this guide",
+   "canonical_url": "https://comemorocco.com/religious-festivals-morocco-guide/",
+   "destination": "fes",
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-2358",
+   "wordpress_post_id": 2358,
+   "title": "The Ultimate Guide to Religion in Morocco for Travelers 2025",
+   "excerpt": "Discover the rich religion in Morocco, explore iconic Morocco mosques, vibrant religious festivals, and experience Morocco's unique religious culture and Islam traditions.",
+   "canonical_url": "https://comemorocco.com/religion-in-morocco-guide/",
+   "destination": "fes",
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-2452",
+   "wordpress_post_id": 2452,
+   "title": "Morocco Safety 2025 Essential Travel Tips and Complete Guide",
+   "excerpt": "Discover essential Morocco safety tips for 2025. Learn how to stay safe, avoid scams, and enjoy secure travel in Marrakech, Casablanca, and beyond",
+   "canonical_url": "https://comemorocco.com/morocco-safety-travel-guide-2025/",
+   "destination": "marrakech",
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-2457",
+   "wordpress_post_id": 2457,
+   "title": "10 Best Moroccan Markets Guide: Ultimate Souk Shopping Tips",
+   "excerpt": "Discover the ultimate Moroccan markets guide with tips on shopping in Moroccan markets and souks, what to buy, how to haggle, and must-visit spots.",
+   "canonical_url": "https://comemorocco.com/moroccan-markets-shopping-guide/",
+   "destination": "marrakech",
+   "topic": "Food"
+  },
+  {
+   "id": "wp-2501",
+   "wordpress_post_id": 2501,
+   "title": "15 Unforgettable Couples Activities Morocco Offers for Romantic Getaways",
+   "excerpt": "Discover 15 unforgettable couples activities Morocco offers, from desert treks to romantic riads, perfect for honeymoons, anniversaries, or dreamy getaways.",
+   "canonical_url": "https://comemorocco.com/couples-activities-morocco-romance/",
+   "destination": "merzouga",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2826",
+   "wordpress_post_id": 2826,
+   "title": "Where to Stay in Marrakech: 15 Coolest Riads",
+   "excerpt": "Deciding where to stay in Marrakech? This guide reveals the 15 coolest riads for every budget. Find your perfect authentic Moroccan stay, from luxe to cheap.",
+   "canonical_url": "https://comemorocco.com/where-to-stay-in-marrakech/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2833",
+   "wordpress_post_id": 2833,
+   "title": "Marrakech Hotels 2025: Ultimate Luxury Stay Guide",
+   "excerpt": "Compare Marrakech hotels for 2025—discover top areas, Four Seasons Marrakech perks, insider tips & prices for unforgettable Marrakech luxury travel",
+   "canonical_url": "https://comemorocco.com/marrakech-hotels-guide-2025/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2841",
+   "wordpress_post_id": 2841,
+   "title": "Where to Stay in Marrakech: 9 Epic Areas & Hotels Guide",
+   "excerpt": "Wondering where to stay in Marrakech? Discover the coolest riads, top Marrakech hotels like Four Seasons, plus pro luxury travel tips.",
+   "canonical_url": "https://comemorocco.com/where-to-stay-in-marrakech-2/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2875",
+   "wordpress_post_id": 2875,
+   "title": "15 Best Affordable Riads in Marrakech: Experience Authentic Morocco on a Budget",
+   "excerpt": "Discover the best affordable riads in Marrakech. Our guide to budget-friendly accommodation Marrakech features top-rated, authentic riads under $100/night for an unforgettable Moroccan experience.",
+   "canonical_url": "https://comemorocco.com/affordable-riads-in-marrakech-budget/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2989",
+   "wordpress_post_id": 2989,
+   "title": "Unforgettable Stays: Your Guide to Luxury Hotels in Marrakech Medina (Updated 2025)",
+   "excerpt": "Updated 2025 guide to the best luxury hotels Marrakech Medina! Find 5-star stays, riads, & maybe an all-inclusive option. Book your unforgettable Moroccan escape!",
+   "canonical_url": "https://comemorocco.com/luxury-hotels-marrakech-medina/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2996",
+   "wordpress_post_id": 2996,
+   "title": "9 Best Family Hotels in Marrakech for a Kid-Friendly Stay",
+   "excerpt": "Find the best family hotels Marrakech for a kid-friendly stay! Discover top hotels with pools, kids' clubs, & family suites for an unforgettable trip.",
+   "canonical_url": "https://comemorocco.com/family-hotels-marrakech-kid-friendly/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-3004",
+   "wordpress_post_id": 3004,
+   "title": "Marrakech Attractions: Your Ultimate Guide to Jemaa el-Fna and Top Points of Interest",
+   "excerpt": "Explore top Marrakech attractions: Jemaa el-Fna, palaces, gardens & more! Discover the best points of interest in Marrakech for an unforgettable trip.",
+   "canonical_url": "https://comemorocco.com/top-marrakech-attractions/",
+   "destination": "marrakech",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-3012",
+   "wordpress_post_id": 3012,
+   "title": "The Ultimate Guide To The Marrakech Medina: Souks, Palaces & Hidden Gems",
+   "excerpt": "Explore the vibrant Marrakech Medina, from its bustling souks to the stunning Bahia Palace. Discover hidden gems and essential tips for navigating this UNESCO World Heritage site.",
+   "canonical_url": "https://comemorocco.com/marrakech-medina-souks-palaces/",
+   "destination": "marrakech",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-3021",
+   "wordpress_post_id": 3021,
+   "title": "The Ultimate Guide to Marrakech Museums: Exploring Cultural Treasures",
+   "excerpt": "Explore the cultural treasures of Marrakech with our guide to the city's best museums, including the Dar Si Said Museum and the History Marrakech Museums. Discover the rich heritage of the Red City.",
+   "canonical_url": "https://comemorocco.com/marrakech-museums-cultural-treasures/",
+   "destination": "marrakech",
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-3055",
+   "wordpress_post_id": 3055,
+   "title": "The Ultimate Guide to Jardin Majorelle Marrakech: 3 Beautiful Gardens You Must See",
+   "excerpt": "Discover Marrakech's most beautiful gardens: Jardin Majorelle, Menara Gardens, and Secret Garden. Get essential visitor info, history, and tips for your trip to these tranquil oases.",
+   "canonical_url": "https://comemorocco.com/jardin-majorelle-marrakech-gardens-guide/",
+   "destination": "marrakech",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-3066",
+   "wordpress_post_id": 3066,
+   "title": "Comprehensive Guide to the Best Things to Do in Marrakech",
+   "excerpt": "Discover the best things to do in Marrakech, Morocco. Our guide covers cultural treasures, desert adventures, souk shopping, and hidden gems to plan your perfect trip.",
+   "canonical_url": "https://comemorocco.com/things-to-do-in-marrakech/",
+   "destination": "marrakech",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-3067",
+   "wordpress_post_id": 3067,
+   "title": "Ultimate Guide to Unforgettable Marrakech Tours: Desert Adventures, Hot Air Balloons & Insider Tips",
+   "excerpt": "Explore unforgettable Marrakech tours: from luxury Sahara desert experiences and hot air balloon rides to thrilling quad biking and camel treks. Your ultimate adventure guide.",
+   "canonical_url": "https://comemorocco.com/marrakech-tours-desert-adventures-guide/",
+   "destination": "marrakech",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-3080",
+   "wordpress_post_id": 3080,
+   "title": "The Ultimate Guide to Marrakech's Best Wellness Retreats for 2025",
+   "excerpt": "Discover the best wellness retreats Marrakech offers for rejuvenation. Experience yoga in Marrakech, traditional hammams, and luxury spa hotels for a transformative escape.",
+   "canonical_url": "https://comemorocco.com/wellness-retreats-marrakech-guide/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-3081",
+   "wordpress_post_id": 3081,
+   "title": "Marrakech Hammam: The Ultimate Guide to Traditional Moroccan Bathing",
+   "excerpt": "Discover the ultimate Marrakech hammam guide. Learn about traditional Moroccan spa rituals, health benefits, etiquette, and find the best hammam in Marrakech for an authentic experience.",
+   "canonical_url": "https://comemorocco.com/marrakech-hammam-ultimate-guide/",
+   "destination": "marrakech",
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-3090",
+   "wordpress_post_id": 3090,
+   "title": "Marrakech Nightlife: The Ultimate Guide to Evening Entertainment",
+   "excerpt": "Explore Marrakech nightlife with our guide to the best bars, nightclubs, and cultural evening entertainment. Discover rooftop lounges and authentic Moroccan experiences.",
+   "canonical_url": "https://comemorocco.com/marrakech-nightlife-comprehensive-guide/",
+   "destination": "marrakech",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-3095",
+   "wordpress_post_id": 3095,
+   "title": "Cultural Performances Marrakech: The Ultimate Guide to Live Music & Belly Dancing",
+   "excerpt": "Experience the soul of Morocco. Our guide reveals the best cultural performances Marrakech offers, from authentic Gnawa music to mesmerizing belly dancing shows. Plan your unforgettable evening.",
+   "canonical_url": "https://comemorocco.com/cultural-performances-marrakech-guide/",
+   "destination": "marrakech",
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-3103",
+   "wordpress_post_id": 3103,
+   "title": "The Ultimate Guide to Marrakech Restaurants, Street Food & Mint Tea",
+   "excerpt": "Delve into the culinary heart of Morocco. Discover the best Marrakech restaurants, vibrant street food, and the ritual of mint tea in this essential guide to the city's food scene.",
+   "canonical_url": "https://comemorocco.com/marrakech-restaurants-culinary-journey/",
+   "destination": "marrakech",
+   "topic": "Food"
+  },
+  {
+   "id": "wp-3109",
+   "wordpress_post_id": 3109,
+   "title": "Exploring Marrakech Food: A Culinary Journey Through Traditional Moroccan Dishes",
+   "excerpt": "Indulge in Marrakech food: a guide to traditional Moroccan dishes in Marrakech. Discover must-try street food & how a cooking class can deepen your experience.",
+   "canonical_url": "https://comemorocco.com/marrakech-food-moroccan-cuisine-guide/",
+   "destination": "marrakech",
+   "topic": "Food"
+  },
+  {
+   "id": "wp-3116",
+   "wordpress_post_id": 3116,
+   "title": "Unforgettable Day Trips to the Atlas Mountains from Marrakech: Your Guide to Ourika Valley & Ouzoud Falls",
+   "excerpt": "Discover unforgettable Atlas Mountains from Marrakech day trips. Explore the lush Ourika Valley and majestic Ouzoud Falls for a perfect blend of nature and Berber culture.",
+   "canonical_url": "https://comemorocco.com/atlas-mountains-from-marrakech-day-trips/",
+   "destination": "marrakech",
+   "topic": "Weather"
+  },
+  {
+   "id": "wp-3118",
+   "wordpress_post_id": 3118,
+   "title": "The Ultimate Essaouira Day Trip from Marrakech: Your Complete 2025 Guide",
+   "excerpt": "Plan your perfect Essaouira day trip from Marrakech. Discover coastal charm, plus adventures to the Agafay Desert and the epic Sahara. Your guide to Morocco's diverse landscapes.",
+   "canonical_url": "https://comemorocco.com/essaouira-day-trip-from-marrakech/",
+   "destination": "marrakech",
+   "topic": "Desert"
+  },
+  {
+   "id": "wp-3142",
+   "wordpress_post_id": 3142,
+   "title": "Where to Stay in Marrakech: The Ultimate Guide to Riads, Hotels & Luxury Escapes 2026",
+   "excerpt": "",
+   "canonical_url": "https://comemorocco.com/where-to-stay-marrakech/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-3658",
+   "wordpress_post_id": 3658,
+   "title": "Best Hostels in Marrakech for Solo Travelers: Your Ultimate Guide",
+   "excerpt": "Discover the top-rated hostels in Marrakech for solo travelers, plus AFCON tips on cheap Casablanca hotels, riads vs. hotels, long-term rentals, and family resorts. Book your perfect Moroccan stay now!",
+   "canonical_url": "https://comemorocco.com/best-hostels-marrakech-solo-travelers/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-3668",
+   "wordpress_post_id": 3668,
+   "title": "Car Rental Morocco Reviews: Your Ultimate Guide & 7-Day Itinerary",
+   "excerpt": "Read trusted car rental Morocco reviews for a safe trip. Get a driving in Morocco safety guide, Casablanca to Marrakech drive times, tips to rent a car Agadir without deposit, and a flexible Morocco road trip itinerary 7",
+   "canonical_url": "https://comemorocco.com/car-rental-morocco-reviews-guide/",
+   "destination": "marrakech",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-3679",
+   "wordpress_post_id": 3679,
+   "title": "The Ultimate Guide to Marrakech Menara Airport Transfer",
+   "excerpt": "Stress-free arrival? Our guide compares all Marrakech Menara airport transfer options: taxis, apps, private cars & buses. Get prices, tips & how to avoid scams.",
+   "canonical_url": "https://comemorocco.com/marrakech-menara-airport-transfer-guide/",
+   "destination": "marrakech",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-3687",
+   "wordpress_post_id": 3687,
+   "title": "Essential Guide: Things to do in Casablanca near the stadium for Football Fans",
+   "excerpt": "Discover things to do in Casablanca near Mohammed V Stadium. Our guide covers local eats, Hassan II Mosque tickets, and epic day trips to Rabat, Tangier & Marrakech.",
+   "canonical_url": "https://comemorocco.com/things-to-do-in-casablanca-near-stadium/",
+   "destination": "marrakech",
+   "topic": "Food"
+  },
+  {
+   "id": "wp-3762",
+   "wordpress_post_id": 3762,
+   "title": "Ultimate Morocco Itinerary: 10-Day Travel Guide (2026)",
+   "excerpt": "Plan your perfect Morocco trip with this detailed 10-day itinerary. Marrakech, Sahara, Fes & Chefchaouen routes, budgets, tips & insider experiences.",
+   "canonical_url": "https://comemorocco.com/morocco-itinerary-10-day-travel-guide/",
+   "destination": "marrakech",
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-3771",
+   "wordpress_post_id": 3771,
+   "title": "25 Essential Morocco Travel Tips for First-Timers",
+   "excerpt": "Morocco mixes ancient medina magic with Saharan adventures — and with the right preparation, 2026 is the perfect year to experience it all safely, affordably, and unforgettably.",
+   "canonical_url": "https://comemorocco.com/essential-morocco-travel-tips/",
+   "destination": "merzouga",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-3802",
+   "wordpress_post_id": 3802,
+   "title": "1-Week Morocco Itinerary: The Best 7-Day Route",
+   "excerpt": "Plan the perfect Morocco itinerary 1 week with 3 detailed route options — from Marrakech's iconic souks to Sahara Desert camel treks and Fes's ancient medina. Day-by-day guide for first-time visitors.",
+   "canonical_url": "https://comemorocco.com/morocco-itinerary-1-week/",
+   "destination": "marrakech",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-4010",
+   "wordpress_post_id": 4010,
+   "title": "Marrakech Airport to City Center: Cheapest Ways in 2026",
+   "excerpt": "Discover the cheapest ways to get from Marrakech airport to the city center in 2026. Compare Bus 19 (30 MAD), official taxis, private transfers, and avoid common taxi scams.",
+   "canonical_url": "https://comemorocco.com/marrakech-airport-to-city-center-cheapest-ways/",
+   "destination": "marrakech",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-4031",
+   "wordpress_post_id": 4031,
+   "title": "Agadir Morocco Beach Guide: Best Resorts, Hotels & Activities",
+   "excerpt": "Plan the perfect Agadir Morocco beach holiday with the best resorts, beach clubs, budget hotels, surfing, camel rides, and practical travel tips",
+   "canonical_url": "https://comemorocco.com/agadir-morocco-beach-guide-best-resorts-activities/",
+   "destination": "agadir",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-4037",
+   "wordpress_post_id": 4037,
+   "title": "Essaouira Morocco Beach Guide: Surf, Wind & Where to Stay",
+   "excerpt": "Plan the perfect Essaouira Morocco beach trip with tips on surfing, kitesurfing, wind, hotels, beach clubs, the medina, and best times to visit.",
+   "canonical_url": "https://comemorocco.com/essaouira-morocco-beach-guide/",
+   "destination": "essaouira",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-4043",
+   "wordpress_post_id": 4043,
+   "title": "Casablanca Morocco Beach Guide 2026: Best Clubs, Hotels & Coastal Escapes",
+   "excerpt": "Discover the best Casablanca Morocco beach experience with our complete 2026 guide. Compare top beach clubs, luxury hotels, resorts & nearby escapes along the Atlantic coast. Plan your perfect coastal getaway today.",
+   "canonical_url": "https://comemorocco.com/casablanca-morocco-beach-guide/",
+   "destination": "casablanca",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-4050",
+   "wordpress_post_id": 4050,
+   "title": "Tangier Morocco Beach: The Ultimate Mediterranean Coast Guide (Hotels, Best Beaches & Beyond)",
+   "excerpt": "Discover the best Tangier Morocco beaches, from Plage de Tanger to Achakar, plus top hotels, Martil and Tetouan beach tips, and more",
+   "canonical_url": "https://comemorocco.com/tangier-morocco-beach-guide/",
+   "destination": "tangier",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-4056",
+   "wordpress_post_id": 4056,
+   "title": "Taghazout Morocco Beach: The Ultimate Guide to the Surf Capital",
+   "excerpt": "Discover Taghazout Morocco beach, surf capital with white sand & world-class waves. Guide covers surfing, yoga, seafood, getting from Agadir. Plan your trip!",
+   "canonical_url": "https://comemorocco.com/taghazout-morocco-beach-guide/",
+   "destination": "agadir",
+   "topic": "Food"
+  },
+  {
+   "id": "wp-4072",
+   "wordpress_post_id": 4072,
+   "title": "Riad vs Hotel in Marrakech: Which One Is Right for You in 2026?",
+   "excerpt": "Riad vs Hotel Marrakech — compare 2026 costs, Medina vs Gueliz locations, amenities, and find out which suits families, couples, and solo travelers best.",
+   "canonical_url": "https://comemorocco.com/riad-vs-hotel-marrakech-2026-guide/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-4079",
+   "wordpress_post_id": 4079,
+   "title": "Best Sahara Desert Tour from Marrakech: 2026 Guide",
+   "excerpt": "Discover the best Sahara desert tour from Marrakech for 2026. Compare Erg Chebbi vs Erg Chigaga, budget to luxury camps, private vs group tours, and must-know red flags before booking",
+   "canonical_url": "https://comemorocco.com/best-sahara-desert-tour-from-marrakech-2026-guide/",
+   "destination": "marrakech",
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-4126",
+   "wordpress_post_id": 4126,
+   "title": "Marrakech Airport Taxi 2026: Fares, Scams, and Best Transfer Options",
+   "excerpt": "Avoid Marrakech airport taxi scams with our 2026 guide. Real fares to the Medina (70-150 MAD), official kiosk tips, and the best prebook options",
+   "canonical_url": "https://comemorocco.com/marrakech-airport-taxi-fares-scams-guide/",
+   "destination": "marrakech",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-4154",
+   "wordpress_post_id": 4154,
+   "title": "Morocco Beach Itinerary: 7 Days of Coastal Adventure",
+   "excerpt": "Discover the perfect 7-day Morocco beach itinerary: surf, culture & relaxation. Get insider tips on top destinations & holiday packages.",
+   "canonical_url": "https://comemorocco.com/morocco-beach-itinerary-7-days/",
+   "destination": "merzouga",
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-4163",
+   "wordpress_post_id": 4163,
+   "title": "Cheap Morocco Beach Holidays: Your Complete Step-by-Step Guide to Booking Affordable Trips",
+   "excerpt": "Plan budget Morocco beach holidays with our step-by-step guide. Find cheap all-inclusive packages in Agadir, Essaouira, and more.",
+   "canonical_url": "https://comemorocco.com/morocco-beach-holidays-booking-guide/",
+   "destination": "essaouira",
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-4167",
+   "wordpress_post_id": 4167,
+   "title": "Book Morocco Beach and Desert Tours: Ultimate Combo Guide",
+   "excerpt": "Discover morocco beach and desert tours blending coast & Sahara. Find top packages, itineraries, and guided excursions for your perfect combo holiday.",
+   "canonical_url": "https://comemorocco.com/morocco-beach-and-desert-tours/",
+   "destination": "merzouga",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-4181",
+   "wordpress_post_id": 4181,
+   "title": "The Ultimate Guide to Morocco Travel Packages from South Africa: Flights, Visas, and Tours",
+   "excerpt": "Find the best Morocco travel packages from South Africa. Discover flights, visa help, and top tours from Joburg & Cape Town. Plan your escape now!",
+   "canonical_url": "https://comemorocco.com/morocco-travel-packages-from-south-africa/",
+   "destination": "marrakech",
+   "topic": "Packing"
+  },
+  {
+   "id": "wp-4201",
+   "wordpress_post_id": 4201,
+   "title": "Spain and Morocco Travel Packages: Your Ultimate Guide to a Two-Continent Adventure",
+   "excerpt": "Plan a seamless two-continent adventure with expert Spain and Morocco travel packages. Explore ferry crossings, sample Portugal Spain Morocco tour itineraries, and discover the best Andalusia Morocco combined tour option",
+   "canonical_url": "https://comemorocco.com/spain-and-morocco-travel-packages/",
+   "destination": "tangier",
+   "topic": "Itineraries"
+  },
+  {
+   "id": "wp-4206",
+   "wordpress_post_id": 4206,
+   "title": "The Ultimate Guide to the Best Time to Travel to Morocco: Month-by-Month",
+   "excerpt": "Plan your trip with our complete month-by-month guide to find the best time to travel to Morocco, including weather, Ramadan, and budget tips.",
+   "canonical_url": "https://comemorocco.com/best-time-to-travel-to-morocco/",
+   "destination": "marrakech",
+   "topic": "Food"
+  },
+  {
+   "id": "wp-4227",
+   "wordpress_post_id": 4227,
+   "title": "Marrakech, Morocco: The Ultimate 2026 Travel Guide for First Timers",
+   "excerpt": "Plan your 2026 trip to Marrakech, Morocco! Find top Marrakech attractions, weather, time zone, and location info in this complete travel guide.",
+   "canonical_url": "https://comemorocco.com/marrakech-morocco-2026-travel-guide/",
+   "destination": "marrakech",
+   "topic": "Food"
+  },
+  {
+   "id": "wp-4230",
+   "wordpress_post_id": 4230,
+   "title": "What to Wear in Marrakech: The Ultimate Guide to Dressing for the Red City",
+   "excerpt": "Learn what to wear in Marrakech: dress code, shorts rules, best walking shoes, and how to dress respectfully. Pack smart for the Red City.",
+   "canonical_url": "https://comemorocco.com/what-to-wear-in-marrakech/",
+   "destination": "marrakech",
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-4232",
+   "wordpress_post_id": 4232,
+   "title": "How Many Days in Marrakech? The Perfect 2-5 Day Itinerary",
+   "excerpt": "Plan your perfect trip with our guide to how many days in Marrakech. Get detailed 2, 3, 4 & 5-day itineraries including a marrakech 3 days itinerary and weekend highlights.",
+   "canonical_url": "https://comemorocco.com/how-many-days-in-marrakech/",
+   "destination": "marrakech",
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-4233",
+   "wordpress_post_id": 4233,
+   "title": "The Ultimate Guide to the Best Things to Do in Marrakech (2026 Edition)",
+   "excerpt": "Discover the best things to do in Marrakech in 2026—from iconic attractions and hidden gems to authentic food tours and desert adventures. Plan your trip!",
+   "canonical_url": "https://comemorocco.com/things-to-do-in-marrakech-2/",
+   "destination": "marrakech",
+   "topic": "Food"
+  },
+  {
+   "id": "wp-4236",
+   "wordpress_post_id": 4236,
+   "title": "The Best Marrakech Cooking Classes (2026 Guide)",
+   "excerpt": "Explore top-rated marrakech cooking classes in our 2026 guide. Learn to cook tagine with locals, from souk tours to riad kitchens. Book your perfect class!",
+   "canonical_url": "https://comemorocco.com/best-marrakech-cooking-classes/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-4237",
+   "wordpress_post_id": 4237,
+   "title": "Desert Tour from Marrakech: How to Choose the Best 1, 2, 3, or 4-Day Trip",
+   "excerpt": "Looking for the perfect desert tour from Marrakech? Compare marrakech desert tours: 1-day Agafay trip, Marrakech to Merzouga tour, Sahara camel rides.",
+   "canonical_url": "https://comemorocco.com/desert-tour-marrakech-guide/",
+   "destination": "marrakech",
+   "topic": "Desert"
+  },
+  {
+   "id": "wp-4238",
+   "wordpress_post_id": 4238,
+   "title": "Best Day Trips from Marrakech: Atlas Mountains, Essaouira, Ouzoud Falls & Agafay Desert Guide",
+   "excerpt": "Discover the best day trips from Marrakech to the Atlas Mountains, Essaouira, Ouzoud Falls & Agafay Desert. Plan your perfect Marrakech day trip today.",
+   "canonical_url": "https://comemorocco.com/best-day-trips-from-marrakech/",
+   "destination": "marrakech",
+   "topic": "Weather"
+  },
+  {
+   "id": "wp-4239",
+   "wordpress_post_id": 4239,
+   "title": "Where to Stay in Marrakech: Ultimate Guide to Best Areas & Neighborhoods",
+   "excerpt": "Where to stay in Marrakech? Compare medina vs gueliz, find the best area for couples, families & first-timers. Marrakech neighborhoods guide inside.",
+   "canonical_url": "https://comemorocco.com/where-to-stay-in-marrakech-3/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-4240",
+   "wordpress_post_id": 4240,
+   "title": "Best Riads in Marrakech: Top 9 Picks for Every Budget & Style (2025/2026 Guide)",
+   "excerpt": "Discover top best riads in Marrakech for every budget & style: luxury, romantic, and authentic riads of Marrakech. Find yours now!",
+   "canonical_url": "https://comemorocco.com/best-riads-in-marrakech/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-4241",
+   "wordpress_post_id": 4241,
+   "title": "Marrakech on a Budget: The Ultimate 2026 Guide to an Affordable Moroccan Adventure",
+   "excerpt": "Discover how to experience Marrakech on a budget in 2026. Get exact costs, cheap flights, budget riads, and daily spending tips for an affordable adventure.",
+   "canonical_url": "https://comemorocco.com/marrakech-budget-guide-2026/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-4242",
+   "wordpress_post_id": 4242,
+   "title": "Luxury Hotels in Marrakech – Top Picks for Your Dream Moroccan Getaway",
+   "excerpt": "Discover the best luxury hotels in Marrakech, from La Mamounia to Royal Mansour. Plan your dream Moroccan getaway with our expert guide.",
+   "canonical_url": "https://comemorocco.com/luxury-hotels-marrakech-guide/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-4243",
+   "wordpress_post_id": 4243,
+   "title": "Flights to Marrakech: Routes, Airlines & How to Find Cheap Deals",
+   "excerpt": "Find cheap flights to Marrakech? Compare direct flights from USA & London, top airlines, Marrakech airport tips, and booking strategies. Save on your trip!",
+   "canonical_url": "https://comemorocco.com/flights-to-marrakesh-guide-2026/",
+   "destination": "marrakech",
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-4244",
+   "wordpress_post_id": 4244,
+   "title": "Marrakech Airport Guide: Menara (RAK) Transfers, Taxis & Tips",
+   "excerpt": "Plan your smooth arrival with our complete Marrakech Airport guide: RAK code, taxi fares, shuttle options & insider tips to avoid scams.",
+   "canonical_url": "https://comemorocco.com/marrakech-airport-transfer-guide/",
+   "destination": "marrakech",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-4245",
+   "wordpress_post_id": 4245,
+   "title": "Casablanca to Marrakech: The Complete 2026 Travel Comparison – Train vs. Bus vs. Car",
+   "excerpt": "Discover the best way to travel from Casablanca to Marrakech! Compare train, bus, and car costs, times, and comfort. Complete 2026 guide.",
+   "canonical_url": "https://comemorocco.com/casablanca-to-marrakech/",
+   "destination": "marrakech",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-4246",
+   "wordpress_post_id": 4246,
+   "title": "What to Pack for Marrakech: The Ultimate Season-by-Season Guide",
+   "excerpt": "Wondering what to pack for Marrakech? Our ultimate Marrakech packing list covers every season, cultural dress tips, and essentials for a comfortable trip.",
+   "canonical_url": "https://comemorocco.com/what-to-pack-for-marrakech/",
+   "destination": "marrakech",
+   "topic": "Weather"
+  },
+  {
+   "id": "wp-4247",
+   "wordpress_post_id": 4247,
+   "title": "Marrakech vs Agadir: 7 Key Differences to Find Your Perfect Morocco Trip",
+   "excerpt": "Marrakech vs Agadir: Which is better for your trip? Compare culture, beaches, cost & climate to decide if you prefer ancient chaos or coastal relaxation.",
+   "canonical_url": "https://comemorocco.com/marrakech-vs-agadir-guide/",
+   "destination": "marrakech",
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-4248",
+   "wordpress_post_id": 4248,
+   "title": "Marrakech with Kids: The Ultimate Family Holiday Guide (Hotels, Activities & Tips)",
+   "excerpt": "Planning a Marrakech with kids? Discover the best family hotels, kid-friendly activities, and practical tips for an unforgettable Marrakech family holiday.",
+   "canonical_url": "https://comemorocco.com/marrakech-with-kids-family-guide/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-4249",
+   "wordpress_post_id": 4249,
+   "title": "Visa Requirements for Morocco 2026: Your Complete Country-by-Country Guide",
+   "excerpt": "Plan your 2026 trip with confidence. Discover visa requirements for Morocco, including Marrakech visa rules, answers to \"do I need a visa for Marrakech,\" and guides for US and UK citizens.",
+   "canonical_url": "https://comemorocco.com/visa-requirements-for-morocco-2026/",
+   "destination": "marrakech",
+   "topic": "Visa"
+  },
+  {
+   "id": "wp-4252",
+   "wordpress_post_id": 4252,
+   "title": "Currency in Marrakech: The Ultimate Guide to Dirhams, Exchange Rates & Getting Cash",
+   "excerpt": "Plan your Marrakech trip with our guide to currency in Marrakech: dirhams, exchange rates, and where to get cash – including airport ATM fees and DCC traps.",
+   "canonical_url": "https://comemorocco.com/currency-in-marrakech-guide/",
+   "destination": "marrakech",
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-4253",
+   "wordpress_post_id": 4253,
+   "title": "10 Best Travel Destinations in Morocco: Your 2026 Must-See Guide",
+   "excerpt": "Discover the **best travel destinations in Morocco** in our ultimate 2026 guide. From Marrakech’s souks to the Sahara’s dunes, explore must-see places and hidden gems.",
+   "canonical_url": "https://comemorocco.com/best-travel-destinations-morocco/",
+   "destination": "marrakech",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-4254",
+   "wordpress_post_id": 4254,
+   "title": "Top 3 Places to Visit in Morocco: Ultimate Guide to the Best Part of Morocco to Go To",
+   "excerpt": "**Meta Description:**\nDiscover the top 3 places to visit in Morocco: Marrakech, Fes & Chefchaouen. Find the best part of Morocco to go to & why Marrakech is the #1 tourist attraction in Morocco.",
+   "canonical_url": "https://comemorocco.com/top-3-places-in-morocco/",
+   "destination": "marrakech",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-4256",
+   "wordpress_post_id": 4256,
+   "title": "Marrakech vs Casablanca: Which City Should You Visit First?",
+   "excerpt": "Stuck between Marrakech vs Casablanca? Discover which is nicer for first-time tourists and find the best city in Morocco to visit based on your travel style.",
+   "canonical_url": "https://comemorocco.com/marrakech-vs-casablanca-first-visit/",
+   "destination": "marrakech",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-4257",
+   "wordpress_post_id": 4257,
+   "title": "Is Morocco Safe for American Tourists? A Complete 2026 Safety Guide",
+   "excerpt": "Is Morocco safe for American tourists? Yes—with precautions. This 2026 guide covers safety data, safest places, unspoken rules, and practical tips for a smooth trip.",
+   "canonical_url": "https://comemorocco.com/is-morocco-safe-for-american-tourists/",
+   "destination": "fes",
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-4261",
+   "wordpress_post_id": 4261,
+   "title": "How Many Days in Morocco Is Enough? A Complete Guide to Choosing Your Perfect Trip Length",
+   "excerpt": "Plan your perfect Morocco trip with our guide to 5, 7, and 10-day itineraries. Discover how many days in Morocco is enough for you, plus top Morocco itinerary ideas including souks and the Sahara.",
+   "canonical_url": "https://comemorocco.com/how-many-days-in-morocco/",
+   "destination": "merzouga",
+   "topic": "Desert"
+  },
+  {
+   "id": "wp-4263",
+   "wordpress_post_id": 4263,
+   "title": "Ultimate Guide to Morocco Atlas Mountains Travel Destinations: Day Trips, Hikes & Villages",
+   "excerpt": "Discover the best Morocco Atlas Mountains travel destinations, from day trips and hikes to Berber villages. Plan your guided atlas mountains tour or high atlas trekking adventure today.",
+   "canonical_url": "https://comemorocco.com/morocco-atlas-mountains-travel-guide/",
+   "destination": "marrakech",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-4264",
+   "wordpress_post_id": 4264,
+   "title": "Ultimate Guide to Sahara Desert Tours Morocco: Compare Camel Trekking & Best Camps",
+   "excerpt": "Discover the best Sahara desert tours Morocco: compare camel trekking, overnight camps & departures from Fes and Marrakech. Book your adventure!",
+   "canonical_url": "https://comemorocco.com/sahara-desert-tours-morocco/",
+   "destination": "marrakech",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-4265",
+   "wordpress_post_id": 4265,
+   "title": "Best Luxury Riads in Marrakech: 3 Unforgettable Stays in the Medina",
+   "excerpt": "Discover the best luxury riads in Marrakech—Royal Mansour, El Fenn, and Riad Kheirredine. Compare where to stay in Marrakech medina for an unforgettable trip.",
+   "canonical_url": "https://comemorocco.com/best-luxury-riads-marrakech/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-4268",
+   "wordpress_post_id": 4268,
+   "title": "Car Rental Casablanca Airport: Complete Booking Guide for 2026",
+   "excerpt": "Step-by-step guide to car rental Casablanca Airport. Learn about reputable services, driving in Morocco, and booking tips to save time and money.",
+   "canonical_url": "https://comemorocco.com/car-rental-casablanca-airport-guide/",
+   "destination": "casablanca",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-4270",
+   "wordpress_post_id": 4270,
+   "title": "5 Best Moroccan Cooking Classes for Tourists: Marrakech vs Essaouira Compared",
+   "excerpt": "Compare top-rated Moroccan cooking classes for tourists in Marrakech vs. Essaouira. Find authentic cuisine experiences and learn how to book the right class for your trip.",
+   "canonical_url": "https://comemorocco.com/moroccan-cooking-classes-for-tourists/",
+   "destination": "marrakech",
+   "topic": "Food"
+  },
+  {
+   "id": "wp-4271",
+   "wordpress_post_id": 4271,
+   "title": "Private Transfer Tangier to Chefchaouen: Book Your Seamless Port-to-Mountain Journey",
+   "excerpt": "Book a seamless private transfer Tangier to Chefchaouen for a 2-hour port-to-mountain journey. Fast, comfortable, fixed pricing—how to get from Tangier to Chefchaouen made easy.",
+   "canonical_url": "https://comemorocco.com/private-transfer-tangier-to-chefchaouen/",
+   "destination": "chefchaouen",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-4272",
+   "wordpress_post_id": 4272,
+   "title": "Top Morocco Adventure Travel Destinations for Trekking, Surfing & Off-Road Sports",
+   "excerpt": "Explore Morocco adventure travel destinations: Atlas Mountains trekking, surfing in Essaouira, sandboarding Sahara & off-road quad biking. Plan your trip!",
+   "canonical_url": "https://comemorocco.com/morocco-adventure-travel-destinations/",
+   "destination": "merzouga",
+   "topic": "Desert"
+  },
+  {
+   "id": "wp-4273",
+   "wordpress_post_id": 4273,
+   "title": "The Ultimate Guide to Quality Leather Goods Fes Medina: Tannery Tours, Shopping Streets & Tips",
+   "excerpt": "Discover the finest **leather goods in Fes medina** with our guide to tanneries, shopping streets & **quality leather goods Fes** is known for. Get expert **Fes tannery shopping guide** tips, learn **where to shop in Fes",
+   "canonical_url": "https://comemorocco.com/leather-goods-fes-medina-guide/",
+   "destination": "fes",
+   "topic": "Food"
+  },
+  {
+   "id": "wp-4274",
+   "wordpress_post_id": 4274,
+   "title": "Best Hotels in Casablanca with Ocean Views: Top-Rated Spa Resorts for a Luxurious Stay",
+   "excerpt": "Discover the best hotels in Casablanca with ocean views—top-rated spa resorts for a luxurious stay. Compare ocean-view rooms, spa facilities, and book your dream getaway.",
+   "canonical_url": "https://comemorocco.com/best-casablanca-ocean-view-hotels/",
+   "destination": "casablanca",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2121",
+   "wordpress_post_id": 2121,
+   "title": "Morocco Trains: The Ultimate 2026 Guide to Safe, Easy & Affordable Travel",
+   "excerpt": "Discover how to navigate Morocco trains and public transport with ease. Get expert tips, routes, prices, and must-know advice for safe, affordable travel in 2025",
+   "canonical_url": "https://comemorocco.com/morocco-trains-travel-guide/",
+   "destination": null,
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-2124",
+   "wordpress_post_id": 2124,
+   "title": "10 Essential Tips for Renting a Car in Morocco Ultimate Guide for 2025",
+   "excerpt": "Discover everything you need to know about renting a car in Morocco. Get expert Morocco car rental tips, driving advice, and car hire Morocco insights for a smooth trip",
+   "canonical_url": "https://comemorocco.com/renting-a-car-in-morocco-guide/",
+   "destination": null,
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-2126",
+   "wordpress_post_id": 2126,
+   "title": "Domestic Flights Morocco 2025 Ultimate Guide Top Routes Tips and Airlines",
+   "excerpt": "Discover everything you need to know about domestic flights Morocco in 2025. Explore top routes, airlines, booking tips, and travel advice for easy flights within Morocco.",
+   "canonical_url": "https://comemorocco.com/domestic-flights-morocco-guide-2025/",
+   "destination": null,
+   "topic": "Itineraries"
+  },
+  {
+   "id": "wp-2128",
+   "wordpress_post_id": 2128,
+   "title": "Ultimate Guide to Taxi Services Morocco 2025 Essential Tips and Prices",
+   "excerpt": "Discover everything about taxi services Morocco: types of taxis, Morocco taxi prices, safety tips, and how to get a taxi in Morocco for a smooth, stress-free trip",
+   "canonical_url": "https://comemorocco.com/taxi-services-morocco-complete-guide/",
+   "destination": null,
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-2131",
+   "wordpress_post_id": 2131,
+   "title": "Morocco Transportation: The Ultimate 2026 Guide to Getting Around Safely and Easily",
+   "excerpt": "Discover every Morocco transportation option with our complete guide. Learn trains, buses, taxis, car rentals & insider tips for getting around Morocco easily.",
+   "canonical_url": "https://comemorocco.com/morocco-transportation-2025-guide/",
+   "destination": null,
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-2135",
+   "wordpress_post_id": 2135,
+   "title": "Morocco on a Budget 2026 Ultimate Guide 21 Essential Tips for Affordable Adventure",
+   "excerpt": "Discover Morocco on a budget with expert tips for cheap travel Morocco, affordable stays, and must-see attractions",
+   "canonical_url": "https://comemorocco.com/morocco-on-a-budget-guide/",
+   "destination": null,
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-2137",
+   "wordpress_post_id": 2137,
+   "title": "10 Best Cheap Accommodation Morocco Options for an Unforgettable Stay",
+   "excerpt": "Discover the best cheap accommodation Morocco options, including hostels, budget hotels, and affordable riads. Find tips to save and enjoy your stay!",
+   "canonical_url": "https://comemorocco.com/cheap-accommodation-morocco-guide/",
+   "destination": null,
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2139",
+   "wordpress_post_id": 2139,
+   "title": "10 Essential Ways to Save Money Morocco Ultimate Travel Tips for 2025",
+   "excerpt": "Discover how to save money Morocco with expert Morocco travel savings and budget tips. Learn how to save money in Morocco and stretch your travel budget further",
+   "canonical_url": "https://comemorocco.com/save-money-morocco-travel-tips/",
+   "destination": null,
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-2141",
+   "wordpress_post_id": 2141,
+   "title": "Morocco Travel Cost: The Ultimate 2026 Guide to Budget, Mid-Range, and Luxury Trips",
+   "excerpt": "Discover Morocco travel cost! Get a complete breakdown of Morocco trip cost, travel budget tips, and how much Morocco expenses to expect for every traveler",
+   "canonical_url": "https://comemorocco.com/morocco-travel-cost-guide/",
+   "destination": null,
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-2146",
+   "wordpress_post_id": 2146,
+   "title": "Atlas Mountains Trekking Ultimate Guide 2025 Best Routes Tips and Must-See Hikes",
+   "excerpt": "Discover the ultimate Atlas Mountains trekking guide with top Morocco trekking routes, best Atlas Mountains hikes, tips, and everything for trekking in Morocco",
+   "canonical_url": "https://comemorocco.com/atlas-mountains-trekking-morocco-guide/",
+   "destination": null,
+   "topic": "Itineraries"
+  },
+  {
+   "id": "wp-2148",
+   "wordpress_post_id": 2148,
+   "title": "10 Best Beaches in Morocco for 2025 Ultimate Guide to Top Coastal Destinations",
+   "excerpt": "Discover the best beaches in Morocco, top Morocco beach destinations, surfing beaches, and charming coastal towns in this essential 2025 travel guide",
+   "canonical_url": "https://comemorocco.com/best-beaches-in-morocco-guide/",
+   "destination": null,
+   "topic": "Beaches"
+  },
+  {
+   "id": "wp-2150",
+   "wordpress_post_id": 2150,
+   "title": "Ouzoud Waterfalls Ultimate Guide 2025 Best Tips and Must-See Highlights",
+   "excerpt": "Discover Ouzoud waterfalls with this ultimate guide. Get expert tips for your Ouzoud waterfalls day trip and learn everything about visiting Morocco waterfalls",
+   "canonical_url": "https://comemorocco.com/ouzoud-waterfalls-morocco-guide/",
+   "destination": null,
+   "topic": "Weather"
+  },
+  {
+   "id": "wp-2153",
+   "wordpress_post_id": 2153,
+   "title": "15 Spectacular Morocco Natural Wonders to Discover and Explore",
+   "excerpt": "Discover Morocco natural wonders, breathtaking Morocco landscapes, and the best nature Morocco offers. Explore top Morocco scenery and essential travel tips",
+   "canonical_url": "https://comemorocco.com/morocco-natural-wonders-best-landscapes/",
+   "destination": null,
+   "topic": "Food"
+  },
+  {
+   "id": "wp-2155",
+   "wordpress_post_id": 2155,
+   "title": "Secret Spots Morocco: 10+ Hidden Places & Off the Beaten Path Gems",
+   "excerpt": "Discover secret spots Morocco travelers miss. Explore 10+ hidden places Morocco offers, from secluded waterfalls to remote villages off the beaten path.",
+   "canonical_url": "https://comemorocco.com/secret-spots-morocco-hidden-places/",
+   "destination": null,
+   "topic": "Food"
+  },
+  {
+   "id": "wp-2158",
+   "wordpress_post_id": 2158,
+   "title": "10 Unforgettable Unique Villages Morocco: Ultimate Guide to Must-See Rural Gems",
+   "excerpt": "Discover the most unique villages Morocco has to offer. Explore authentic Moroccan villages, rural gems, and the best villages Morocco for an unforgettable journey.",
+   "canonical_url": "https://comemorocco.com/unique-villages-morocco-guide/",
+   "destination": null,
+   "topic": "Travel planning"
+  },
+  {
+   "id": "wp-2160",
+   "wordpress_post_id": 2160,
+   "title": "10 Unforgettable Rural Morocco Experiences and Essential Travel Tips",
+   "excerpt": "Discover rural Morocco with expert tips, top destinations, and authentic Morocco experiences for unforgettable rural travel Morocco and Morocco countryside travel.",
+   "canonical_url": "https://comemorocco.com/rural-morocco-authentic-experiences/",
+   "destination": null,
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-2162",
+   "wordpress_post_id": 2162,
+   "title": "5 Hidden Gems Morocco You Must Explore for Unforgettable Adventures",
+   "excerpt": "Discover hidden gems Morocco with our guide to unexplored Morocco, secret spots, and off the beaten path adventures for unforgettable Morocco adventure travel.",
+   "canonical_url": "https://comemorocco.com/hidden-gems-morocco-offbeat-adventures/",
+   "destination": null,
+   "topic": "Food"
+  },
+  {
+   "id": "wp-2267",
+   "wordpress_post_id": 2267,
+   "title": "10 Best Moroccan Cooking Classes for Authentic Cuisine 2025",
+   "excerpt": "Join the best Moroccan cooking classes! Learn authentic recipes with expert chefs and get top tips for mastering Moroccan cuisine.",
+   "canonical_url": "https://comemorocco.com/moroccan-cooking-classes-guide/",
+   "destination": null,
+   "topic": "Food"
+  },
+  {
+   "id": "wp-2270",
+   "wordpress_post_id": 2270,
+   "title": "Ultimate Hammam Experience Morocco Guide 2025 What to Expect and How to Enjoy",
+   "excerpt": "Discover the ultimate hammam experience Morocco offers, from traditional rituals to essential tips for your authentic visit.",
+   "canonical_url": "https://comemorocco.com/hammam-experience-morocco-guide/",
+   "destination": null,
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-2280",
+   "wordpress_post_id": 2280,
+   "title": "Explore 7 Vibrant Styles of Traditional Moroccan Music: The Complete Guide",
+   "excerpt": "Explore traditional Moroccan music, instruments, and heritage. Discover Gnawa, Andalusian, and Berber styles with their cultural significance.\"",
+   "canonical_url": "https://comemorocco.com/traditional-moroccan-music-guide/",
+   "destination": null,
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-2283",
+   "wordpress_post_id": 2283,
+   "title": "10 Unforgettable Moroccan Cultural Experiences You Must Try",
+   "excerpt": "Discover unforgettable Moroccan cultural experiences with rich traditions, and essential Morocco tradition travel tips for an authentic journey.",
+   "canonical_url": "https://comemorocco.com/moroccan-cultural-experiences/",
+   "destination": null,
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-2287",
+   "wordpress_post_id": 2287,
+   "title": "Best Moroccan Dishes: 25 Must-Try Traditional Foods",
+   "excerpt": "Explore 25 best Moroccan dishes from tagines and pastilla to street snacks. Your guide to must-try Moroccan food and traditional Moroccan cuisine.",
+   "canonical_url": "https://comemorocco.com/best-moroccan-dishes/",
+   "destination": null,
+   "topic": "Food"
+  },
+  {
+   "id": "wp-2290",
+   "wordpress_post_id": 2290,
+   "title": "Ultimate Street Food Morocco Guide: 10 Essential Dishes",
+   "excerpt": "Discover authentic street food Morocco offers with our expert guide. Explore must-try dishes, best locations, cultural insights, and essential tips for an unforgettable culinary adventure",
+   "canonical_url": "https://comemorocco.com/street-food-morocco-ultimate-guide/",
+   "destination": null,
+   "topic": "Food"
+  },
+  {
+   "id": "wp-2292",
+   "wordpress_post_id": 2292,
+   "title": "Moroccan Tea: The Ultimate Guide to History, Culture and Perfect Mint Tea Recipe",
+   "excerpt": "Discover Moroccan tea culture, history, and ritual. Learn how to make Moroccan mint tea with our step-by-step recipe and traditional tea set tips",
+   "canonical_url": "https://comemorocco.com/moroccan-tea-culture-recipe/",
+   "destination": null,
+   "topic": "Food"
+  },
+  {
+   "id": "wp-2299",
+   "wordpress_post_id": 2299,
+   "title": "The Ultimate Moroccan Food Guide: Discover Authentic Flavors",
+   "excerpt": "Discover authentic Moroccan food from Tagines to breads in our complete guide. Learn about traditional flavors, must-try dishes, and where to find the best food in Morocco.",
+   "canonical_url": "https://comemorocco.com/ultimate-moroccan-food-guide/",
+   "destination": null,
+   "topic": "Food"
+  },
+  {
+   "id": "wp-2303",
+   "wordpress_post_id": 2303,
+   "title": "Moroccan UNESCO Sites: The Complete 2025 Guide to Morocco's 9 World Heritage Treasures",
+   "excerpt": "Discover all 9 Moroccan UNESCO sites with our complete 2025 guide. Get maps, travel tips, and itineraries for Morocco heritage sites and UNESCO treasures",
+   "canonical_url": "https://comemorocco.com/moroccan-unesco-sites-guide/",
+   "destination": null,
+   "topic": "Itineraries"
+  },
+  {
+   "id": "wp-2309",
+   "wordpress_post_id": 2309,
+   "title": "Ultimate Guide to Moroccan Architecture: 7 Breathtaking Elements",
+   "excerpt": "Explore the timeless beauty of Moroccan architecture from traditional riads to modern designs. Discover unique building styles and influences that shape this rich heritage",
+   "canonical_url": "https://comemorocco.com/moroccan-architecture-tradition-innovation/",
+   "destination": null,
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2312",
+   "wordpress_post_id": 2312,
+   "title": "Morocco History: Exploring the Rich Heritage of North Africa's Ancient Kingdom",
+   "excerpt": "Discover Morocco history from ancient times to modern-day in this rich guide exploring Moroccan heritage, dynasties, and iconic Morocco historical sites",
+   "canonical_url": "https://comemorocco.com/morocco-history-ancient-kingdom-heritage/",
+   "destination": null,
+   "topic": "Travel planning"
+  },
+  {
+   "id": "wp-2315",
+   "wordpress_post_id": 2315,
+   "title": "The Perfect Moroccan Dress: 7 Beautiful Styles for Your Trip",
+   "excerpt": "Discover the Moroccan dress code with our complete Morocco clothing guide. Learn what to wear in Morocco for comfort, style, and cultural respect.",
+   "canonical_url": "https://comemorocco.com/moroccan-dress-morocco-clothing-guide/",
+   "destination": null,
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-2318",
+   "wordpress_post_id": 2318,
+   "title": "7 Spectacular Moroccan Wedding Traditions: Ultimate Guide",
+   "excerpt": "Discover spectacular Moroccan wedding traditions! From ancient rituals to colorful customs, explore how these multi-day celebrations honor love and culture .",
+   "canonical_url": "https://comemorocco.com/moroccan-wedding-traditions-guide/",
+   "destination": null,
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-2321",
+   "wordpress_post_id": 2321,
+   "title": "Moroccan Hospitality: Ultimate Guide to Authentic Traditions & Culture",
+   "excerpt": "Discover the secrets of Moroccan hospitality traditions, from ancient Berber customs to modern welcoming culture. Learn authentic guest practices & dining experiences.",
+   "canonical_url": "https://comemorocco.com/moroccan-hospitality-ultimate-guide/",
+   "destination": null,
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-2324",
+   "wordpress_post_id": 2324,
+   "title": "Moroccan Etiquette Essential Guide to Customs and Manners",
+   "excerpt": "Master Moroccan etiquette with our complete guide covering Morocco customs, dining rules, business manners, and tourist tips for a respectful visit.",
+   "canonical_url": "https://comemorocco.com/moroccan-etiquette-guide-travelers/",
+   "destination": null,
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-2350",
+   "wordpress_post_id": 2350,
+   "title": "10 Most Beautiful Mosques in Morocco Ultimate Guide",
+   "excerpt": "Discover the most beautiful mosques in Morocco with our complete Morocco mosque guide. Explore famous mosques Morocco treasures and plan your visit today.",
+   "canonical_url": "https://comemorocco.com/mosques-in-morocco-guide/",
+   "destination": null,
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-2353",
+   "wordpress_post_id": 2353,
+   "title": "Islam in Morocco: 7 Beautiful Traditions to Understand",
+   "excerpt": "Discover Islam in Morocco with this complete Morocco religion guide. Learn about Islamic culture, Moroccan Islamic traditions, history, and daily life.",
+   "canonical_url": "https://comemorocco.com/islam-in-morocco-guide/",
+   "destination": null,
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-2413",
+   "wordpress_post_id": 2413,
+   "title": "10 best Morocco riads for an authentic stay",
+   "excerpt": "Discover the best Morocco riads and experience authentic stays in traditional riads Morocco. Explore riads in Morocco for culture, charm, and unforgettable memories.",
+   "canonical_url": "https://comemorocco.com/morocco-riads-travel-guide/",
+   "destination": null,
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2416",
+   "wordpress_post_id": 2416,
+   "title": "10 Best Hostels in Morocco for Unforgettable Budget Adventures",
+   "excerpt": "Discover the best hostels in Morocco for budget travel. Find cheap hostels Morocco, top Morocco backpacker hostels, and insider tips to save and explore more.",
+   "canonical_url": "https://comemorocco.com/hostels-in-morocco-guide/",
+   "destination": null,
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2420",
+   "wordpress_post_id": 2420,
+   "title": "10 Best Morocco Luxury Resorts to Experience in 2025",
+   "excerpt": "Discover the best Morocco luxury resorts for 2025 with top 5-star hotels, beach escapes, and all-inclusive stays for an unforgettable vacation experience.",
+   "canonical_url": "https://comemorocco.com/morocco-luxury-resorts-guide/",
+   "destination": null,
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2424",
+   "wordpress_post_id": 2424,
+   "title": "10 Best Hotels in Morocco Ultimate Guide for 2025",
+   "excerpt": "Discover the best hotels in Morocco with our complete Morocco hotel guide. Find where to stay, top Morocco accommodation, and expert tips for your perfect trip.",
+   "canonical_url": "https://comemorocco.com/hotels-in-morocco-guide/",
+   "destination": null,
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2428",
+   "wordpress_post_id": 2428,
+   "title": "10 Essential Health Tips Morocco Travelers Must Know for a Safe and Enjoyable Trip",
+   "excerpt": "Discover essential health tips Morocco travelers need. Get expert Morocco travel health advice on vaccines, food safety, hydration, and staying healthy in Morocco.",
+   "canonical_url": "https://comemorocco.com/health-tips-morocco-travel/",
+   "destination": null,
+   "topic": "Food"
+  },
+  {
+   "id": "wp-2437",
+   "wordpress_post_id": 2437,
+   "title": "Essential Vaccinations for Morocco: A 2025 Healthy Guide",
+   "excerpt": "Discover essential vaccinations for Morocco, travel health tips, and expert advice to stay safe and healthy on your 2025 Moroccan adventure.",
+   "canonical_url": "https://comemorocco.com/vaccinations-for-morocco-travel-guide/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-2447",
+   "wordpress_post_id": 2447,
+   "title": "Women Traveling Morocco: Ultimate 2025 Safety Guide",
+   "excerpt": "Women traveling Morocco in 2025? Get the ultimate safety guide with cultural etiquette, dress rules, transit tips, and smart solo travel strategies.",
+   "canonical_url": "https://comemorocco.com/women-traveling-morocco-safety-guide/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-2463",
+   "wordpress_post_id": 2463,
+   "title": "25 Best Souvenirs From Morocco Ultimate Guide with Insider Tips",
+   "excerpt": "Discover the best souvenirs from Morocco with insider tips on authentic gifts, shopping spots, and haggling advice to bring home meaningful Moroccan treasures.",
+   "canonical_url": "https://comemorocco.com/best-souvenirs-from-morocco/",
+   "destination": null,
+   "topic": "Shopping"
+  },
+  {
+   "id": "wp-2467",
+   "wordpress_post_id": 2467,
+   "title": "7 Essential Must-Know Bargaining Tips Morocco Travelers Need to Know",
+   "excerpt": "Discover expert bargaining tips Morocco travelers need to master how to bargain in Morocco, navigate market bargaining, and enjoy smart shopping tips Morocco.",
+   "canonical_url": "https://comemorocco.com/bargaining-tips-morocco-souk-guide/",
+   "destination": null,
+   "topic": "Shopping"
+  },
+  {
+   "id": "wp-2472",
+   "wordpress_post_id": 2472,
+   "title": "Epic 25 Kid-Friendly Activities Morocco Guide for Families",
+   "excerpt": "Explore kid-friendly activities Morocco families love: camel rides, souks, beaches & more. Get tips, costs, and a 7-day family plan for stress-free travel.",
+   "canonical_url": "https://comemorocco.com/kid-friendly-activities-morocco-guide/",
+   "destination": null,
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-2473",
+   "wordpress_post_id": 2473,
+   "title": "What to Buy in Morocco: 27 Best Souvenirs & Shopping Tips",
+   "excerpt": "Wondering what to buy in Morocco? Discover 27 authentic Morocco souvenirs, plus tips for the best markets and smart haggling for an unforgettable shopping trip.",
+   "canonical_url": "https://comemorocco.com/what-to-buy-in-morocco/",
+   "destination": null,
+   "topic": "Shopping"
+  },
+  {
+   "id": "wp-2481",
+   "wordpress_post_id": 2481,
+   "title": "10 Ultimate Family-Friendly Tours Morocco 2025 Guide",
+   "excerpt": "Discover 10 ultimate family-friendly tours Morocco offers in 2024. Compare itineraries, safety tips & budgets to plan the perfect adventure for all ages.",
+   "canonical_url": "https://comemorocco.com/family-friendly-tours-morocco-2024/",
+   "destination": null,
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-2488",
+   "wordpress_post_id": 2488,
+   "title": "10 Best Places to Visit in Morocco with Kids Ultimate Family Guide",
+   "excerpt": "Discover the best places to visit in Morocco with kids. Explore top Morocco family destinations, tips for Morocco with children, and expert family travel Morocco advice.",
+   "canonical_url": "https://comemorocco.com/best-places-to-visit-in-morocco-with-kids/",
+   "destination": null,
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-2492",
+   "wordpress_post_id": 2492,
+   "title": "Family Travel Morocco Ultimate Guide 2025 Best Tips and Itinerary",
+   "excerpt": "Plan your family travel Morocco adventure with our complete guide. discover top destinations, safety tips, best times to visit, and expert itineraries for kids",
+   "canonical_url": "https://comemorocco.com/family-travel-morocco-guide-kids/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-2497",
+   "wordpress_post_id": 2497,
+   "title": "Honeymoon in Morocco: best Destinations & Packages in 2025",
+   "excerpt": "Your perfect honeymoon in Morocco awaits! Explore romantic destinations, compare packages, and find luxury resorts in our complete 2024 travel guide.",
+   "canonical_url": "https://comemorocco.com/honeymoon-in-morocco-guide/",
+   "destination": null,
+   "topic": "Couples"
+  },
+  {
+   "id": "wp-2507",
+   "wordpress_post_id": 2507,
+   "title": "25 Dreamy Romantic Riads Morocco: Best Stays & Insider Tips",
+   "excerpt": "Find your perfect Morocco couples accommodation. Discover 25 dreamy romantic riads Morocco has, plus top resorts and insider tips for an unforgettable escape.",
+   "canonical_url": "https://comemorocco.com/best-romantic-riads-morocco/",
+   "destination": null,
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2512",
+   "wordpress_post_id": 2512,
+   "title": "Romantic Morocco: 25 Dreamy Destinations & Stays for Couples",
+   "excerpt": "Planning a romantic Morocco getaway? Discover 25 dreamy destinations, hotels & honeymoon ideas for couples. Includes a sample itinerary & insider tips.",
+   "canonical_url": "https://comemorocco.com/romantic-morocco-couples-guide/",
+   "destination": null,
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2516",
+   "wordpress_post_id": 2516,
+   "title": "Is Morocco Safe for Solo Travelers? Your 2026 Safety Guide",
+   "excerpt": "Is Morocco safe for solo travelers? Yes! Our complete 2025 safety guide offers essential tips, cultural insights, and real experiences for a confident solo trip",
+   "canonical_url": "https://comemorocco.com/is-morocco-safe-for-solo-travelers/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-2521",
+   "wordpress_post_id": 2521,
+   "title": "Solo Female Travel Morocco: Essential Tips for a Safe Trip",
+   "excerpt": "Planning solo female travel Morocco? Get essential safety tips, dress code advice & packing lists to explore this magical country safely & with confidence.",
+   "canonical_url": "https://comemorocco.com/solo-female-travel-morocco-tips/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-2526",
+   "wordpress_post_id": 2526,
+   "title": "Best Destinations Morocco Solo Travelers: 7 Spots & Safety Tips",
+   "excerpt": "Planning a solo trip to Morocco? Discover the 7 best destinations Morocco solo travelers love, plus a 10-day itinerary & essential safety tips.",
+   "canonical_url": "https://comemorocco.com/best-destinations-morocco-solo-travelers/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-2530",
+   "wordpress_post_id": 2530,
+   "title": "Solo Travel Morocco: 10 Essential Tips for a Safe Trip",
+   "excerpt": "Is solo travel Morocco safe? This ultimate guide covers safety tips, best routes, and real advice for female travelers to explore Morocco with confidence.",
+   "canonical_url": "https://comemorocco.com/solo-travel-morocco-safety-guide/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-3403",
+   "wordpress_post_id": 3403,
+   "title": "Best SIM Card for Morocco: Ultimate 2025 Guide for Reliable Mobile Data",
+   "excerpt": "Find the best SIM card for Morocco in 2025. Our guide compares top physical & eSIM options like Airalo Morocco for reliable mobile data, coverage, and value. Stay connected!",
+   "canonical_url": "https://comemorocco.com/best-sim-card-morocco/",
+   "destination": null,
+   "topic": "Travel planning"
+  },
+  {
+   "id": "wp-3570",
+   "wordpress_post_id": 3570,
+   "title": "Best eSIM for Morocco Travel: Expert Guide for Instant Connectivity",
+   "excerpt": "Avoid \"landing anxiety\" in Morocco. Find the best eSIM for travel, learn how to get internet, & discover top apps & a VPN for secure streaming. Get connected instantly.",
+   "canonical_url": "https://comemorocco.com/best-esim-for-morocco-travel/",
+   "destination": null,
+   "topic": "Travel planning"
+  },
+  {
+   "id": "wp-3820",
+   "wordpress_post_id": 3820,
+   "title": "Is Morocco Safe for Solo Female Travelers? 2026 Guide",
+   "excerpt": "",
+   "canonical_url": "https://comemorocco.com/is-morocco-safe-for-solo-female-travelers-2026/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-4018",
+   "wordpress_post_id": 4018,
+   "title": "The Ultimate Guide to Morocco Beach Holidays: Sun, Surf, and Sand",
+   "excerpt": "",
+   "canonical_url": "https://comemorocco.com/ultimate-guide-morocco-beaches/",
+   "destination": null,
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-4024",
+   "wordpress_post_id": 4024,
+   "title": "Discover the Most Beautiful Beaches in Morocco: A Complete Guide",
+   "excerpt": "Explore the most beautiful beaches in Morocco — from Legzira's red arches to Dakhla's turquoise lagoon. Discover top beaches, surf spots, travel tips, and hidden coastal gems in this complete guide.",
+   "canonical_url": "https://comemorocco.com/most-beautiful-beaches-in-morocco/",
+   "destination": null,
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-4062",
+   "wordpress_post_id": 4062,
+   "title": "Are Morocco Beaches Swimmable? Safety, Water Quality & Best Seasons",
+   "excerpt": "Find out which Morocco beaches are safe for swimming, when to visit, and what to know about water quality, tides, and seasonal conditions",
+   "canonical_url": "https://comemorocco.com/morocco-beaches-swimmable-guide/",
+   "destination": null,
+   "topic": "Food"
+  },
+  {
+   "id": "wp-4148",
+   "wordpress_post_id": 4148,
+   "title": "Morocco Beach Weather: Your Ultimate Month-by-Month Guide to Finding the Perfect Season",
+   "excerpt": "Plan your perfect coastal escape with our month-by-month guide to Morocco beach weather—from sunny summer swims to winter surf season.",
+   "canonical_url": "https://comemorocco.com/morocco-beach-weather-guide/",
+   "destination": null,
+   "topic": "Food"
+  },
+  {
+   "id": "wp-4164",
+   "wordpress_post_id": 4164,
+   "title": "Is Morocco Beach Safe? 15 FAQs Every Traveler Should Know",
+   "excerpt": "Answered: all your morocco beach questions—safety, best beaches, scams & food tips. Is Morocco beach safe? Find out now.",
+   "canonical_url": "https://comemorocco.com/is-morocco-beach-safe/",
+   "destination": null,
+   "topic": "Food"
+  },
+  {
+   "id": "wp-4177",
+   "wordpress_post_id": 4177,
+   "title": "Unlock the Magic: Your Ultimate Guide to Morocco Travel Packages for 2026",
+   "excerpt": "Discover the best Morocco travel packages for 2026. Compare top tour deals, pricing, and destinations to plan your perfect Moroccan adventure. Start your journey today.",
+   "canonical_url": "https://comemorocco.com/morocco-travel-packages-guide/",
+   "destination": null,
+   "topic": "Packing"
+  },
+  {
+   "id": "wp-4178",
+   "wordpress_post_id": 4178,
+   "title": "How to Choose the Best Morocco Travel Packages Tours for Your Dream Vacation",
+   "excerpt": "Compare guided vs. independent Morocco travel packages tours, private vs. group options, and how to vet reputable operators. Find your perfect adventure today.",
+   "canonical_url": "https://comemorocco.com/best-morocco-travel-packages-tours/",
+   "destination": null,
+   "topic": "Packing"
+  },
+  {
+   "id": "wp-4179",
+   "wordpress_post_id": 4179,
+   "title": "Morocco Travel Tour Packages: 7-Day, 10-Day & 14-Day Itineraries Compared",
+   "excerpt": "Wondering how many days in Morocco is enough? Our guide compares 7-day, 10-day & 2-week Morocco travel tour packages to help you choose the best itinerary.",
+   "canonical_url": "https://comemorocco.com/morocco-travel-tour-packages-compared/",
+   "destination": null,
+   "topic": "Itineraries"
+  },
+  {
+   "id": "wp-4180",
+   "wordpress_post_id": 4180,
+   "title": "Discover the Best Morocco Travel Packages from India: Your Ultimate Guide to an Enchanting Holiday",
+   "excerpt": "Discover the best Morocco travel packages from India with our ultimate guide. Find top Morocco tour packages, flight deals, visa tips, costs, and the best time to visit for an unforgettable holiday.",
+   "canonical_url": "https://comemorocco.com/morocco-travel-packages-india/",
+   "destination": null,
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-4195",
+   "wordpress_post_id": 4195,
+   "title": "Cheap Morocco Travel Packages: The Ultimate 2026 Budget Guide",
+   "excerpt": "Plan your 2026 trip with our guide to cheap Morocco travel packages. Learn the cheapest month to visit, how far $100 goes, and top budget Morocco tour deals.",
+   "canonical_url": "https://comemorocco.com/cheap-morocco-travel-packages/",
+   "destination": null,
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-4198",
+   "wordpress_post_id": 4198,
+   "title": "How to Find the Best Morocco Travel Packages with Airfare",
+   "excerpt": "Discover how to find genuine **Morocco travel packages with airfare**. Learn to decode inclusions, avoid hidden costs, and book the **best value Morocco flight packages** for your dream trip.",
+   "canonical_url": "https://comemorocco.com/best-morocco-travel-packages-airfare/",
+   "destination": null,
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-4199",
+   "wordpress_post_id": 4199,
+   "title": "Morocco Solo Travel Packages: The Complete Safety & Adventure Guide",
+   "excerpt": "Discover safe, social Morocco solo travel packages: expert safety tips, female solo advice, top group tours, and packing guides for an unforgettable adventure.",
+   "canonical_url": "https://comemorocco.com/morocco-solo-travel-packages-guide/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-4203",
+   "wordpress_post_id": 4203,
+   "title": "Best Time to Visit Morocco: Complete Guide for 2026",
+   "excerpt": "Discover the best time to visit Morocco in 2026. Guide covers weather by month, peak season, cheapest month, and Morocco travel packages deals. Plan your trip now!",
+   "canonical_url": "https://comemorocco.com/best-time-to-visit-morocco/",
+   "destination": null,
+   "topic": "Food"
+  },
+  {
+   "id": "wp-4204",
+   "wordpress_post_id": 4204,
+   "title": "The Ultimate Guide to Travel to Morocco (Everything You Need to Know)",
+   "excerpt": "Planning your dream trip? This ultimate travel to Morocco guide covers safety, visas, packing & top itineraries for a stress-free first visit.",
+   "canonical_url": "https://comemorocco.com/ultimate-guide-travel-to-morocco/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-4205",
+   "wordpress_post_id": 4205,
+   "title": "Is It Safe to Travel to Morocco Right Now? (2026 Safety Guide)",
+   "excerpt": "Is it safe to travel to Morocco right now? Honest 2026 safety guide with U.S. state department insights, traveler reviews & tips for Americans.",
+   "canonical_url": "https://comemorocco.com/is-it-safe-to-travel-to-morocco-right-now/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-4207",
+   "wordpress_post_id": 4207,
+   "title": "Do I Need a Visa to Travel to Morocco? The Essential 90-Day Visa-Free Guide",
+   "excerpt": "Wondering \"do I need a visa to travel to Morocco\"? US, UK & Canadian citizens enjoy visa-free entry for 90 days. Learn passport rules, entry requirements & more.",
+   "canonical_url": "https://comemorocco.com/do-i-need-a-visa-to-travel-to-morocco/",
+   "destination": null,
+   "topic": "Visa"
+  },
+  {
+   "id": "wp-4208",
+   "wordpress_post_id": 4208,
+   "title": "Travel to Morocco from USA: Your Complete 2026 Travel Guide",
+   "excerpt": "Can you travel to Morocco from USA now? Yes! This 2025 guide covers flights, requirements, safety, and tips. Learn how to travel to Morocco from US safely.",
+   "canonical_url": "https://comemorocco.com/travel-to-morocco-from-usa/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-4209",
+   "wordpress_post_id": 4209,
+   "title": "Solo Travel to Morocco: The Complete Guide for Women (Safety, Tips & Itinerary Planning)",
+   "excerpt": "Solo female travel to Morocco made easy! Safety tips, itinerary planning, and honest answers on is it safe to travel to Morocco as a woman.",
+   "canonical_url": "https://comemorocco.com/solo-travel-to-morocco-guide-women/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-4216",
+   "wordpress_post_id": 4216,
+   "title": "The Ultimate Guide to Travel to Morocco and Spain: Routes, Itineraries, and Insider Tips",
+   "excerpt": "Travel to Morocco and Spain? This guide covers best ferry routes, 14-day itineraries, and insider tips. Includes Portugal options. Plan your adventure now!",
+   "canonical_url": "https://comemorocco.com/travel-to-morocco-and-spain/",
+   "destination": null,
+   "topic": "Itineraries"
+  },
+  {
+   "id": "wp-4219",
+   "wordpress_post_id": 4219,
+   "title": "What to Wear in Morocco: The Ultimate Guide to Stylish & Practical Travel to Morocco Outfits",
+   "excerpt": "Plan your perfect Morocco packing list with stylish & practical travel to morocco outfits. Learn what to wear in Morocco, from dresses to essentials, plus can females wear shorts?",
+   "canonical_url": "https://comemorocco.com/travel-to-morocco-outfits-guide/",
+   "destination": null,
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-4255",
+   "wordpress_post_id": 4255,
+   "title": "Where to Go in Morocco for First Timers: Ultimate Beginner’s Guide",
+   "excerpt": "Wondering where to go in Morocco for first timers? This guide reveals the best part of Morocco to visit, a classic first time in Morocco itinerary, and essential tips for Morocco for beginners.",
+   "canonical_url": "https://comemorocco.com/morocco-for-first-timers/",
+   "destination": null,
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-4258",
+   "wordpress_post_id": 4258,
+   "title": "Morocco Travel Etiquette: Your Complete Guide to Respectful Travel in 2026",
+   "excerpt": "Discover essential Morocco travel etiquette for 2026, from dress codes to unspoken rules. Learn what to wear, how to greet, and navigate cultural customs like a pro.",
+   "canonical_url": "https://comemorocco.com/morocco-travel-etiquette-guide/",
+   "destination": null,
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-4259",
+   "wordpress_post_id": 4259,
+   "title": "Morocco vs Egypt for Tourists: How to Choose Your Perfect North African Adventure",
+   "excerpt": "Morocco vs Egypt: What is safer? Cost differences? Best for first-timers? Our comprehensive guide helps you choose the perfect North African adventure.",
+   "canonical_url": "https://comemorocco.com/morocco-vs-egypt-guide/",
+   "destination": null,
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-4262",
+   "wordpress_post_id": 4262,
+   "title": "How Far Does $100 Go in Morocco? (2026 Budget Breakdown)",
+   "excerpt": "How far does $100 go in Morocco? 2026 budget breakdown: backpacker to luxury. Learn morocco budget travel costs and cheap travel destinations.",
+   "canonical_url": "https://comemorocco.com/how-far-100-go-morocco/",
+   "destination": null,
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-4266",
+   "wordpress_post_id": 4266,
+   "title": "12 Best All-Inclusive Morocco Travel Packages for Families in 2026",
+   "excerpt": "Plan stress-free family travel in 2026 with the best all-inclusive Morocco travel packages. Compare top family-friendly resorts, US vacation packages, and trusted tour operators.",
+   "canonical_url": "https://comemorocco.com/all-inclusive-morocco-travel-packages/",
+   "destination": null,
+   "topic": "Family travel"
+  },
+  {
+   "id": "wp-4267",
+   "wordpress_post_id": 4267,
+   "title": "Best Time to Book Flights to Morocco: Your Ultimate Guide to Saving Money",
+   "excerpt": "Discover the best time to book flights to Morocco and save up to 40%. Get insider tips for cheap flights, flight deals from US, and when to book Morocco flights.",
+   "canonical_url": "https://comemorocco.com/best-time-book-morocco-flights/",
+   "destination": null,
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-4269",
+   "wordpress_post_id": 4269,
+   "title": "Best Travel Insurance for Morocco Trips: Compare Top Providers & Get Covered for 2026",
+   "excerpt": "Compare top providers for the **best travel insurance for Morocco trips** in 2026. Covers medical evacuation, souk theft & adventure riders. Meet **Morocco travel insurance requirements** today.",
+   "canonical_url": "https://comemorocco.com/best-travel-insurance-morocco-trips/",
+   "destination": null,
+   "topic": "Travel planning"
+  },
+  {
+   "id": "wp-3299",
+   "wordpress_post_id": 3299,
+   "title": "A Complete Guide to AFCON 2025 Stadiums in Morocco",
+   "excerpt": "Get ready for AFCON 2025 with our complete guide to the Morocco stadiums hosting the tournament, from the historic Stade Mohammed V to the massive new Grand Stade de Casablanca.",
+   "canonical_url": "https://comemorocco.com/afcon-2025-stadiums-morocco/",
+   "destination": "casablanca",
+   "topic": "Travel planning"
+  },
+  {
+   "id": "wp-3422",
+   "wordpress_post_id": 3422,
+   "title": "Casablanca AFCON 2025: The Ultimate Guide to Matches, Stays & Attractions",
+   "excerpt": "Your ultimate guide to Casablanca AFCON 2025: Get match schedules, top things to do in Casablanca, and the best hotels near Mohammed V Stadium for an epic trip.",
+   "canonical_url": "https://comemorocco.com/casablanca-afcon-2025-guide/",
+   "destination": "casablanca",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-3433",
+   "wordpress_post_id": 3433,
+   "title": "Rabat AFCON 2025: The Ultimate Guide to the Stadium and Where to Stay",
+   "excerpt": "Your ultimate guide to Rabat AFCON 2025. Get key details on the Prince Moulay Abdellah Stadium, top Rabat hotels for every budget, and local travel tips for an unforgettable trip.",
+   "canonical_url": "https://comemorocco.com/rabat-afcon-2025-essential-guide/",
+   "destination": "rabat",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-3441",
+   "wordpress_post_id": 3441,
+   "title": "Marrakech AFCON 2025: The Ultimate Guide to the Tournament, Stadium & Best Areas to Stay",
+   "excerpt": "Plan your trip for Marrakech AFCON 2025. Our guide covers the tournament schedule, the Marrakech stadium, and the best areas to stay in Marrakech for an unforgettable experience.",
+   "canonical_url": "https://comemorocco.com/marrakech-afcon-2025-guide/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-3451",
+   "wordpress_post_id": 3451,
+   "title": "Tangier AFCON 2025: The Ultimate Travel Guide for Football Fans",
+   "excerpt": "Plan your Tangier AFCON 2025 trip! Our guide covers Ibn Batouta Stadium matches, Tangier travel tips, and top cultural attractions for the ultimate football adventure in Morocco.",
+   "canonical_url": "https://comemorocco.com/tangier-afcon-2025-guide/",
+   "destination": "tangier",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-3460",
+   "wordpress_post_id": 3460,
+   "title": "Agadir AFCON 2025: Your Ultimate Guide to the Tournament, Stadium, and Best Hotels",
+   "excerpt": "Plan your Agadir AFCON 2025 trip! Get the ultimate guide to the tournament schedule, the Agadir stadium, top-rated hotels, and local attractions for an unforgettable football getaway.",
+   "canonical_url": "https://comemorocco.com/agadir-afcon-2025-guide/",
+   "destination": "agadir",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-3469",
+   "wordpress_post_id": 3469,
+   "title": "Fes AFCON 2025: The Ultimate Guide to the Tournament, Stadium, and Travel Tips",
+   "excerpt": "Plan your trip to Fes AFCON 2025! Get essential travel tips, stadium details, and tournament info for the Africa Cup of Nations matches in historic Fes, Morocco.",
+   "canonical_url": "https://comemorocco.com/fes-afcon-2025-guide/",
+   "destination": "fes",
+   "topic": "Travel planning"
+  },
+  {
+   "id": "wp-3509",
+   "wordpress_post_id": 3509,
+   "title": "The Ultimate Guide to Airport Transfers for AFCON 2025 Morocco",
+   "excerpt": "Plan your AFCON 2025 Morocco trip with stress-free airport transfers. Book reliable private rides from Casablanca airport to city with Welcome Pickups Morocco for a seamless start.",
+   "canonical_url": "https://comemorocco.com/afcon-morocco-airport-transfers/",
+   "destination": "casablanca",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-3542",
+   "wordpress_post_id": 3542,
+   "title": "Ultimate Rabat Stadium AFCON Guide: 7 Parking & Match Day Tips",
+   "excerpt": "Get to Rabat Stadium AFCON 2025 stress-free. Essential guide on how to get there, taxi tips, parking details, and match day advice for a seamless experience.",
+   "canonical_url": "https://comemorocco.com/rabat-stadium-afcon-match-day-essentials/",
+   "destination": "rabat",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-3552",
+   "wordpress_post_id": 3552,
+   "title": "Ultimate Agadir Stadium AFCON Guide: Essential Travel Tips",
+   "excerpt": "Plan your AFCON trip to Agadir! Our guide covers stadium access for the 5 PM kickoff, top hotels Agadir AFCON, fan zones, and essential travel tips for Morocco.",
+   "canonical_url": "https://comemorocco.com/agadir-stadium-afcon-travel-guide/",
+   "destination": "agadir",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-3560",
+   "wordpress_post_id": 3560,
+   "title": "Ultimate Train Casablanca Rabat AFCON Guide: Seamless Travel Tips You Need",
+   "excerpt": "Plan your AFCON 2025 travel between Casablanca & Rabat. Our guide covers the fast train, car rental, airport transfers & local transport for seamless matchday journeys.",
+   "canonical_url": "https://comemorocco.com/train-casablanca-rabat-afcon-guide/",
+   "destination": "casablanca",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-3580",
+   "wordpress_post_id": 3580,
+   "title": "Essential AFCON Matches Today Morocco: 3 Must-See Group F Guides & Tips",
+   "excerpt": "Catch every AFCON match today in Morocco! Get the full schedule, guides to Marrakech & Agadir stadiums, plus tips on transport, taxis, and staying safe. Your guide to the Group F deciders.",
+   "canonical_url": "https://comemorocco.com/afcon-matches-today-morocco-guide/",
+   "destination": "marrakech",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-3616",
+   "wordpress_post_id": 3616,
+   "title": "Ultimate Guide to Last Minute Hotels AFCON: Affordable Stays for Round of 16 Magic",
+   "excerpt": "Last minute hotels AFCON: Find cheap hotels afcon morocco in Tangier, Casablanca & Rabat. Get hotels near afcon stadium & tips for transport between afcon cities. Book now!",
+   "canonical_url": "https://comemorocco.com/last-minute-hotels-afcon-morocco/",
+   "destination": "casablanca",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-3624",
+   "wordpress_post_id": 3624,
+   "title": "Ultimate AFCON Transport Morocco Guide: 4 Essential Ways to Navigate Host Cities",
+   "excerpt": "Get around AFCON 2025 in Morocco! Our guide covers transport between host cities, including train, taxi, car rental & bus options for a seamless tournament journey",
+   "canonical_url": "https://comemorocco.com/afcon-transport-morocco-guide/",
+   "destination": "casablanca",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-3642",
+   "wordpress_post_id": 3642,
+   "title": "Top 5 Last Minute Hotels AFCON: Secure Tangier & Casablanca Stays for Unforgettable 2026 Matches",
+   "excerpt": "Scrambling for AFCON 2025 stays? Find last minute hotels for Tangier (Senegal vs Sudan) & Casablanca, with cheap options and hotels near the stadium. Book now & secure your spot!",
+   "canonical_url": "https://comemorocco.com/last-minute-hotels-afcon/",
+   "destination": "casablanca",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-3651",
+   "wordpress_post_id": 3651,
+   "title": "Top Hotels Near Mohammed V Stadium Casablanca: Your Ultimate AFCON 2025 Guide",
+   "excerpt": "Discover top hotels near Mohammed V Stadium Casablanca for AFCON 2025. Find the perfect stay for easy stadium access, from budget to luxury",
+   "canonical_url": "https://comemorocco.com/hotels-near-mohammed-v-stadium-casablanca/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-3696",
+   "wordpress_post_id": 3696,
+   "title": "Ultimate Guide to 8 AFCON Fan Zones Morocco 2025 for Solo Travelers",
+   "excerpt": "Your ultimate solo travel guide to AFCON 2025 fan zones in Morocco. Explore match viewing spots, safety tips for Marrakech at night, and the best singles nightlife.",
+   "canonical_url": "https://comemorocco.com/afcon-fan-zones-morocco-2025-guide/",
+   "destination": "marrakech",
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-3239",
+   "wordpress_post_id": 3239,
+   "title": "AFCON 2025 Morocco: The Ultimate Guide to Dates, Host Cities & Must-Know Tips",
+   "excerpt": "Everything you need to know about AFCON 2025 Morocco! Get the official dates, host cities, travel tips, and tournament schedule for the Africa Cup of Nations. Plan your trip now.",
+   "canonical_url": "https://comemorocco.com/afcon-2025-morocco-guide/",
+   "destination": null,
+   "topic": "Travel planning"
+  },
+  {
+   "id": "wp-3289",
+   "wordpress_post_id": 3289,
+   "title": "When is AFCON 2025 in Morocco? The Ultimate Guide to Dates, Schedule & Key Details",
+   "excerpt": "AFCON 2025 in Morocco runs from Dec 21, 2025 to Jan 18, 2026. Get the full schedule, key matchups, host cities, and how to watch the Africa Cup of Nations.",
+   "canonical_url": "https://comemorocco.com/afcon-2025-morocco-dates/",
+   "destination": null,
+   "topic": "Travel planning"
+  },
+  {
+   "id": "wp-3377",
+   "wordpress_post_id": 3377,
+   "title": "The Ultimate Guide on How to Buy AFCON 2025 Tickets: Your Step-by-Step Plan",
+   "excerpt": "Learn how to buy AFCON 2025 tickets the right way. Get key dates, prices, & a step-by-step guide to officially secure your Africa Cup of Nations tickets & avoid scams.",
+   "canonical_url": "https://comemorocco.com/how-to-buy-afcon-2025-tickets/",
+   "destination": null,
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-3385",
+   "wordpress_post_id": 3385,
+   "title": "Where to Stay During AFCON 2025: Top Accommodation Options in Morocco for an Unforgettable Tournament Experience",
+   "excerpt": "Find the perfect AFCON accommodation! Our guide covers top Morocco hotels 2025, from budget to luxury, for an unforgettable tournament experience. Book your stay now!",
+   "canonical_url": "https://comemorocco.com/where-to-stay-during-afcon-2025-morocco/",
+   "destination": null,
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-3394",
+   "wordpress_post_id": 3394,
+   "title": "Getting Around Morocco During AFCON: The Ultimate Transportation Guide",
+   "excerpt": "Plan your travel for AFCON 2025 in Morocco. Our guide covers booking tips for trains, buses, & car rentals to navigate the crowds & get to the matches.",
+   "canonical_url": "https://comemorocco.com/getting-around-morocco-during-afcon/",
+   "destination": null,
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-3407",
+   "wordpress_post_id": 3407,
+   "title": "Is Morocco Safe for AFCON 2025 Tourists? Your Ultimate Safety Guide",
+   "excerpt": "Planning to attend AFCON 2025 in Morocco? Get the facts on safety. Our guide covers security measures, travel advisories, and essential tips for a safe and enjoyable trip to the tournament.",
+   "canonical_url": "https://comemorocco.com/is-morocco-safe-for-afcon-tourists/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-3499",
+   "wordpress_post_id": 3499,
+   "title": "Car Rental Morocco for AFCON 2025: Your Ultimate Guide to Flexible Travel",
+   "excerpt": "Rent a car in Morocco for AFCON 2025 and travel freely between stadiums. Our guide covers the best rental tips, driving advice, and deals to maximize your tournament experience.",
+   "canonical_url": "https://comemorocco.com/car-rental-morocco-for-afcon-2025/",
+   "destination": null,
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-3519",
+   "wordpress_post_id": 3519,
+   "title": "How to Watch AFCON 2025 Matches: The Ultimate Streaming Guide",
+   "excerpt": "Don't miss a moment of AFCON 2025! Our complete guide shows you how to watch every match, with legal streaming options on ESPN+, Sky Sports, and more. Stream AFCON 2025 online from any device.",
+   "canonical_url": "https://comemorocco.com/how-to-watch-afcon-2025-matches/",
+   "destination": null,
+   "topic": "Travel planning"
+  },
+  {
+   "id": "wp-3533",
+   "wordpress_post_id": 3533,
+   "title": "Morocco Visa Requirements for AFCON 2025: Your Ultimate Guide",
+   "excerpt": "Your complete guide to Morocco visa requirements for AFCON 2025. Learn about the free fan e-visa, tournament dates, host cities, and essential entry rules for a seamless trip.",
+   "canonical_url": "https://comemorocco.com/morocco-visa-requirements-afcon/",
+   "destination": null,
+   "topic": "Beaches"
+  },
+  {
+   "id": "wp-3607",
+   "wordpress_post_id": 3607,
+   "title": "Ultimate AFCON Fan Zones Morocco: Where to watch matches",
+   "excerpt": "Watch AFCON match in Morocco's fan zones & ring in NYE without tickets. Find locations, safety tips & how to stream online.",
+   "canonical_url": "https://comemorocco.com/afcon-fan-zones-morocco-guide/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-3632",
+   "wordpress_post_id": 3632,
+   "title": "Ultimate Guide: What to Do Between AFCON Matches in Morocco",
+   "excerpt": "Discover what to do between AFCON matches in Morocco: essential safety tips, best SIM cards for internet, top fan zones, and sightseeing for a complete 2025 trip.",
+   "canonical_url": "https://comemorocco.com/afcon-matches-morocco-sightseeing/",
+   "destination": null,
+   "topic": "Safety"
+  },
+  {
+   "id": "wp-2190",
+   "wordpress_post_id": 2190,
+   "title": "Hotels",
+   "excerpt": "How to choose between a riad, a hotel and a desert camp in each Moroccan city, with price bands for 2026. Compare stays across Morocco in one place.",
+   "canonical_url": "https://comemorocco.com/morocco-hotels/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2710",
+   "wordpress_post_id": 2710,
+   "title": "Camel Riding",
+   "excerpt": "Experience magical camel riding adventures through Morocco's golden Sahara Desert dunes.",
+   "canonical_url": "https://comemorocco.com/activity/camel-riding-sahara-desert-morocco/",
+   "destination": "merzouga",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-2735",
+   "wordpress_post_id": 2735,
+   "title": "Desert Camping",
+   "excerpt": "Experience authentic desert camping under Morocco's starry Sahara sky in luxury Berber camps.",
+   "canonical_url": "https://comemorocco.com/activity/desert-camping-sahara-morocco-luxury/",
+   "destination": "merzouga",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-2747",
+   "wordpress_post_id": 2747,
+   "title": "City Tours",
+   "excerpt": "Discover Morocco's imperial cities with comprehensive city tours of Marrakech, Fez, Rabat, and Meknes.",
+   "canonical_url": "https://comemorocco.com/activity/morocco-imperial-city-tours-marrakech-fez/",
+   "destination": "marrakech",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-2752",
+   "wordpress_post_id": 2752,
+   "title": "Shopping Tours",
+   "excerpt": "Navigate Morocco's vibrant souks with expert shopping tours through Marrakech and Fez medinas.",
+   "canonical_url": "https://comemorocco.com/activity/morocco-shopping-tours-souks-medina/",
+   "destination": "marrakech",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-2755",
+   "wordpress_post_id": 2755,
+   "title": "Cooking Classes",
+   "excerpt": "Master authentic Moroccan cuisine with hands-on cooking classes led by local chefs.",
+   "canonical_url": "https://comemorocco.com/activity/moroccan-cooking-classes-marrakech-riad/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2767",
+   "wordpress_post_id": 2767,
+   "title": "Quad Biking",
+   "excerpt": "Explore Morocco's terrain on thrilling quad biking adventures through desert dunes and mountain trails.",
+   "canonical_url": "https://comemorocco.com/activity/quad-biking-morocco-desert-adventure/",
+   "destination": "merzouga",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-3254",
+   "wordpress_post_id": 3254,
+   "title": "Activity",
+   "excerpt": "Desert camps, cooking classes, hammams, Atlas hikes and balloon flights across Morocco, with 2026 prices and honest verdicts. Browse every experience.",
+   "canonical_url": "https://comemorocco.com/activity/",
+   "destination": "merzouga",
+   "topic": "Budget"
+  },
+  {
+   "id": "wp-3487",
+   "wordpress_post_id": 3487,
+   "title": "Hostels",
+   "excerpt": "The best hostels in Morocco city by city — from medina riads in Marrakech and Fes to desert camps near Merzouga. Prices, tips and booking links for every budget.",
+   "canonical_url": "https://comemorocco.com/best-hostels-in-morocco/",
+   "destination": "marrakech",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-4279",
+   "wordpress_post_id": 4279,
+   "title": "Marrakech",
+   "excerpt": "",
+   "canonical_url": "https://comemorocco.com/destinations/marrakech/",
+   "destination": "marrakech",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-4281",
+   "wordpress_post_id": 4281,
+   "title": "Fes",
+   "excerpt": "Fes Morocco guide: explore the ancient medina, tanneries, Al Quaraouiyine, food, day trips and practical tips for your visit. Start planning today.\nRank Math Focus Keyword: fes morocco",
+   "canonical_url": "https://comemorocco.com/destinations/fes/",
+   "destination": "fes",
+   "topic": "Food"
+  },
+  {
+   "id": "wp-4282",
+   "wordpress_post_id": 4282,
+   "title": "Chefchaouen",
+   "excerpt": "Explore Chefchaouen, Morocco’s Blue City: blue Medina, Kasbah, hikes, hotels, food, transport and Akchour day trips. Plan your visit with ComeMorocco.",
+   "canonical_url": "https://comemorocco.com/destinations/chefchaouen/",
+   "destination": "chefchaouen",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-4285",
+   "wordpress_post_id": 4285,
+   "title": "Merzouga",
+   "excerpt": "Plan your Merzouga trip with our honest guide to Erg Chebbi dunes, luxury desert camps, camel treks, and tours from Marrakech. Start here.",
+   "canonical_url": "https://comemorocco.com/destinations/merzouga/",
+   "destination": "marrakech",
+   "topic": "Desert"
+  },
+  {
+   "id": "wp-4286",
+   "wordpress_post_id": 4286,
+   "title": "Essaouira",
+   "excerpt": "Discover the best things to do in Essaouira — from the UNESCO medina and Skala ramparts to kitesurfing and Gnawa music. Your complete 2026 travel guide.",
+   "canonical_url": "https://comemorocco.com/destinations/essaouira/",
+   "destination": "essaouira",
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-4289",
+   "wordpress_post_id": 4289,
+   "title": "Casablanca",
+   "excerpt": "Casablanca Morocco travel guide for 2026: discover Hassan II Mosque, the medina, beaches, food, hotels, transport and day trips. Plan your visit today.",
+   "canonical_url": "https://comemorocco.com/destinations/casablanca/",
+   "destination": "casablanca",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-4291",
+   "wordpress_post_id": 4291,
+   "title": "Rabat",
+   "excerpt": "Discover Rabat, Morocco's serene capital. Explore the Kasbah of the Udayas, Hassan Tower, and the Medina. Complete guide to hotels, trains, and day trips.",
+   "canonical_url": "https://comemorocco.com/destinations/rabat/",
+   "destination": "rabat",
+   "topic": "Transportation"
+  },
+  {
+   "id": "wp-4293",
+   "wordpress_post_id": 4293,
+   "title": "Tangier",
+   "excerpt": "Your complete 2026 Tangier Morocco guide: explore the medina, caves of Hercules, port city culture, where to stay, and day trips to Chefchaouen and Asilah.",
+   "canonical_url": "https://comemorocco.com/destinations/tangier/",
+   "destination": "chefchaouen",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-4419",
+   "wordpress_post_id": 4419,
+   "title": "Dakhla",
+   "excerpt": "Discover Dakhla Morocco: world-class kitesurfing lagoon, White Dune, oyster farms & desert coast. Best months, hotels, tours & essential trip-planning tips.",
+   "canonical_url": "https://comemorocco.com/destinations/dakhla/",
+   "destination": "merzouga",
+   "topic": "Accommodation"
+  },
+  {
+   "id": "wp-2758",
+   "wordpress_post_id": 2758,
+   "title": "Hiking",
+   "excerpt": "Explore Morocco's diverse landscapes on hiking trails through Atlas Mountains and coastal paths.",
+   "canonical_url": "https://comemorocco.com/activity/hiking-morocco-atlas-mountains/",
+   "destination": null,
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-2761",
+   "wordpress_post_id": 2761,
+   "title": "Historical Tours",
+   "excerpt": "Journey through Morocco's fascinating history with guided historical tours of ancient ruins and kasbahs.",
+   "canonical_url": "https://comemorocco.com/activity/morocco-historical-tours-unesco-kasbahs/",
+   "destination": null,
+   "topic": "Activities"
+  },
+  {
+   "id": "wp-2763",
+   "wordpress_post_id": 2763,
+   "title": "Hammam",
+   "excerpt": "Rejuvenate in traditional Moroccan hammam steam baths with authentic cleansing and relaxation rituals.",
+   "canonical_url": "https://comemorocco.com/activity/traditional-moroccan-hammam-steam-bath/",
+   "destination": null,
+   "topic": "Culture"
+  },
+  {
+   "id": "wp-2771",
+   "wordpress_post_id": 2771,
+   "title": "Hot Air Ballooning",
+   "excerpt": "Float above Morocco's magical landscapes in hot air balloon adventures over Atlas foothills.",
+   "canonical_url": "https://comemorocco.com/activity/hot-air-ballooning-morocco-atlas-sunrise/",
+   "destination": null,
+   "topic": "Activities"
+  }
+ ]
+}

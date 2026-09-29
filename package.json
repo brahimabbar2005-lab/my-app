@@ -1,0 +1,18 @@
+{
+  "name": "comemorocco",
+  "private": true,
+  "description": "ComeMorocco platform: mobile app, AI service, platform worker, shared packages",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "pnpm -r --if-present typecheck",
+    "lint": "pnpm -r --if-present lint",
+    "test": "pnpm -r --if-present test",
+    "check": "pnpm typecheck && pnpm lint && pnpm test",
+    "mobile": "pnpm --filter @comemorocco/mobile start",
+    "worker": "pnpm --filter @comemorocco/worker-platform dev",
+    "secrets:scan": "node scripts/scan-secrets.mjs"
+  }
+}

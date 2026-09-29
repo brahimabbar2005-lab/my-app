@@ -1,0 +1,25 @@
+{
+  "name": "@comemorocco/shared",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Versioned API contracts (zod) and platform clients shared by the app, worker and admin",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./api/v1": "./src/api/v1/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@comemorocco/config": "workspace:*",
+    "@types/node": "^22.20.4",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.2"
+  }
+}

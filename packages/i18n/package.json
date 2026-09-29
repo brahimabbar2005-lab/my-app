@@ -1,0 +1,17 @@
+{
+  "name": "@comemorocco/i18n",
+  "version": "0.1.0",
+  "private": true,
+  "description": "UI strings (en, fr, ar, es) and locale helpers",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@comemorocco/config": "workspace:*",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.2"
+  }
+}

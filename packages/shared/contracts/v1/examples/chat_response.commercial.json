@@ -1,0 +1,35 @@
+{
+  "affiliates": [],
+  "answer": "I couldn't get that answer together just now — try again in a moment. If it keeps happening, the Morocco guides on the site cover most of the common questions.",
+  "conversation_id": "<conversation_id>",
+  "intents": [
+    "ACTIVITY",
+    "DESERT",
+    "BOOKING"
+  ],
+  "language": "en",
+  "latency_ms": 0,
+  "message_id": "<message_id>",
+  "notices": [],
+  "resources": [
+    {
+      "anchor_text": "our Marrakech guide",
+      "content_id": "4079",
+      "reason": "title match, destination match, intent match, topic in title",
+      "score": 2.248,
+      "title": "Best Sahara Desert Tour from Marrakech: 2026 Guide",
+      "url": "https://comemorocco.com/best-sahara-desert-tour-from-marrakech-2026-guide/"
+    }
+  ],
+  "session_id": "<session_id>",
+  "trip_state": {
+    "destinations": [
+      "Marrakech",
+      "Merzouga",
+      "Sahara Desert"
+    ],
+    "interests": [
+      "desert"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "affiliates": [],
+  "answer": "I couldn't get that answer together just now — try again in a moment. If it keeps happening, the Morocco guides on the site cover most of the common questions.",
+  "conversation_id": "<conversation_id>",
+  "intents": [
+    "ITINERARY",
+    "COMPARISON",
+    "WEATHER",
+    "DESTINATION"
+  ],
+  "language": "en",
+  "latency_ms": 0,
+  "message_id": "<message_id>",
+  "notices": [],
+  "resources": [
+    {
+      "anchor_text": "our Marrakech guide",
+      "content_id": "3802",
+      "reason": "destination match, intent match, content type match",
+      "score": 1.844,
+      "title": "1-Week Morocco Itinerary: The Best 7-Day Route",
+      "url": "https://comemorocco.com/morocco-itinerary-1-week/"
+    },
+    {
+      "anchor_text": "our Marrakech guide",
+      "content_id": "4232",
+      "reason": "destination match, intent match, content type match",
+      "score": 1.5425,
+      "title": "How Many Days in Marrakech? The Perfect 2-5 Day Itinerary",
+      "url": "https://comemorocco.com/how-many-days-in-marrakech/"
+    }
+  ],
+  "session_id": "<session_id>",
+  "trip_state": {
+    "destinations": [
+      "Marrakech",
+      "Fes"
+    ],
+    "season": "spring",
+    "travel_dates": "April"
+  }
+}
