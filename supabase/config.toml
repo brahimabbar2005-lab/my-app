@@ -1,0 +1,23 @@
+# Supabase CLI project config (supabase init / supabase start / supabase db reset).
+project_id = "comemorocco"
+
+[api]
+schemas = ["public"]
+max_rows = 1000
+
+[db]
+major_version = 16
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed/seed.sql", "./seed/emergency_contacts.sql"]
+
+[auth]
+site_url = "https://comemorocco.com"
+additional_redirect_urls = ["comemorocco://", "http://localhost:8081"]
+enable_signup = true
+
+[auth.email]
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = true
