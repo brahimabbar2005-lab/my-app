@@ -1,0 +1,26 @@
+node_modules/
+.pnpm-store/
+dist/
+build/
+.expo/
+web-build/
+coverage/
+*.log
+.DS_Store
+
+# secrets — never commit
+.env
+.env.*
+!.env.example
+.dev.vars
+!.dev.vars.example
+*.pem
+*.p8
+*.p12
+*.keystore
+
+# python
+__pycache__/
+.venv/
+.pytest_cache/
+.ruff_cache/

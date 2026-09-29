@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ComeMorocco AI — widget preview</title>
+<style>
+  :root {
+    --ink: #15201b; --soft: #5a6b62; --line: #e2e8e3;
+    --green: #0c3b2e; --amber: #ffba00; --page: #fbfcfb;
+    box-sizing: border-box;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #eef2ef; --soft: #9aa8a0; --line: #2a332e; --page: #101613;
+    }
+  }
+  body {
+    margin: 0; background: var(--page); color: var(--ink);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 62ch; margin: 0 auto; padding: 56px 24px 140px; }
+  h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.02em; }
+  .sub { color: var(--soft); margin: 0 0 40px; }
+  h2 { font-size: 17px; margin: 34px 0 10px; }
+  p { margin: 0 0 14px; }
+  ul { margin: 0 0 14px; padding-left: 20px; }
+  li { margin-bottom: 5px; }
+  code {
+    background: rgba(12,59,46,.07); padding: 1px 5px; border-radius: 4px;
+    font: 13.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) code { background: rgba(255,255,255,.09); }
+  }
+  pre {
+    background: var(--green); color: #eef3ef; padding: 14px 16px; border-radius: 10px;
+    overflow-x: auto; font: 13px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .note {
+    border-left: 3px solid var(--amber); padding: 10px 14px; margin: 0 0 20px;
+    background: rgba(255,186,0,.09); border-radius: 0 8px 8px 0; font-size: 14.5px;
+  }
+  .field { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+  label { font-size: 13.5px; color: var(--soft); min-width: 88px; }
+  input {
+    flex: 1; min-width: 200px; padding: 8px 11px; border: 1px solid var(--line);
+    border-radius: 8px; font: inherit; font-size: 14px; background: transparent; color: inherit;
+  }
+  input:focus { outline: 2px solid var(--green); outline-offset: -1px; }
+  button.reload {
+    border: 0; background: var(--green); color: #fff; padding: 9px 16px;
+    border-radius: 8px; cursor: pointer; font: inherit; font-size: 14px; font-weight: 600;
+  }
+  button.reload:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ComeMorocco AI</h1>
+  <p class="sub">Widget preview. The launcher is in the bottom-right corner.</p>
+
+  <div class="note">
+    This page exists to review the widget against a real backend. Start the API with
+    <code>make run</code>, then reload. Without a running API the panel opens and the
+    interface works, but answers will fall back to the error state.
+  </div>
+
+  <div class="field">
+    <label for="api">API base</label>
+    <input id="api" value="http://localhost:8000">
+  </div>
+  <div class="field">
+    <label for="key">Widget key</label>
+    <input id="key" placeholder="leave empty in development">
+  </div>
+  <div class="field">
+    <label for="locale">Locale</label>
+    <input id="locale" value="en">
+  </div>
+  <div class="field">
+    <label></label>
+    <button class="reload" id="apply">Apply and reload</button>
+  </div>
+
+  <h2>What to check</h2>
+  <ul>
+    <li>Answers stream in rather than appearing all at once.</li>
+    <li>Resource cards appear only when a page is genuinely relevant.</li>
+    <li>Affiliate cards carry the partner label, and do not appear on questions like
+      &ldquo;what should I see in Marrakech?&rdquo;</li>
+    <li>Follow-ups keep context: ask about a 10-day trip, then just say
+      &ldquo;actually, add Essaouira&rdquo;.</li>
+    <li>Keyboard only: Tab to the launcher, Enter to open, Esc to close.</li>
+    <li>Narrow the window below 480px for the mobile layout.</li>
+  </ul>
+
+  <h2>Embedding it elsewhere</h2>
+  <pre>&lt;script
+  src="/widget/comemorocco-ai.js"
+  data-api-base="https://ai.comemorocco.com"
+  data-widget-key="YOUR_KEY"
+  data-locale="en"
+  defer&gt;&lt;/script&gt;</pre>
+  <p>On WordPress, install the plugin in <code>wordpress-plugin/</code> instead — it handles
+     the key, locale and per-page rules from the admin screen.</p>
+</div>
+
+<script>
+  var params = new URLSearchParams(location.search);
+  // Default to wherever this page is being served from. localhost and
+  // 127.0.0.1 are different origins to a browser, so hard-coding one of them
+  // made every question fail with a CORS error when the page was opened
+  // through the other.
+  var sameOrigin = location.protocol.indexOf("http") === 0 ? location.origin : "http://localhost:8000";
+  document.getElementById("api").value = params.get("api") || sameOrigin;
+  document.getElementById("key").value = params.get("key") || "";
+  document.getElementById("locale").value = params.get("locale") || "en";
+
+  document.getElementById("apply").addEventListener("click", function () {
+    var next = new URLSearchParams({
+      api: document.getElementById("api").value,
+      key: document.getElementById("key").value,
+      locale: document.getElementById("locale").value
+    });
+    location.search = next.toString();
+  });
+</script>
+<script src="comemorocco-ai.js"></script>
+<script>
+  window.ComeMoroccoAI.init({
+    apiBase: document.getElementById("api").value,
+    widgetKey: document.getElementById("key").value || null,
+    locale: document.getElementById("locale").value || "en"
+  });
+</script>
+</body>
+</html>

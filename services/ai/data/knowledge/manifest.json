@@ -1,0 +1,29 @@
+{
+ "built_at": "2026-09-21T08:05:24+00:00",
+ "counts": {
+  "content_items": 240,
+  "destinations": 14,
+  "content_gaps": 28,
+  "affiliate_programs": 27,
+  "affiliate_programs_usable": 26,
+  "activities": 77,
+  "activities_usable": 76,
+  "golden_questions": 213,
+  "multi_turn_tests": 10,
+  "source_examples": 17
+ },
+ "files": {
+  "content.json": {
+   "sha256_16": "b38b70fccd98edf2",
+   "bytes": 950961
+  },
+  "affiliates.json": {
+   "sha256_16": "95002035d3e2401c",
+   "bytes": 181443
+  },
+  "golden.json": {
+   "sha256_16": "345ad602e80f54a2",
+   "bytes": 400229
+  }
+ }
+}
