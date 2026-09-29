@@ -29,7 +29,8 @@ describe('i18n', () => {
   });
 
   it('translates with interpolation and falls back to the key text', () => {
-    expect(translate('fr', 'tabs.trip')).toBe('Mon voyage');
+    expect(translate('fr', 'trip.title')).toBe('Mon voyage');
+    expect(translate('fr', 'trip.day', { n: 3 })).toBe('Jour 3');
     expect(translate('ar', 'tabs.explore')).toBe('استكشف');
   });
 

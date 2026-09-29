@@ -7,8 +7,9 @@ import { router, Stack, useLocalSearchParams } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import { ArticleCard, ListingRow, ZelligeStar } from '@/components/brand';
+import { AddToTripButton, SaveButton } from '@/components/trip-buttons';
 import { Button, EmptyState, Screen, SectionHeader, T } from '@/components/ui';
-import { destinationName, getDestination, listingsFor } from '@/data/catalog';
+import { destinationName, destinationTagline, getDestination, listingsFor } from '@/data/catalog';
 import { useArticles } from '@/data/content';
 import { useApp } from '@/lib/app-state';
 import { openArticle, openPartner } from '@/lib/links';
@@ -38,16 +39,20 @@ export default function DestinationScreen() {
       <Stack.Screen options={{ title: name }} />
       <View style={[styles.hero, { backgroundColor: destination.hue }]}>
         <ZelligeStar size={260} color="#FFFFFF" opacity={0.12} style={{ position: 'absolute', top: -70, end: -60 }} />
+        <View style={{ position: 'absolute', top: spacing.lg, end: spacing.lg }}>
+          <SaveButton refType="destination" refId={destination.id} title={name} size={28} onDark />
+        </View>
         <T variant="display" style={{ color: '#FFFFFF' }}>
           {name}
         </T>
-        <T style={{ color: 'rgba(255,255,255,0.92)' }}>{destination.tagline}</T>
+        <T style={{ color: 'rgba(255,255,255,0.92)' }}>{destinationTagline(destination, locale)}</T>
         <T variant="caption" style={{ color: 'rgba(255,255,255,0.85)' }}>
           {destination.region}
         </T>
       </View>
 
       <View style={{ gap: spacing.sm }}>
+        <AddToTripButton item={{ type: 'destination', refId: destination.id, title: name }} />
         {destination.guide_url ? (
           <Button label={t('common.readFullGuide')} icon="book-outline" onPress={() => openArticle(destination.guide_url!, 'destination')} />
         ) : null}

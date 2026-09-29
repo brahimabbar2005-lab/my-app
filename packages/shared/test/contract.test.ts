@@ -3,6 +3,7 @@ import { join } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
+import { authorizeToolCall } from '../src/api/v1/actions';
 import { ChatResponse, StreamDone, StreamMeta } from '../src/api/v1/chat';
 import { SseParser } from '../src/client/sse';
 
@@ -32,5 +33,17 @@ describe('v1 contract — payloads produced by services/ai', () => {
     expect(meta.affiliates.length).toBeGreaterThan(0);
     expect(meta.resources[0]?.url).toMatch(/^https:\/\/comemorocco\.com\//);
     StreamDone.parse(JSON.parse(messages.at(-1)!.data));
+  });
+
+  it('every action the service proposes passes the app\'s action validator', () => {
+    const text = read('chat_stream.commercial.sse');
+    const meta = StreamMeta.parse(JSON.parse(new SseParser().feed(text)[0]!.data));
+    expect(meta.actions.length).toBeGreaterThan(0);
+    for (const action of meta.actions) {
+      const tapped = authorizeToolCall(action.tool, action.args, { signedIn: true, userRequested: true });
+      expect(tapped.outcome, `${action.id}`).toBe('execute');
+      // Never runs on its own: a write needs the traveller's request.
+      expect(authorizeToolCall(action.tool, action.args, { signedIn: true, userRequested: false }).outcome).toBe('rejected');
+    }
   });
 });

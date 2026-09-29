@@ -16,6 +16,30 @@ class ChatMessage(BaseModel):
     content: str
 
 
+class TripContext(BaseModel):
+    """The app's My Trip, as controlled context (Master Plan §20). Optional."""
+
+    day_count: Optional[int] = Field(default=None, ge=1, le=90)
+    destinations: list[str] = Field(default_factory=list, max_length=12)
+    start_date: Optional[str] = Field(default=None, pattern=r"^\d{4}-\d{2}-\d{2}$")
+
+    @field_validator("destinations")
+    @classmethod
+    def short_names(cls, value: list[str]) -> list[str]:
+        return [v.strip()[:80] for v in value if v and v.strip()]
+
+
+class AIActionOut(BaseModel):
+    """A proposed action. The app validates it and runs it only on a tap."""
+
+    id: str
+    tool: Literal["add_to_trip", "save_place"]
+    args: dict[str, Any]
+    access: Literal["read", "write", "confirm"]
+    label: str
+    requires_confirmation: bool = False
+
+
 class ChatRequest(BaseModel):
     message: str = Field(min_length=1)
     session_id: Optional[str] = None
@@ -25,6 +49,7 @@ class ChatRequest(BaseModel):
     page_url: Optional[str] = None
     page_title: Optional[str] = None
     locale: Optional[str] = None
+    trip_context: Optional[TripContext] = None
 
     @field_validator("message")
     @classmethod
@@ -74,6 +99,7 @@ class ChatResponse(BaseModel):
     # Surfaced to the UI so it can render "General seasonal guidance, not a
     # forecast" style notes without the model having to remember to say it.
     notices: list[str] = []
+    actions: list[AIActionOut] = []
     latency_ms: int = 0
 
 

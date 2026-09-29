@@ -22,6 +22,7 @@ from sqlalchemy.orm import Session as OrmSession
 from app.api.deps import client_ip, get_db, require_widget_key
 from app.config import get_settings
 from app.core import safety
+from app.core.actions import merge_trip_context
 from app.core.orchestrator import get_orchestrator
 from app.db import repo
 from app.infra.auth import caller_from_authorization
@@ -92,7 +93,7 @@ async def chat(payload: ChatRequest, request: Request, db: OrmSession = Depends(
         return error
 
     history = repo.history_for(db, conversation)
-    trip = repo.trip_state_for(conversation)
+    trip = merge_trip_context(repo.trip_state_for(conversation), payload.trip_context)
     repo.record_user_message(db, conversation, payload.message)
     repo.record_event(
         db,
@@ -133,6 +134,7 @@ async def chat(payload: ChatRequest, request: Request, db: OrmSession = Depends(
         language=result.classification.language,
         trip_state=result.trip.to_dict(),
         notices=result.notices,
+        actions=result.actions,
         latency_ms=result.latency_ms,
     )
 
@@ -148,7 +150,7 @@ async def chat_stream(payload: ChatRequest, request: Request, db: OrmSession = D
         return error
 
     history = repo.history_for(db, conversation)
-    trip = repo.trip_state_for(conversation)
+    trip = merge_trip_context(repo.trip_state_for(conversation), payload.trip_context)
     repo.record_user_message(db, conversation, payload.message)
     repo.record_event(
         db,

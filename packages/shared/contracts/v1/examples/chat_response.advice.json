@@ -1,4 +1,52 @@
 {
+  "actions": [
+    {
+      "access": "write",
+      "args": {
+        "item_type": "article",
+        "ref_id": "3802",
+        "title": "1-Week Morocco Itinerary: The Best 7-Day Route"
+      },
+      "id": "add_to_trip:article:3802",
+      "label": "1-Week Morocco Itinerary: The Best 7-Day Route",
+      "requires_confirmation": false,
+      "tool": "add_to_trip"
+    },
+    {
+      "access": "write",
+      "args": {
+        "item_type": "article",
+        "ref_id": "4232",
+        "title": "How Many Days in Marrakech? The Perfect 2-5 Day Itinerary"
+      },
+      "id": "add_to_trip:article:4232",
+      "label": "How Many Days in Marrakech? The Perfect 2-5 Day Itinerary",
+      "requires_confirmation": false,
+      "tool": "add_to_trip"
+    },
+    {
+      "access": "write",
+      "args": {
+        "place_id": "marrakech",
+        "ref_type": "destination"
+      },
+      "id": "save_place:marrakech",
+      "label": "Marrakech",
+      "requires_confirmation": false,
+      "tool": "save_place"
+    },
+    {
+      "access": "write",
+      "args": {
+        "place_id": "fes",
+        "ref_type": "destination"
+      },
+      "id": "save_place:fes",
+      "label": "Fes",
+      "requires_confirmation": false,
+      "tool": "save_place"
+    }
+  ],
   "affiliates": [],
   "answer": "I couldn't get that answer together just now — try again in a moment. If it keeps happening, the Morocco guides on the site cover most of the common questions.",
   "conversation_id": "<conversation_id>",

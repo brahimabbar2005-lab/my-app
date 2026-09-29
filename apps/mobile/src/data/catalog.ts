@@ -16,7 +16,7 @@ export interface Destination {
   lat: number;
   lng: number;
   hue: string;
-  tagline: string;
+  tagline: Record<Locale, string>;
   guide_url: string | null;
   listing_count: number;
   article_count: number;
@@ -54,6 +54,10 @@ export function destinationName(d: Destination, locale: Locale): string {
   return d.name[locale] ?? d.name.en;
 }
 
+export function destinationTagline(d: Destination, locale: Locale): string {
+  return d.tagline[locale] ?? d.tagline.en;
+}
+
 export function getDestination(id: string): Destination | undefined {
   return catalog.destinations.find((d) => d.id === id);
 }
@@ -76,8 +80,29 @@ export function searchCatalog(query: string, locale: Locale) {
   if (q.length < 2) return { destinations: [], listings: [], articles: [] };
   const has = (s: string | null | undefined) => !!s && s.toLowerCase().includes(q);
   return {
-    destinations: catalog.destinations.filter((d) => has(destinationName(d, locale)) || has(d.name.en) || has(d.tagline)),
+    destinations: catalog.destinations.filter((d) => has(destinationName(d, locale)) || has(d.name.en) || has(destinationTagline(d, locale))),
     listings: catalog.listings.filter((l) => has(l.title) || has(l.subtitle)).slice(0, 20),
     articles: catalog.articles.filter((a) => has(a.title)).slice(0, 10),
   };
+}
+
+/** Topic words per onboarding interest, matched against guide titles. */
+const INTEREST_WORDS: Record<string, string[]> = {
+  food: ['food', 'cuisine', 'restaurant', 'cooking', 'tagine', 'culinary'],
+  culture: ['medina', 'museum', 'culture', 'histor', 'festival', 'ancient', 'palace'],
+  desert: ['desert', 'sahara', 'merzouga', 'dunes', 'camel'],
+  beach: ['beach', 'surf', 'coast', 'essaouira', 'agadir', 'taghazout'],
+  hiking: ['atlas', 'hik', 'trek', 'mountain', 'toubkal'],
+  shopping: ['souk', 'market', 'shopping', 'leather'],
+  relax: ['hammam', 'spa', 'wellness', 'riad', 'retreat'],
+  family: ['family', 'kids', 'children'],
+};
+
+/** Guides for the traveller's interests first, then the rest (Master Plan §17). */
+export function articlesForInterests(interests: string[], limit = 8): Article[] {
+  const words = interests.flatMap((i) => INTEREST_WORDS[i] ?? []);
+  if (!words.length) return catalog.articles.slice(0, limit);
+  const matches = catalog.articles.filter((a) => words.some((w) => a.title.toLowerCase().includes(w)));
+  const rest = catalog.articles.filter((a) => !matches.includes(a));
+  return [...matches, ...rest].slice(0, limit);
 }

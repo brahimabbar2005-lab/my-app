@@ -7,6 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { configureAnalytics, track } from '@/lib/analytics';
 import { AppStateProvider, useApp } from '@/lib/app-state';
 import { AuthProvider } from '@/lib/auth';
+import { TripProvider } from '@/lib/trip-store';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -15,7 +16,9 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <AppStateProvider>
         <AuthProvider>
-          <Root />
+          <TripProvider>
+            <Root />
+          </TripProvider>
         </AuthProvider>
       </AppStateProvider>
     </SafeAreaProvider>

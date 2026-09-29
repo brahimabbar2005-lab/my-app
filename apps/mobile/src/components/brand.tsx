@@ -8,9 +8,10 @@ import { radii, spacing } from '@comemorocco/ui';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Pressable, StyleSheet, View, type ViewStyle } from 'react-native';
 
-import { type Destination, destinationName, type Listing } from '@/data/catalog';
+import { type Destination, destinationName, destinationTagline, type Listing } from '@/data/catalog';
 import { useApp } from '@/lib/app-state';
 
+import { AddToTripButton, SaveButton } from './trip-buttons';
 import { Card, Pill, Row, T } from './ui';
 
 export function ZelligeStar({
@@ -55,12 +56,15 @@ export function DestinationTile({
       style={({ pressed }) => [styles.tile, { width, backgroundColor: destination.hue, opacity: pressed ? 0.9 : 1 }]}>
       <ZelligeStar size={width * 0.9} color="#FFFFFF" opacity={0.12} style={styles.tileStar} />
       <ZelligeStar size={width * 0.35} color="#FFFFFF" opacity={0.2} style={styles.tileStarSmall} />
+      <View style={styles.tileHeart}>
+        <SaveButton refType="destination" refId={destination.id} title={destinationName(destination, locale)} onDark />
+      </View>
       <View style={styles.tileText}>
         <T variant="bodyStrong" style={{ color: '#FFFFFF' }} numberOfLines={2}>
           {destinationName(destination, locale)}
         </T>
         <T variant="caption" style={{ color: 'rgba(255,255,255,0.9)' }} numberOfLines={2}>
-          {destination.tagline}
+          {destinationTagline(destination, locale)}
         </T>
       </View>
     </Pressable>
@@ -96,7 +100,11 @@ export function ListingRow({ listing, onPress }: { listing: Listing; onPress: ()
             ) : null}
           </Row>
         </View>
+        <SaveButton refType="listing" refId={listing.id} title={listing.title} />
       </Row>
+      {listing.destination ? (
+        <AddToTripButton item={{ type: 'listing', refId: listing.id, title: listing.title }} />
+      ) : null}
       <Row style={{ justifyContent: 'space-between' }}>
         <T variant="caption" tone="muted" style={{ flex: 1 }}>
           {t('common.sponsored')} · {t('book.priceIndicative')}
@@ -157,6 +165,7 @@ const styles = StyleSheet.create({
   tileStar: { position: 'absolute', top: -30, end: -40 },
   tileStarSmall: { position: 'absolute', top: 24, start: 16 },
   tileText: { padding: spacing.md, gap: 2 },
+  tileHeart: { position: 'absolute', top: spacing.md, end: spacing.md },
   listingIcon: { width: 44, height: 44, borderRadius: radii.md, alignItems: 'center', justifyContent: 'center' },
   cta: {
     flexDirection: 'row',

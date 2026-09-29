@@ -13,7 +13,12 @@
    "lat": 31.6295,
    "lng": -7.9811,
    "hue": "#B4462F",
-   "tagline": "Souks, riads and the Atlas on the horizon",
+   "tagline": {
+    "en": "Souks, riads and the Atlas on the horizon",
+    "fr": "Souks, riads et l'Atlas à l'horizon",
+    "ar": "أسواق ورياضات والأطلس في الأفق",
+    "es": "Zocos, riads y el Atlas en el horizonte"
+   },
    "guide_url": "https://comemorocco.com/destinations/marrakech/",
    "listing_count": 18,
    "article_count": 74
@@ -30,7 +35,12 @@
    "lat": 34.0181,
    "lng": -5.0078,
    "hue": "#3450A1",
-   "tagline": "The world's largest living medina",
+   "tagline": {
+    "en": "The world's largest living medina",
+    "fr": "La plus grande médina vivante du monde",
+    "ar": "أكبر مدينة عتيقة مأهولة في العالم",
+    "es": "La medina viva más grande del mundo"
+   },
    "guide_url": "https://comemorocco.com/destinations/fes/",
    "listing_count": 1,
    "article_count": 7
@@ -47,7 +57,12 @@
    "lat": 35.1688,
    "lng": -5.2636,
    "hue": "#4F7BC8",
-   "tagline": "The blue city in the Rif mountains",
+   "tagline": {
+    "en": "The blue city in the Rif mountains",
+    "fr": "La ville bleue au cœur du Rif",
+    "ar": "المدينة الزرقاء في جبال الريف",
+    "es": "La ciudad azul en las montañas del Rif"
+   },
    "guide_url": "https://comemorocco.com/destinations/chefchaouen/",
    "listing_count": 1,
    "article_count": 3
@@ -64,7 +79,12 @@
    "lat": 31.0802,
    "lng": -4.0134,
    "hue": "#C9832E",
-   "tagline": "Dunes of Erg Chebbi and nights under the stars",
+   "tagline": {
+    "en": "Dunes of Erg Chebbi and nights under the stars",
+    "fr": "Les dunes de l'Erg Chebbi et des nuits sous les étoiles",
+    "ar": "كثبان عرق الشبي وليالٍ تحت النجوم",
+    "es": "Las dunas del Erg Chebbi y noches bajo las estrellas"
+   },
    "guide_url": "https://comemorocco.com/destinations/merzouga/",
    "listing_count": 6,
    "article_count": 12
@@ -81,7 +101,12 @@
    "lat": 31.5085,
    "lng": -9.7595,
    "hue": "#1F7A63",
-   "tagline": "Windswept ramparts, surf and seafood",
+   "tagline": {
+    "en": "Windswept ramparts, surf and seafood",
+    "fr": "Remparts battus par le vent, surf et fruits de mer",
+    "ar": "أسوار تعصف بها الرياح وركوب الأمواج والمأكولات البحرية",
+    "es": "Murallas azotadas por el viento, surf y marisco"
+   },
    "guide_url": "https://comemorocco.com/destinations/essaouira/",
    "listing_count": 3,
    "article_count": 3
@@ -98,7 +123,12 @@
    "lat": 33.5731,
    "lng": -7.5898,
    "hue": "#4A403A",
-   "tagline": "Art deco, the Atlantic and Hassan II Mosque",
+   "tagline": {
+    "en": "Art deco, the Atlantic and Hassan II Mosque",
+    "fr": "Art déco, l'Atlantique et la mosquée Hassan II",
+    "ar": "فن الآرت ديكو والأطلسي ومسجد الحسن الثاني",
+    "es": "Art déco, el Atlántico y la mezquita Hassan II"
+   },
    "guide_url": "https://comemorocco.com/destinations/casablanca/",
    "listing_count": 2,
    "article_count": 11
@@ -115,7 +145,12 @@
    "lat": 34.0209,
    "lng": -6.8416,
    "hue": "#2A3F8F",
-   "tagline": "The calm, green capital by the sea",
+   "tagline": {
+    "en": "The calm, green capital by the sea",
+    "fr": "La capitale calme et verte au bord de l'océan",
+    "ar": "العاصمة الهادئة الخضراء على البحر",
+    "es": "La capital tranquila y verde junto al mar"
+   },
    "guide_url": "https://comemorocco.com/destinations/rabat/",
    "listing_count": 3,
    "article_count": 3
@@ -132,7 +167,12 @@
    "lat": 35.7595,
    "lng": -5.834,
    "hue": "#6A4C93",
-   "tagline": "Where Africa meets Europe",
+   "tagline": {
+    "en": "Where Africa meets Europe",
+    "fr": "Là où l'Afrique rencontre l'Europe",
+    "ar": "حيث تلتقي إفريقيا بأوروبا",
+    "es": "Donde África se encuentra con Europa"
+   },
    "guide_url": "https://comemorocco.com/destinations/tangier/",
    "listing_count": 1,
    "article_count": 3
@@ -149,7 +189,12 @@
    "lat": 30.4278,
    "lng": -9.5981,
    "hue": "#E0A526",
-   "tagline": "Year-round sun and world-class surf",
+   "tagline": {
+    "en": "Year-round sun and world-class surf",
+    "fr": "Soleil toute l'année et surf de classe mondiale",
+    "ar": "شمس طوال العام وأمواج عالمية لركوب الأمواج",
+    "es": "Sol todo el año y surf de primer nivel"
+   },
    "guide_url": "https://comemorocco.com/agadir-morocco-beach-guide-best-resorts-activities/",
    "listing_count": 9,
    "article_count": 4
@@ -166,7 +211,12 @@
    "lat": 30.9335,
    "lng": -6.937,
    "hue": "#9C3B26",
-   "tagline": "Kasbahs, film sets and the road to the desert",
+   "tagline": {
+    "en": "Kasbahs, film sets and the road to the desert",
+    "fr": "Kasbahs, studios de cinéma et la route du désert",
+    "ar": "قصبات واستوديوهات سينما والطريق إلى الصحراء",
+    "es": "Kasbahs, platós de cine y la ruta al desierto"
+   },
    "guide_url": null,
    "listing_count": 4,
    "article_count": 0
@@ -183,7 +233,12 @@
    "lat": 23.6848,
    "lng": -15.9579,
    "hue": "#2B8C9E",
-   "tagline": "Lagoon kitesurfing where the desert meets the ocean",
+   "tagline": {
+    "en": "Lagoon kitesurfing where the desert meets the ocean",
+    "fr": "Kitesurf sur la lagune, là où le désert rencontre l'océan",
+    "ar": "ركوب الأمواج الشراعية في البحيرة حيث تلتقي الصحراء بالمحيط",
+    "es": "Kitesurf en la laguna donde el desierto se une al océano"
+   },
    "guide_url": "https://comemorocco.com/destinations/dakhla/",
    "listing_count": 1,
    "article_count": 0

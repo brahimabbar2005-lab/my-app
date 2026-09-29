@@ -41,37 +41,37 @@ OUT_SQL = ROOT / "supabase" / "seed" / "seed.sql"
 DESTINATIONS = [
     {"id": "marrakech", "name": {"en": "Marrakech", "fr": "Marrakech", "ar": "مراكش", "es": "Marrakech"},
      "region": "Marrakech-Safi", "lat": 31.6295, "lng": -7.9811, "hue": "#B4462F",
-     "tagline": "Souks, riads and the Atlas on the horizon", "match": ["marrakech", "marrakesh", "agafay", "palmeraie", "rak"]},
+     "tagline": {"en": "Souks, riads and the Atlas on the horizon", "fr": "Souks, riads et l'Atlas à l'horizon", "ar": "أسواق ورياضات والأطلس في الأفق", "es": "Zocos, riads y el Atlas en el horizonte"}, "match": ["marrakech", "marrakesh", "agafay", "palmeraie", "rak"]},
     {"id": "fes", "name": {"en": "Fes", "fr": "Fès", "ar": "فاس", "es": "Fez"},
      "region": "Fès-Meknès", "lat": 34.0181, "lng": -5.0078, "hue": "#3450A1",
-     "tagline": "The world's largest living medina", "match": ["fes", "fez"]},
+     "tagline": {"en": "The world's largest living medina", "fr": "La plus grande médina vivante du monde", "ar": "أكبر مدينة عتيقة مأهولة في العالم", "es": "La medina viva más grande del mundo"}, "match": ["fes", "fez"]},
     {"id": "chefchaouen", "name": {"en": "Chefchaouen", "fr": "Chefchaouen", "ar": "شفشاون", "es": "Chefchaouen"},
      "region": "Tanger-Tétouan-Al Hoceïma", "lat": 35.1688, "lng": -5.2636, "hue": "#4F7BC8",
-     "tagline": "The blue city in the Rif mountains", "match": ["chefchaouen"]},
+     "tagline": {"en": "The blue city in the Rif mountains", "fr": "La ville bleue au cœur du Rif", "ar": "المدينة الزرقاء في جبال الريف", "es": "La ciudad azul en las montañas del Rif"}, "match": ["chefchaouen"]},
     {"id": "merzouga", "name": {"en": "Merzouga & Sahara", "fr": "Merzouga et Sahara", "ar": "مرزوكة والصحراء", "es": "Merzouga y Sáhara"},
      "region": "Drâa-Tafilalet", "lat": 31.0802, "lng": -4.0134, "hue": "#C9832E",
-     "tagline": "Dunes of Erg Chebbi and nights under the stars", "match": ["merzouga", "erg chebbi", "sahara"]},
+     "tagline": {"en": "Dunes of Erg Chebbi and nights under the stars", "fr": "Les dunes de l'Erg Chebbi et des nuits sous les étoiles", "ar": "كثبان عرق الشبي وليالٍ تحت النجوم", "es": "Las dunas del Erg Chebbi y noches bajo las estrellas"}, "match": ["merzouga", "erg chebbi", "sahara"]},
     {"id": "essaouira", "name": {"en": "Essaouira", "fr": "Essaouira", "ar": "الصويرة", "es": "Esauira"},
      "region": "Marrakech-Safi", "lat": 31.5085, "lng": -9.7595, "hue": "#1F7A63",
-     "tagline": "Windswept ramparts, surf and seafood", "match": ["essaouira"]},
+     "tagline": {"en": "Windswept ramparts, surf and seafood", "fr": "Remparts battus par le vent, surf et fruits de mer", "ar": "أسوار تعصف بها الرياح وركوب الأمواج والمأكولات البحرية", "es": "Murallas azotadas por el viento, surf y marisco"}, "match": ["essaouira"]},
     {"id": "casablanca", "name": {"en": "Casablanca", "fr": "Casablanca", "ar": "الدار البيضاء", "es": "Casablanca"},
      "region": "Casablanca-Settat", "lat": 33.5731, "lng": -7.5898, "hue": "#4A403A",
-     "tagline": "Art deco, the Atlantic and Hassan II Mosque", "match": ["casablanca"]},
+     "tagline": {"en": "Art deco, the Atlantic and Hassan II Mosque", "fr": "Art déco, l'Atlantique et la mosquée Hassan II", "ar": "فن الآرت ديكو والأطلسي ومسجد الحسن الثاني", "es": "Art déco, el Atlántico y la mezquita Hassan II"}, "match": ["casablanca"]},
     {"id": "rabat", "name": {"en": "Rabat", "fr": "Rabat", "ar": "الرباط", "es": "Rabat"},
      "region": "Rabat-Salé-Kénitra", "lat": 34.0209, "lng": -6.8416, "hue": "#2A3F8F",
-     "tagline": "The calm, green capital by the sea", "match": ["rabat"]},
+     "tagline": {"en": "The calm, green capital by the sea", "fr": "La capitale calme et verte au bord de l'océan", "ar": "العاصمة الهادئة الخضراء على البحر", "es": "La capital tranquila y verde junto al mar"}, "match": ["rabat"]},
     {"id": "tangier", "name": {"en": "Tangier", "fr": "Tanger", "ar": "طنجة", "es": "Tánger"},
      "region": "Tanger-Tétouan-Al Hoceïma", "lat": 35.7595, "lng": -5.8340, "hue": "#6A4C93",
-     "tagline": "Where Africa meets Europe", "match": ["tangier", "tanger"]},
+     "tagline": {"en": "Where Africa meets Europe", "fr": "Là où l'Afrique rencontre l'Europe", "ar": "حيث تلتقي إفريقيا بأوروبا", "es": "Donde África se encuentra con Europa"}, "match": ["tangier", "tanger"]},
     {"id": "agadir", "name": {"en": "Agadir & Taghazout", "fr": "Agadir et Taghazout", "ar": "أكادير وتغازوت", "es": "Agadir y Taghazout"},
      "region": "Souss-Massa", "lat": 30.4278, "lng": -9.5981, "hue": "#E0A526",
-     "tagline": "Year-round sun and world-class surf", "match": ["agadir", "taghazout", "timlalin", "legzira"]},
+     "tagline": {"en": "Year-round sun and world-class surf", "fr": "Soleil toute l'année et surf de classe mondiale", "ar": "شمس طوال العام وأمواج عالمية لركوب الأمواج", "es": "Sol todo el año y surf de primer nivel"}, "match": ["agadir", "taghazout", "timlalin", "legzira"]},
     {"id": "ouarzazate", "name": {"en": "Ouarzazate", "fr": "Ouarzazate", "ar": "ورزازات", "es": "Uarzazat"},
      "region": "Drâa-Tafilalet", "lat": 30.9335, "lng": -6.9370, "hue": "#9C3B26",
-     "tagline": "Kasbahs, film sets and the road to the desert", "match": ["ouarzazate", "ait benhaddou", "draa", "dades", "todra"]},
+     "tagline": {"en": "Kasbahs, film sets and the road to the desert", "fr": "Kasbahs, studios de cinéma et la route du désert", "ar": "قصبات واستوديوهات سينما والطريق إلى الصحراء", "es": "Kasbahs, platós de cine y la ruta al desierto"}, "match": ["ouarzazate", "ait benhaddou", "draa", "dades", "todra"]},
     {"id": "dakhla", "name": {"en": "Dakhla", "fr": "Dakhla", "ar": "الداخلة", "es": "Dajla"},
      "region": "Dakhla-Oued Ed-Dahab", "lat": 23.6848, "lng": -15.9579, "hue": "#2B8C9E",
-     "tagline": "Lagoon kitesurfing where the desert meets the ocean", "match": ["dakhla"]},
+     "tagline": {"en": "Lagoon kitesurfing where the desert meets the ocean", "fr": "Kitesurf sur la lagune, là où le désert rencontre l'océan", "ar": "ركوب الأمواج الشراعية في البحيرة حيث تلتقي الصحراء بالمحيط", "es": "Kitesurf en la laguna donde el desierto se une al océano"}, "match": ["dakhla"]},
 ]
 
 # Book tab categories for partner programs (Master Plan §9).
@@ -229,7 +229,8 @@ def build_sql(catalog, links, programs) -> str:
            "-- Source: services/ai/data/knowledge (editorial spreadsheets).", "begin;", ""]
     out.append("insert into public.destinations (id, name, region, lat, lng, tagline, hue, guide_url) values")
     rows = [f"  ({sql_str(d['id'])}, {sql_str(json.dumps(d['name'], ensure_ascii=False))}::jsonb, {sql_str(d['region'])}, "
-            f"{d['lat']}, {d['lng']}, {sql_str(d['tagline'])}, {sql_str(d['hue'])}, {sql_str(d['guide_url'])})"
+            f"{d['lat']}, {d['lng']}, {sql_str(json.dumps(d['tagline'], ensure_ascii=False))}::jsonb, "
+            f"{sql_str(d['hue'])}, {sql_str(d['guide_url'])})"
             for d in catalog["destinations"]]
     out.append(",\n".join(rows) + "\non conflict (id) do update set name = excluded.name, region = excluded.region, "
                "lat = excluded.lat, lng = excluded.lng, tagline = excluded.tagline, hue = excluded.hue, "

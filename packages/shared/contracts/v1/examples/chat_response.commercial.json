@@ -1,4 +1,40 @@
 {
+  "actions": [
+    {
+      "access": "write",
+      "args": {
+        "item_type": "article",
+        "ref_id": "4079",
+        "title": "Best Sahara Desert Tour from Marrakech: 2026 Guide"
+      },
+      "id": "add_to_trip:article:4079",
+      "label": "Best Sahara Desert Tour from Marrakech: 2026 Guide",
+      "requires_confirmation": false,
+      "tool": "add_to_trip"
+    },
+    {
+      "access": "write",
+      "args": {
+        "place_id": "marrakech",
+        "ref_type": "destination"
+      },
+      "id": "save_place:marrakech",
+      "label": "Marrakech",
+      "requires_confirmation": false,
+      "tool": "save_place"
+    },
+    {
+      "access": "write",
+      "args": {
+        "place_id": "merzouga",
+        "ref_type": "destination"
+      },
+      "id": "save_place:merzouga",
+      "label": "Merzouga",
+      "requires_confirmation": false,
+      "tool": "save_place"
+    }
+  ],
   "affiliates": [],
   "answer": "I couldn't get that answer together just now — try again in a moment. If it keeps happening, the Morocco guides on the site cover most of the common questions.",
   "conversation_id": "<conversation_id>",

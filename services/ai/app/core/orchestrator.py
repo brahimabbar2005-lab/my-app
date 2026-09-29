@@ -33,8 +33,10 @@ from app.core.trip_state import extract_rules, extract_with_model
 from app.knowledge.affiliates import select_affiliates
 from app.knowledge.links import detect_content_gap, select_links
 from app.knowledge.retriever import get_retriever
+from app.core.actions import propose_actions
 from app.schemas import (
     AffiliateCard,
+    AIActionOut,
     Classification,
     ResourceCard,
     TripState,
@@ -56,6 +58,7 @@ class AnswerResult:
     flagged_for_review: bool = False
     quality_issues: list[dict[str, str]] = field(default_factory=list)
     content_gap: dict[str, Any] | None = None
+    actions: list[AIActionOut] = field(default_factory=list)
     debug: dict[str, Any] = field(default_factory=dict)
     message_id: str = field(default_factory=lambda: uuid.uuid4().hex)
 
@@ -223,6 +226,7 @@ class Orchestrator:
                 classification=classification,
                 trip=trip,
                 resources=resources,
+                actions=propose_actions(classification, resources, []),
                 notices=self._notices(classification, settings.live_data_enabled),
                 latency_ms=int((time.perf_counter() - started) * 1000),
                 flagged_for_review=True,
@@ -245,6 +249,7 @@ class Orchestrator:
             trip=trip,
             resources=resources,
             affiliates=affiliates,
+            actions=propose_actions(classification, resources, affiliates),
             notices=self._notices(classification, settings.live_data_enabled),
             usage=usage,
             latency_ms=int((time.perf_counter() - started) * 1000),
@@ -308,7 +313,9 @@ class Orchestrator:
         )
         notices = self._notices(classification, settings.live_data_enabled)
 
+        actions = propose_actions(classification, resources, affiliates)
         yield "meta", {
+            "actions": [a.model_dump() for a in actions],
             "resources": [r.model_dump() for r in resources],
             "affiliates": [a.model_dump() for a in affiliates],
             "notices": notices,
@@ -339,7 +346,7 @@ class Orchestrator:
             yield "delta", message_text if not chunks else "\n\n" + message_text
             yield "done", AnswerResult(
                 answer="".join(chunks) or message_text, classification=classification,
-                trip=trip, resources=resources, affiliates=affiliates, notices=notices,
+                trip=trip, resources=resources, affiliates=affiliates, notices=notices, actions=actions,
                 usage=usage, latency_ms=int((time.perf_counter() - started) * 1000),
                 flagged_for_review=True, debug={"error": str(exc)},
             )
@@ -356,6 +363,7 @@ class Orchestrator:
             resources=resources,
             affiliates=affiliates,
             notices=notices,
+            actions=actions,
             usage=usage,
             latency_ms=int((time.perf_counter() - started) * 1000),
             flagged_for_review=flagged,

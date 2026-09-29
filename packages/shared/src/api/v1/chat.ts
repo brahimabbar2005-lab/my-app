@@ -11,6 +11,8 @@
  */
 import { z } from 'zod';
 
+import { AIAction } from './actions';
+
 export const API_VERSION = 'v1' as const;
 
 export const ChatMessage = z.object({
@@ -19,6 +21,17 @@ export const ChatMessage = z.object({
 });
 export type ChatMessage = z.infer<typeof ChatMessage>;
 
+/** The app's My Trip as controlled context for the AI (Master Plan §20). */
+export const TripContext = z.object({
+  day_count: z.number().int().min(1).max(90).nullish(),
+  destinations: z.array(z.string().max(80)).max(12).default([]),
+  start_date: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/)
+    .nullish(),
+});
+export type TripContext = z.infer<typeof TripContext>;
+
 export const ChatRequest = z.object({
   message: z.string().trim().min(1),
   session_id: z.string().nullish(),
@@ -26,6 +39,7 @@ export const ChatRequest = z.object({
   page_url: z.string().nullish(),
   page_title: z.string().nullish(),
   locale: z.string().nullish(),
+  trip_context: TripContext.nullish(),
 });
 export type ChatRequest = z.infer<typeof ChatRequest>;
 
@@ -89,6 +103,7 @@ export const ChatResponse = z.object({
   language: z.string().default('en'),
   trip_state: TripState.default({}),
   notices: z.array(z.string()).default([]),
+  actions: z.array(AIAction).default([]),
   latency_ms: z.number().default(0),
 });
 export type ChatResponse = z.infer<typeof ChatResponse>;
@@ -107,6 +122,7 @@ export type ChatError = z.infer<typeof ChatError>;
 export const StreamMeta = z.object({
   session_id: z.string(),
   conversation_id: z.string(),
+  actions: z.array(AIAction).default([]),
   resources: z.array(ResourceCard).default([]),
   affiliates: z.array(AffiliateCard).default([]),
   notices: z.array(z.string()).default([]),

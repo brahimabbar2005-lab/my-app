@@ -8,6 +8,7 @@
  */
 import {
   type AffiliateCard,
+  type AIAction,
   type ChatStreamEvent,
   getStarters,
   type ResourceCard,
@@ -36,7 +37,10 @@ import { aiClient } from '@/lib/ai';
 import { track } from '@/lib/analytics';
 import { useApp } from '@/lib/app-state';
 import { useAuth } from '@/lib/auth';
+import { isActionDone, runAction } from '@/lib/ai-actions';
 import { openArticle, openPartner } from '@/lib/links';
+import { tripContext } from '@/lib/trip-model';
+import { useTrip } from '@/lib/trip-store';
 
 interface Turn {
   id: string;
@@ -45,6 +49,7 @@ interface Turn {
   resources?: ResourceCard[];
   affiliates?: AffiliateCard[];
   notices?: string[];
+  actions?: AIAction[];
   messageId?: string;
   pending?: boolean;
   failed?: boolean;
@@ -61,6 +66,12 @@ const LOCAL_STARTERS = [
 export default function AiScreen() {
   const { t, colors, locale, prefs } = useApp();
   const { userId } = useAuth();
+  const trip = useTrip();
+  // The latest trip, read when a message is sent (not a render dependency).
+  const tripRef = useRef(trip.state.trip);
+  useEffect(() => {
+    tripRef.current = trip.state.trip;
+  }, [trip.state.trip]);
   const params = useLocalSearchParams<{ q?: string }>();
   const [turns, setTurns] = useState<Turn[]>([]);
   const [input, setInput] = useState('');
@@ -108,6 +119,7 @@ export default function AiScreen() {
               resources: event.data.resources,
               affiliates: event.data.affiliates,
               notices: event.data.notices,
+              actions: event.data.actions,
             }));
             break;
           case 'delta':
@@ -131,6 +143,7 @@ export default function AiScreen() {
             session_id: prefs.anonymousId,
             conversation_id: conversationId.current,
             locale,
+            trip_context: tripContext(tripRef.current),
           },
           onEvent,
           controller.signal,
@@ -310,6 +323,7 @@ function AssistantTurn({ turn, onRate }: { turn: Turn; onRate: (helpful: boolean
                   </T>
                   <Ionicons name="open-outline" size={16} color={colors.textMuted} />
                 </Row>
+                <ActionButton action={turn.actions?.find((a) => a.id === `add_to_trip:article:${r.content_id}`)} />
               </Card>
             </Pressable>
           ))}
@@ -343,10 +357,21 @@ function AssistantTurn({ turn, onRate }: { turn: Turn; onRate: (helpful: boolean
                 <T variant="caption" tone="muted">
                   {a.disclosure}
                 </T>
+                <ActionButton action={turn.actions?.find((x) => x.id === `add_to_trip:listing:${a.affiliate_id}`)} />
               </Card>
             </Pressable>
           ))}
         </View>
+      ) : null}
+
+      {turn.actions?.some((a) => a.tool === 'save_place') ? (
+        <Row style={{ flexWrap: 'wrap' }}>
+          {turn.actions
+            .filter((a) => a.tool === 'save_place')
+            .map((a) => (
+              <ActionButton key={a.id} action={a} />
+            ))}
+        </Row>
       ) : null}
 
       {turn.messageId ? (
@@ -384,5 +409,51 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.sm,
     fontSize: 16,
   },
+  action: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 6,
+    borderRadius: radii.pill,
+    borderWidth: 1,
+    alignSelf: 'flex-start',
+  },
   send: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
 });
+
+/** A proposed action as a button; runs only on tap, after validation. */
+function ActionButton({ action }: { action: AIAction | undefined }) {
+  const { t, colors } = useApp();
+  const { userId } = useAuth();
+  const trip = useTrip();
+  if (!action) return null;
+  const done = isActionDone(action, trip);
+  const isSave = action.tool === 'save_place';
+  const label = isSave ? (done ? `${action.label} ✓` : `${t('trip.save')} ${action.label}`) : done ? t('trip.inTrip') : t('trip.addToTrip');
+  return (
+    <Pressable
+      onPress={() => {
+        if (runAction(action, trip, { signedIn: !!userId }) === 'done') {
+          track('ai_recommendation_clicked', { properties: { kind: 'action', id: action.id } });
+        }
+      }}
+      disabled={done}
+      accessibilityRole="button"
+      accessibilityState={{ disabled: done }}
+      hitSlop={6}
+      style={({ pressed }) => [
+        styles.action,
+        { borderColor: done ? colors.success : colors.secondary, backgroundColor: colors.surface, opacity: pressed ? 0.8 : 1 },
+      ]}>
+      <Ionicons
+        name={done ? 'checkmark-circle' : isSave ? 'heart-outline' : 'add-circle-outline'}
+        size={16}
+        color={done ? colors.success : colors.secondary}
+      />
+      <T variant="label" style={{ color: done ? colors.success : colors.secondary }}>
+        {label}
+      </T>
+    </Pressable>
+  );
+}

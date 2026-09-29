@@ -12,7 +12,7 @@ import { FlatList, Modal, Pressable, ScrollView, StyleSheet, TextInput, View } f
 
 import { ArticleCard, DestinationTile, ListingRow } from '@/components/brand';
 import { Button, Card, Chip, Row, Screen, SectionHeader, T } from '@/components/ui';
-import { catalog, destinationName, listingsFor, searchCatalog } from '@/data/catalog';
+import { articlesForInterests, catalog, destinationName, destinationTagline, listingsFor, searchCatalog } from '@/data/catalog';
 import { useArticles } from '@/data/content';
 import { track } from '@/lib/analytics';
 import { useApp } from '@/lib/app-state';
@@ -68,7 +68,7 @@ export default function Explore() {
               <Card>
                 <T variant="bodyStrong">{destinationName(d, locale)}</T>
                 <T variant="caption" tone="muted">
-                  {d.tagline}
+                  {destinationTagline(d, locale)}
                 </T>
               </Card>
             </Pressable>
@@ -118,7 +118,7 @@ export default function Explore() {
           <View style={{ gap: spacing.md }}>
             <SectionHeader title={t('explore.guides')} />
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: spacing.md }}>
-              {articles.items.map((a) => (
+              {(articles.source === 'fallback' ? articlesForInterests(prefs.interests, 8) : articles.items).map((a) => (
                 <ArticleCard
                   key={a.id}
                   width={260}

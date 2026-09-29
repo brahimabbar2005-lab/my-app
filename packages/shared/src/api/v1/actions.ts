@@ -51,8 +51,17 @@ export const ToolArgs = {
   search_community: z.strictObject({ query: z.string().min(1).max(300), destination: destination.optional() }),
   open_article: z.strictObject({ content_id: id }),
   generate_booking_link: z.strictObject({ listing_id: id }),
-  save_place: z.strictObject({ place_id: id }),
-  add_to_trip: z.strictObject({ trip_id: id.optional(), item_type: z.enum(['place', 'listing', 'activity', 'note']), ref_id: id.optional(), day: z.number().int().min(1).max(60).optional(), title: z.string().max(200).optional() }),
+  save_place: z.strictObject({
+    place_id: id,
+    ref_type: z.enum(['destination', 'listing', 'article', 'place']).default('place'),
+  }),
+  add_to_trip: z.strictObject({
+    trip_id: id.optional(),
+    item_type: z.enum(['destination', 'place', 'listing', 'activity', 'article', 'note']),
+    ref_id: id.optional(),
+    day: z.number().int().min(1).max(60).optional(),
+    title: z.string().max(200).optional(),
+  }),
   remove_from_trip: z.strictObject({ trip_item_id: id }),
   update_itinerary: z.strictObject({
     trip_id: id,
@@ -123,7 +132,13 @@ export type ActionDecision =
 export function authorizeToolCall(
   tool: string,
   args: unknown,
-  ctx: { signedIn: boolean; userRequested: boolean; confirmed?: boolean },
+  ctx: {
+    signedIn: boolean;
+    userRequested: boolean;
+    confirmed?: boolean;
+    /** The write only touches the traveller's own on-device data (guest My Trip). */
+    deviceLocal?: boolean;
+  },
 ): ActionDecision {
   if (!(tool in ToolArgs)) return { outcome: 'rejected', reason: 'unknown_tool', detail: tool };
   const name = tool as ToolName;
@@ -134,7 +149,9 @@ export function authorizeToolCall(
   const access = TOOL_ACCESS[name];
   const data = parsed.data as Record<string, unknown>;
   if (access === 'read') return { outcome: 'execute', args: data };
-  if (!ctx.signedIn) return { outcome: 'rejected', reason: 'not_signed_in' };
+  // Server writes need an account; device-local writes (a guest's own trip) do
+  // not. Confirm-level actions (payments) always need an account.
+  if (!ctx.signedIn && !(ctx.deviceLocal && access === 'write')) return { outcome: 'rejected', reason: 'not_signed_in' };
   if (access === 'write') {
     return ctx.userRequested ? { outcome: 'execute', args: data } : { outcome: 'rejected', reason: 'not_requested' };
   }

@@ -31,6 +31,7 @@ select pg_temp.expect((select count(*) from public.listings where status = 'publ
 select pg_temp.expect(not exists (select 1 from public.listings where id = 'DRAFT-1'), 'anon cannot see draft listings');
 select pg_temp.expect((select count(*) from public.trips) = 0, 'anon sees no trips');
 select pg_temp.expect((select count(*) from public.emergency_contacts) = 4, 'anon reads emergency contacts');
+select pg_temp.expect((select tagline ->> 'ar' from public.destinations where id = 'fes') is not null, 'taglines are localised');
 do $$ begin
   begin perform 1 from public.affiliate_links limit 1; raise exception 'FAIL: anon read affiliate_links';
   exception when insufficient_privilege then null; end;
@@ -86,6 +87,44 @@ do $$ begin
 end $$;
 select pg_temp.expect((public.export_my_data() -> 'trips' -> 0 ->> 'title') = 'A in Morocco', 'export_my_data includes trips');
 commit;
+
+-- Trip sync (v0.2): A syncs a device-built trip; B cannot overwrite it ----
+begin;
+set local role authenticated;
+select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-00000000000a","role":"authenticated"}', true);
+select public.sync_trip(
+  '{"id":"50000000-0000-4000-8000-00000000000a","user_id":"00000000-0000-0000-0000-00000000000a","title":"Synced","travelers_adults":2,"travelers_children":0}'::jsonb,
+  '[{"id":"51000000-0000-4000-8000-000000000001","day_number":1},{"id":"51000000-0000-4000-8000-000000000002","day_number":2}]'::jsonb,
+  '[{"id":"52000000-0000-4000-8000-000000000001","trip_day_id":"51000000-0000-4000-8000-000000000001","item_type":"destination","ref_id":"fes","title":"Fes","position":0},
+    {"id":"52000000-0000-4000-8000-000000000002","trip_day_id":"","item_type":"article","ref_id":"wp-1","title":"Idea","position":0}]'::jsonb);
+select pg_temp.expect((select count(*) from public.trip_items where trip_id = '50000000-0000-4000-8000-00000000000a') = 2, 'sync_trip stores items');
+-- A second sync replaces rather than duplicates.
+select public.sync_trip(
+  '{"id":"50000000-0000-4000-8000-00000000000a","user_id":"00000000-0000-0000-0000-00000000000a","title":"Synced v2"}'::jsonb,
+  '[{"id":"51000000-0000-4000-8000-000000000001","day_number":1}]'::jsonb,
+  '[{"id":"52000000-0000-4000-8000-000000000001","trip_day_id":"51000000-0000-4000-8000-000000000001","item_type":"destination","ref_id":"fes","title":"Fes","position":0}]'::jsonb);
+select pg_temp.expect((select count(*) from public.trip_items where trip_id = '50000000-0000-4000-8000-00000000000a') = 1, 'sync_trip replaces items');
+select pg_temp.expect((select title from public.trips where id = '50000000-0000-4000-8000-00000000000a') = 'Synced v2', 'sync_trip updates the trip');
+do $$ begin
+  begin
+    perform public.sync_trip('{"id":"50000000-0000-4000-8000-00000000000b","user_id":"00000000-0000-0000-0000-00000000000b"}'::jsonb, '[]', '[]');
+    raise exception 'FAIL: A synced a trip owned by B';
+  exception when insufficient_privilege then null; end;
+end $$;
+commit;
+
+begin;
+set local role authenticated;
+select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-00000000000b","role":"authenticated"}', true);
+do $$ begin
+  begin
+    perform public.sync_trip('{"id":"50000000-0000-4000-8000-00000000000a","user_id":"00000000-0000-0000-0000-00000000000b","title":"hijack"}'::jsonb, '[]', '[]');
+    raise exception 'FAIL: B overwrote A''s synced trip';
+  exception when insufficient_privilege or unique_violation then null; end;
+end $$;
+commit;
+select pg_temp.expect((select title from public.trips where id = '50000000-0000-4000-8000-00000000000a') = 'Synced v2', 'B could not change A''s synced trip');
+select pg_temp.expect((select count(*) from public.trip_items where trip_id = '50000000-0000-4000-8000-00000000000a') = 1, 'B could not delete A''s synced items');
 
 -- User B -----------------------------------------------------------------------
 begin;

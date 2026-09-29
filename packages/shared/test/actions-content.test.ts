@@ -30,6 +30,19 @@ describe('action authorization', () => {
     expect(authorizeToolCall('add_to_trip', { item_type: 'place', ref_id: 'p1' }, user).outcome).toBe('execute');
   });
 
+  it('guests may write their own device-local trip, but never pay', () => {
+    const guestTap = { signedIn: false, userRequested: true, deviceLocal: true };
+    expect(authorizeToolCall('add_to_trip', { item_type: 'listing', ref_id: 'GYG-008' }, guestTap).outcome).toBe('execute');
+    expect(
+      authorizeToolCall('add_to_trip', { item_type: 'listing', ref_id: 'GYG-008' }, { ...guestTap, userRequested: false }),
+    ).toMatchObject({ outcome: 'rejected', reason: 'not_requested' });
+    const pay = { booking_id: 'b1', amount_minor: 100, currency: 'MAD' };
+    expect(authorizeToolCall('make_payment', pay, { ...guestTap, confirmed: true })).toMatchObject({
+      outcome: 'rejected',
+      reason: 'not_signed_in',
+    });
+  });
+
   it('payments always require confirmation', () => {
     const args = { booking_id: 'b1', amount_minor: 240000, currency: 'MAD' };
     expect(authorizeToolCall('make_payment', args, user).outcome).toBe('needs_confirmation');
