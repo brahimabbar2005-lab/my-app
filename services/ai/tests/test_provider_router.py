@@ -243,8 +243,10 @@ async def test_stream_falls_back_before_the_first_token(chain):
 
 
 async def test_stream_does_not_switch_provider_after_text_was_sent(chain, monkeypatch):
+    shown = "Marrakech is a good first stop: compact medina, easy day trips, and plenty of riads. " * 2
+
     async def broken_after_first_token(self, *args, **kwargs):
-        yield "delta", "Half an ans"
+        yield "delta", shown  # longer than the probe, so it reaches the traveller
         raise ModelUnavailable("connection dropped", kind="network")
 
     from app.core.providers.hosted import OpenRouterProvider
@@ -253,7 +255,7 @@ async def test_stream_does_not_switch_provider_after_text_was_sent(chain, monkey
     chain["workers"] = cf_ok("should never be used")
     gen = llm.stream("sys", "hi")
     first = await gen.__anext__()
-    assert first == ("delta", "Half an ans")
+    assert first == ("delta", shown)
     with pytest.raises(ModelUnavailable):
         await gen.__anext__()
     assert not any(c.startswith("workers_ai") for c in chain["calls"])
@@ -319,3 +321,106 @@ def test_router_is_rebuilt_when_settings_change(chain, monkeypatch):
     get_settings.cache_clear()
     assert get_router() is not first
     assert router_mod._router_settings is get_settings()
+
+
+async def test_default_answer_model_is_not_forced_onto_a_different_primary_provider(chain, monkeypatch):
+    """Found in the first live run: with Workers AI first in LLM_CHAIN, the
+    OpenRouter answer model was sent to Cloudflare."""
+    monkeypatch.setenv("LLM_CHAIN", f"workers_ai:{CF_MODEL},openrouter:{MODEL_A}")
+    get_settings.cache_clear()
+    chain["workers"] = cf_ok("from workers")
+    result = await llm.complete("sys", "hi")
+    assert result.text == "from workers"
+    assert chain["calls"] == [f"workers_ai:{CF_MODEL}"]
+    chain["workers"] = cf_ok('{"intent": "desert"}')
+    data = await llm.complete_json("sys", "hi")  # the utility model is an OpenRouter id too
+    assert data == {"intent": "desert"}
+    assert chain["calls"][-1] == f"workers_ai:{CF_MODEL}"
+
+
+@pytest.mark.parametrize(
+    "effort,expected_reasoning,headroom",
+    [
+        ("off", {"enabled": False}, False),
+        ("low", {"effort": "low", "exclude": True}, True),
+        ("none", None, False),
+    ],
+)
+def test_reasoning_setting_is_sent_as_configured(monkeypatch, effort, expected_reasoning, headroom):
+    monkeypatch.setenv("OPENROUTER_API_KEY", "k")
+    monkeypatch.setenv("LLM_PROVIDER", "openrouter")
+    monkeypatch.setenv("OPENROUTER_REASONING_EFFORT", effort)
+    get_settings.cache_clear()
+    payload = llm._openrouter_payload(
+        "sys", [{"role": "user", "content": "hi"}], "m:free", 100, 0.5, stream=False
+    )
+    assert payload.get("reasoning") == expected_reasoning
+    assert payload["max_tokens"] == (100 + llm.REASONING_HEADROOM if headroom else 100)
+    get_settings.cache_clear()
+
+
+async def test_a_failure_before_anything_was_shown_still_falls_through(chain, monkeypatch):
+    async def breaks_early(self, *args, **kwargs):
+        yield "delta", "Half an ans"  # still inside the probe, never shown
+        raise ModelUnavailable("connection dropped", kind="network")
+
+    from app.core.providers.hosted import OpenRouterProvider
+
+    monkeypatch.setattr(OpenRouterProvider, "stream", breaks_early)
+    chain["workers"] = cf_ok("Take the train to Fes.")
+    items = await collect(llm.stream("sys", "hi"))
+    assert "".join(v for k, v in items if k == "delta") == "Take the train to Fes."
+
+
+@pytest.mark.parametrize(
+    "garbage",
+    ["Si vous cherchez où résellsellsells fromells réserver", "À Fès, comptez 2 jours【重要特rows(matrix"],
+)
+async def test_garbled_output_is_never_shown_and_the_next_provider_answers(chain, monkeypatch, garbage):
+    async def garbled(self, *args, **kwargs):
+        yield "delta", garbage
+
+    from app.core.providers.hosted import OpenRouterProvider
+
+    monkeypatch.setattr(OpenRouterProvider, "stream", garbled)
+    chain["workers"] = cf_ok("Deux à trois jours suffisent.")
+    items = await collect(llm.stream("sys", "hi"))
+    text = "".join(v for k, v in items if k == "delta")
+    assert text == "Deux à trois jours suffisent."
+    kinds = {h["provider"]: h["failures_by_kind"] for h in get_router().snapshot()}
+    assert kinds[f"openrouter:{MODEL_A}"] == {"garbled": 1}
+
+
+async def test_a_provider_that_does_not_start_in_time_is_skipped(chain, monkeypatch):
+    import asyncio
+
+    monkeypatch.setenv("LLM_FIRST_TOKEN_TIMEOUT", "0.05")
+    get_settings.cache_clear()
+
+    async def slow(self, *args, **kwargs):
+        await asyncio.sleep(5)
+        yield "delta", "too late"
+
+    from app.core.providers.hosted import OpenRouterProvider
+
+    monkeypatch.setattr(OpenRouterProvider, "stream", slow)
+    chain["workers"] = cf_ok("Fast answer.")
+    items = await collect(llm.stream("sys", "hi"))
+    assert "".join(v for k, v in items if k == "delta") == "Fast answer."
+    health = {h["provider"]: h for h in get_router().snapshot()}
+    assert health[f"openrouter:{MODEL_A}"]["failures_by_kind"] == {"timeout": 1}
+
+
+async def test_non_streaming_answers_are_checked_for_garbage_too(chain):
+    chain["openrouter"][MODEL_A] = or_ok("réservellsellsells in in in")
+    chain["openrouter"][MODEL_B] = or_ok("A clean answer.")
+    result = await llm.complete("sys", "hi")
+    assert result.text == "A clean answer."
+
+
+def test_arabic_and_accented_answers_are_not_mistaken_for_garbage():
+    from app.core.providers.router import looks_garbled
+
+    assert not looks_garbled("أكبر مدينة عتيقة مأهولة في العالم، خصص لها ثلاثة أيام.")
+    assert not looks_garbled("Comptez 2 à 3 jours à Fès : médina, tanneries, Al Quaraouiyine.")
+    assert not looks_garbled("Mississippi-style? No — Marrakech, 3–4 days, then Essaouira.")

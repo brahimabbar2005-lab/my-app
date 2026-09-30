@@ -19,7 +19,9 @@ message plus the resource cards.
 
 from __future__ import annotations
 
+import asyncio
 import logging
+import re
 import time
 from collections.abc import AsyncIterator
 from typing import Any
@@ -37,6 +39,21 @@ PROVIDER_CLASSES: dict[str, type[ProviderBase]] = {
     "workers_ai": WorkersAIProvider,
     "anthropic": AnthropicProvider,
 }
+
+
+# Degenerate output seen from free models with reasoning disabled: a word
+# fragment stuttering ("résellsellsells"), or a switch into CJK script or
+# bracket tokens ("【重要…") in a French or English answer. No supported
+# answer language uses CJK, so any CJK character is treated as garbled.
+GARBLED = re.compile(r"(\w{3,}?)\1{2,}|[\u3040-\u30ff\u4e00-\u9fff\uac00-\ud7af]|[【】]")
+
+# Characters held back at the start of a streamed answer so garbled output
+# can still be swapped for another provider before the traveller sees it.
+PROBE_CHARS = 120
+
+
+def looks_garbled(text: str) -> bool:
+    return bool(GARBLED.search(text))
 
 
 def parse_chain(entries: list[str]) -> list[ProviderBase]:
@@ -87,7 +104,11 @@ class ProviderRouter:
         """The chain, with the primary provider switched to `model` when a
         caller asks for a specific model (the utility model, for example)."""
         chain = list(self.providers)
-        if model and chain[0].model != model:
+        # Model names are provider-specific: only apply an override to a
+        # primary provider of the configured LLM_PROVIDER kind. Otherwise an
+        # OpenRouter model id would be sent to Workers AI (which answers
+        # "400 No route for that URI").
+        if model and chain[0].model != model and chain[0].name == get_settings().llm_provider:
             chain[0] = type(chain[0])(model)
         return chain
 
@@ -122,7 +143,18 @@ class ProviderRouter:
             health = self._health(provider)
             started = time.monotonic()
             try:
-                result = await provider.complete(system, messages, max_tokens, temperature)
+                result = await asyncio.wait_for(
+                    provider.complete(system, messages, max_tokens, temperature),
+                    timeout=get_settings().llm_provider_timeout_seconds,
+                )
+                if looks_garbled(result.text):
+                    raise ModelUnavailable(f"garbled output: {result.text[:80]!r}", kind="garbled")
+            except TimeoutError:
+                exc = ModelUnavailable("no answer within the provider timeout", kind="timeout")
+                health.record_failure(exc.kind, str(exc), int((time.monotonic() - started) * 1000))
+                log.warning("provider %s timed out", provider.key)
+                errors.append((provider, exc))
+                continue
             except ModelUnavailable as exc:
                 health.record_failure(exc.kind, str(exc), int((time.monotonic() - started) * 1000))
                 log.warning("provider %s failed (%s): %s", provider.key, exc.kind, exc)
@@ -151,23 +183,61 @@ class ProviderRouter:
         """Fall through to the next provider only while nothing has been
         streamed yet. Once text is on the traveller's screen, a failure is
         raised: switching models mid-sentence would produce a garbled answer."""
+        settings = get_settings()
         errors: list[tuple[ProviderBase, ModelUnavailable]] = []
         for provider in self._ordered(model):
             health = self._health(provider)
             started = time.monotonic()
             emitted = False
             usage = Usage()
+            held: list[str] = []  # the probe: first characters, not yet shown
+            source = provider.stream(system, messages, max_tokens, temperature)
             try:
-                async for kind, value in provider.stream(system, messages, max_tokens, temperature):
-                    if kind == "delta":
-                        emitted = True
-                        yield kind, value
-                    elif kind == "usage":
+                while True:
+                    try:
+                        if not emitted and not held:
+                            # A provider that has not started answering in time is
+                            # skipped; the traveller is not kept waiting on it.
+                            kind, value = await asyncio.wait_for(
+                                source.__anext__(), timeout=settings.llm_first_token_timeout_seconds
+                            )
+                        else:
+                            kind, value = await source.__anext__()
+                    except StopAsyncIteration:
+                        break
+                    if kind == "usage":
                         usage = value
-                        yield kind, value
+                        continue
+                    if kind != "delta":
+                        continue
+                    if emitted:
+                        yield "delta", value
+                        continue
+                    held.append(value)
+                    probe = "".join(held)
+                    if looks_garbled(probe):
+                        raise ModelUnavailable(f"garbled output: {probe[:80]!r}", kind="garbled")
+                    if len(probe) >= PROBE_CHARS:
+                        emitted = True
+                        yield "delta", probe
+                        held.clear()
+                if held:
+                    probe = "".join(held)
+                    if looks_garbled(probe):
+                        raise ModelUnavailable(f"garbled output: {probe[:80]!r}", kind="garbled")
+                    emitted = True
+                    yield "delta", probe
+            except TimeoutError:
+                exc = ModelUnavailable("no first token within the timeout", kind="timeout")
+                health.record_failure(exc.kind, str(exc), int((time.monotonic() - started) * 1000))
+                log.warning("provider %s did not start answering in time", provider.key)
+                errors.append((provider, exc))
+                await _close(source)
+                continue
             except ModelUnavailable as exc:
                 health.record_failure(exc.kind, str(exc), int((time.monotonic() - started) * 1000))
                 log.warning("provider %s failed while streaming (%s): %s", provider.key, exc.kind, exc)
+                await _close(source)
                 if emitted:
                     raise
                 errors.append((provider, exc))
@@ -175,11 +245,21 @@ class ProviderRouter:
             health.record_success(
                 int((time.monotonic() - started) * 1000), usage.input_tokens, usage.output_tokens
             )
+            yield "usage", usage
             return
         raise self._exhausted(errors)
 
     def snapshot(self) -> list[dict[str, Any]]:
         return [self._health(p).snapshot() for p in self.providers]
+
+
+async def _close(source: AsyncIterator[Any]) -> None:
+    aclose = getattr(source, "aclose", None)
+    if aclose is not None:
+        try:
+            await aclose()
+        except Exception:  # noqa: BLE001 - closing a failed stream must not mask the failure
+            pass
 
 
 _router: ProviderRouter | None = None

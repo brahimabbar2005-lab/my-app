@@ -50,7 +50,7 @@ export default function TabsLayout() {
           // Native sizes the bar from safe-area insets; web needs room for the label.
           ...(Platform.OS === 'web' ? { height: 60, paddingBottom: 6 } : null),
         },
-        tabBarLabelStyle: { fontWeight: '600', fontSize: 11, lineHeight: 14 },
+        tabBarLabelStyle: { fontWeight: '600', fontSize: 10.5, lineHeight: 14, letterSpacing: -0.1 },
       }}>
       <Tabs.Screen
         name="index"

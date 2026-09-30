@@ -354,7 +354,10 @@ class ContentIndex:
         # every token, because travellers write long posts. A 90-word question
         # about Merzouga is still a question about Merzouga, and demanding that
         # a page echo 40% of ninety words would mark every real question a gap.
-        key_tokens = sorted(set(base_tokens), key=lambda t: self.bm25.idf.get(t, 0.0), reverse=True)[:8]
+        # Ties broken alphabetically: set order varies per process (hash
+        # randomisation), which made the chosen terms — and the links — change
+        # between server restarts.
+        key_tokens = sorted(set(base_tokens), key=lambda t: (-self.bm25.idf.get(t, 0.0), t))[:8]
         base_set = set(key_tokens)
 
         place_tokens: set[str] = set()

@@ -29,12 +29,14 @@ jobs:
       - run: pip install -r requirements-dev.txt
       - name: Unit tests (no API keys; providers are mocked)
         run: pytest -q
+      - name: Retrieval is deterministic across hash seeds
+        run: PYTHONHASHSEED=0 pytest -q tests/test_orchestrator_retrieval.py tests/test_retrieval_quality.py && PYTHONHASHSEED=7 pytest -q tests/test_orchestrator_retrieval.py tests/test_retrieval_quality.py
       - name: Offline eval must not fall below eval/baseline.json
         run: make eval-gate
       - name: Shared contract examples are up to date
         run: python scripts/export_contract_examples.py --check
       - name: Lint new modules
-        run: ruff check app/core/providers app/core/lexicon.py app/infra/auth.py tests/test_provider_router.py tests/test_app_clients.py tests/test_contract.py tests/test_multilingual.py
+        run: ruff check app/core/providers app/core/lexicon.py app/infra/auth.py tests/test_provider_router.py tests/test_app_clients.py tests/test_contract.py tests/test_multilingual.py tests/test_actions.py tests/test_orchestrator_retrieval.py app/core/actions.py
 
   typescript:
     name: TypeScript (typecheck, lint, tests)

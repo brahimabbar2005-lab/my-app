@@ -113,6 +113,10 @@ class Settings:
     # plan can use, so the model is always named in configuration.
     workers_ai_model: str | None
     workers_ai_base_url: str
+    # Skip a provider that has not started answering within this many seconds
+    # (streaming), or has not finished within the second value (non-streaming).
+    llm_first_token_timeout_seconds: float
+    llm_provider_timeout_seconds: float
     max_answer_tokens: int
     temperature: float
     request_timeout_seconds: int
@@ -220,6 +224,8 @@ def load_settings() -> Settings:
         cloudflare_api_token=_str("CLOUDFLARE_API_TOKEN"),
         workers_ai_model=_str("WORKERS_AI_MODEL"),
         workers_ai_base_url=_str("WORKERS_AI_BASE_URL", "https://api.cloudflare.com/client/v4"),
+        llm_first_token_timeout_seconds=_float("LLM_FIRST_TOKEN_TIMEOUT", 10.0),
+        llm_provider_timeout_seconds=_float("LLM_PROVIDER_TIMEOUT", 45.0),
         max_answer_tokens=_int("MAX_ANSWER_TOKENS", 1400),
         temperature=_float("TEMPERATURE", 0.7),
         request_timeout_seconds=_int("REQUEST_TIMEOUT_SECONDS", 60),

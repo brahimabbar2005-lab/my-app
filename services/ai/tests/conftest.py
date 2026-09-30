@@ -19,7 +19,7 @@ os.environ["LLM_PROVIDER"] = ""
 # provider to every test's chain. Tests that need them set them explicitly.
 for name in (
     "LLM_CHAIN", "OPENROUTER_FALLBACK_MODEL", "CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_TOKEN",
-    "WORKERS_AI_MODEL", "APP_KEY", "SUPABASE_URL", "SUPABASE_JWT_SECRET",
+    "WORKERS_AI_MODEL", "APP_KEY", "SUPABASE_URL", "SUPABASE_JWT_SECRET", "OPENROUTER_REASONING_EFFORT",
 ):
     os.environ[name] = ""
 os.environ.setdefault("ENVIRONMENT", "test")

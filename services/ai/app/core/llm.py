@@ -211,14 +211,21 @@ REASONING_HEADROOM = 3000
 
 def _openrouter_payload(system, messages, model, max_tokens, temperature, stream: bool) -> dict[str, Any]:
     settings = get_settings()
+    effort = settings.openrouter_reasoning_effort
+    thinks = effort not in ("none", "off")
     payload: dict[str, Any] = {
         "model": model,
         "messages": [{"role": "system", "content": system}, *messages],
-        "max_tokens": max_tokens + (REASONING_HEADROOM if settings.openrouter_reasoning_effort != "none" else 0),
+        "max_tokens": max_tokens + (REASONING_HEADROOM if thinks else 0),
         "temperature": temperature,
         "stream": stream,
     }
-    if settings.openrouter_reasoning_effort != "none":
+    if effort == "off":
+        # Explicitly disable thinking. Measured on nemotron-3.5-lightning:free:
+        # ~5 s per answer instead of 25-115 s with effort "low", which could
+        # also run out of budget mid-thought and return the raw reasoning.
+        payload["reasoning"] = {"enabled": False}
+    elif thinks:
         # Keep thinking short, and keep it out of the response entirely.
         payload["reasoning"] = {"effort": settings.openrouter_reasoning_effort, "exclude": True}
     if stream:

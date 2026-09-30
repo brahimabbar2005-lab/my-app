@@ -64,6 +64,7 @@ COOLDOWN_SECONDS = {
     "network": 20,
     "provider_error": 20,
     "empty": 5,
+    "garbled": 30,
 }
 MAX_COOLDOWN = 6 * 3600
 

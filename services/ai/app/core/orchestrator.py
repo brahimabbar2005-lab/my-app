@@ -71,6 +71,21 @@ NOTICE_OFFICIAL_SOURCE = (
 )
 
 
+def retrieval_query_with_trip(message: str, trip: TripState) -> str:
+    """The question plus durable trip context the question does not already
+    contain.
+
+    Appending context the message already names ("Marrakech or Fes…?" +
+    "Marrakech Fes") doubled the city terms, and generic city pages then
+    outranked the page that answers the question (the first-timers guide lost
+    to "Flights to Marrakech"). Only genuinely new context is added.
+    """
+    lowered = message.lower()
+    extra = [d for d in trip.destinations if d.lower() not in lowered]
+    extra += [i for i in trip.interests if i.lower() not in lowered]
+    return " ".join([message, *extra]) if extra else message
+
+
 class Orchestrator:
     def __init__(self) -> None:
         self.retriever = get_retriever()
@@ -114,12 +129,7 @@ class Orchestrator:
 
         # Retrieval query: the question plus durable trip context, so a
         # follow-up like "would you add Fes?" still retrieves usefully.
-        query_parts = [message]
-        if trip.destinations:
-            query_parts.append(" ".join(trip.destinations))
-        if trip.interests:
-            query_parts.append(" ".join(trip.interests))
-        query = " ".join(query_parts)
+        query = retrieval_query_with_trip(message, trip)
 
         candidates = self.retriever.retrieve(query, classification, page_url=page_url)
         context_items = self.retriever.context_items(candidates)

@@ -63,5 +63,28 @@ End-to-end checks (`scratchpad/e2e-v02.mjs`, run against the live local stack):
 - the trip is sent to the AI as `trip_context`
 - the Arabic tagline shows on the destination page in dark mode
 
-## Still blocked by the build environment
-`make check-model` was retried with the provided OpenRouter and Cloudflare keys. Both calls were refused by this container's network proxy (HTTP 403 from the proxy; the providers were never reached). Allow `openrouter.ai` and `api.cloudflare.com` under the environment's Network access to see live answers here. Everything else about the model chain is tested with mocked HTTP.
+## Live verification with the real keys (2026-09-30, after network access was opened)
+
+Your OpenRouter and Cloudflare keys work, and comemorocco.com's live articles come through the worker.
+The first live runs found four problems that no offline test had caught. All four are fixed and now have tests:
+
+| Found live | Cause | Fix + test |
+|---|---|---|
+| "Marrakech or Fes for a first trip?" linked *Flights to Marrakech* | Orchestrator appended trip cities the question already named, doubling them (pre-existing) | Only new trip context is appended; `tests/test_orchestrator_retrieval.py` runs every annotated case through the real orchestrator path (failed before the fix) |
+| Links changed between server restarts | Top-8 term selection broke IDF ties by random set order (pre-existing) | Alphabetical tie-break; CI runs retrieval under two fixed hash seeds |
+| Workers AI first in the chain → "400 No route for that URI" | Router forced the OpenRouter model id onto Cloudflare (v0.1 router bug) | Model overrides only apply to the configured provider kind; regression test |
+| 57–114 s answers, raw "thinking" or gibberish text | Free Nemotron is a reasoning model; `effort: low` still thinks | `OPENROUTER_REASONING_EFFORT=off` (reasoning disabled, ~4 s); router skips a provider with no first token in 10 s, and holds back the first 120 characters so garbled output switches provider before anyone sees it |
+
+The chain in use now: OpenRouter Nemotron free (reasoning off) → Workers AI Mistral Small 24B → Workers AI Llama 4 Scout.
+Five live questions in English, French, Spanish and Arabic all came back clean. When OpenRouter stalled, the switch to Mistral happened automatically, with first words in 1.4–2.5 s.
+
+![Live answer in the app](screenshots/live-ai-answer.png)
+
+**Free-tier capacity:**
+- OpenRouter free allows about 50 requests a day, or 1,000 a day after a one-time $10 credit.
+- The Workers AI free allowance is about 10k Neurons a day, roughly 130 Mistral answers.
+
+That is enough for development and a soft launch. Plan a paid model or credit before a public launch.
+
+## Remaining environment note
+Supabase (`vsswwdauxyjsefuhvtgr.supabase.co`) is not in the allowed domains yet, so sign-in and trip sync can't be tested from here.
