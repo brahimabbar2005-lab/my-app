@@ -13,6 +13,8 @@ interface AuthState {
   session: Session | null;
   userId: string | null;
   signInWithEmail: (email: string) => Promise<{ error?: string }>;
+  /** Completes an email sign-in with the 6-digit code from the same email. */
+  verifyEmailCode: (email: string, code: string) => Promise<{ error?: string }>;
   signOut: () => Promise<void>;
   /** Deletes the account and all personal data server-side, then signs out. */
   deleteAccount: () => Promise<{ error?: string }>;
@@ -38,6 +40,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       async signInWithEmail(email) {
         if (!supabase) return { error: 'not_configured' };
         const { error } = await supabase.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
+        return error ? { error: error.message } : {};
+      },
+      async verifyEmailCode(email, code) {
+        if (!supabase) return { error: 'not_configured' };
+        const { error } = await supabase.auth.verifyOtp({ email, token: code, type: 'email' });
         return error ? { error: error.message } : {};
       },
       async signOut() {

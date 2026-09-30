@@ -10,16 +10,21 @@ import { Platform } from 'react-native';
 
 import { config, supabaseConfigured } from './config';
 
-export const supabase: SupabaseClient | null = supabaseConfigured
-  ? createClient(config.supabaseUrl, config.supabaseAnonKey, {
-      auth: {
-        storage: AsyncStorage,
-        autoRefreshToken: true,
-        persistSession: true,
-        detectSessionInUrl: Platform.OS === 'web',
-      },
-    })
-  : null;
+// Web pages are also rendered on the server, where there is no browser
+// storage to hold a session: keep the client off there (guest render).
+const serverRender = Platform.OS === 'web' && typeof window === 'undefined';
+
+export const supabase: SupabaseClient | null =
+  supabaseConfigured && !serverRender
+    ? createClient(config.supabaseUrl, config.supabaseAnonKey, {
+        auth: {
+          storage: AsyncStorage,
+          autoRefreshToken: true,
+          persistSession: true,
+          detectSessionInUrl: Platform.OS === 'web',
+        },
+      })
+    : null;
 
 export async function accessToken(): Promise<string | null> {
   if (!supabase) return null;

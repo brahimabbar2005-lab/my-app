@@ -61,6 +61,7 @@ pnpm typecheck && pnpm lint && pnpm test
 python3 scripts/generate_catalog.py --check
 scripts/test-supabase.sh
 node scripts/scan-secrets.mjs
+node scripts/check-supabase-live.mjs   # live project, publishable key from env
 cd services/ai && pytest -q && make eval-gate && python scripts/export_contract_examples.py --check
 ```
 

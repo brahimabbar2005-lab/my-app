@@ -174,5 +174,9 @@ export const fr: Messages = {
     apple: 'Continuer avec Apple',
     guest: 'Continuer en invité',
     notConfigured: "La connexion n'est pas encore configurée dans cette version.",
+    codeSent: 'Nous avons envoyé un e-mail de connexion à {email}. Touchez le lien ou saisissez le code à 6 chiffres.',
+    codeLabel: 'Code à 6 chiffres',
+    verify: 'Vérifier le code',
+    signedIn: 'Vous êtes connecté.',
   },
 };

@@ -48,26 +48,31 @@ export function DestinationTile({
   width?: number;
 }) {
   const { locale } = useApp();
+  const name = destinationName(destination, locale);
+  // The heart sits beside the tile's pressable, not inside it: nested
+  // buttons are invalid on web and confuse screen readers.
   return (
-    <Pressable
-      onPress={onPress}
-      accessibilityRole="button"
-      accessibilityLabel={destinationName(destination, locale)}
-      style={({ pressed }) => [styles.tile, { width, backgroundColor: destination.hue, opacity: pressed ? 0.9 : 1 }]}>
-      <ZelligeStar size={width * 0.9} color="#FFFFFF" opacity={0.12} style={styles.tileStar} />
-      <ZelligeStar size={width * 0.35} color="#FFFFFF" opacity={0.2} style={styles.tileStarSmall} />
+    <View style={{ width }}>
+      <Pressable
+        onPress={onPress}
+        accessibilityRole="button"
+        accessibilityLabel={name}
+        style={({ pressed }) => [styles.tile, { backgroundColor: destination.hue, opacity: pressed ? 0.9 : 1 }]}>
+        <ZelligeStar size={width * 0.9} color="#FFFFFF" opacity={0.12} style={styles.tileStar} />
+        <ZelligeStar size={width * 0.35} color="#FFFFFF" opacity={0.2} style={styles.tileStarSmall} />
+        <View style={styles.tileText}>
+          <T variant="bodyStrong" style={{ color: '#FFFFFF' }} numberOfLines={2}>
+            {name}
+          </T>
+          <T variant="caption" style={{ color: 'rgba(255,255,255,0.9)' }} numberOfLines={2}>
+            {destinationTagline(destination, locale)}
+          </T>
+        </View>
+      </Pressable>
       <View style={styles.tileHeart}>
-        <SaveButton refType="destination" refId={destination.id} title={destinationName(destination, locale)} onDark />
+        <SaveButton refType="destination" refId={destination.id} title={name} onDark />
       </View>
-      <View style={styles.tileText}>
-        <T variant="bodyStrong" style={{ color: '#FFFFFF' }} numberOfLines={2}>
-          {destinationName(destination, locale)}
-        </T>
-        <T variant="caption" style={{ color: 'rgba(255,255,255,0.9)' }} numberOfLines={2}>
-          {destinationTagline(destination, locale)}
-        </T>
-      </View>
-    </Pressable>
+    </View>
   );
 }
 

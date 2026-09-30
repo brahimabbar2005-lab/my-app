@@ -172,5 +172,9 @@ export const es: Messages = {
     apple: 'Continuar con Apple',
     guest: 'Continuar como invitado',
     notConfigured: 'El inicio de sesión aún no está configurado en esta versión.',
+    codeSent: 'Hemos enviado un correo de acceso a {email}. Toca el enlace o introduce el código de 6 dígitos.',
+    codeLabel: 'Código de 6 dígitos',
+    verify: 'Verificar código',
+    signedIn: 'Has iniciado sesión.',
   },
 };

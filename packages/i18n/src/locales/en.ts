@@ -175,6 +175,10 @@ export const en = {
     apple: 'Continue with Apple',
     guest: 'Continue as guest',
     notConfigured: 'Sign-in is not configured in this build yet.',
+    codeSent: 'We sent a sign-in email to {email}. Tap the link in it, or enter the 6-digit code.',
+    codeLabel: '6-digit code',
+    verify: 'Verify code',
+    signedIn: "You're signed in.",
   },
 } as const;
 

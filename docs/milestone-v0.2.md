@@ -86,5 +86,16 @@ Five live questions in English, French, Spanish and Arabic all came back clean. 
 
 That is enough for development and a soft launch. Plan a paid model or credit before a public launch.
 
-## Remaining environment note
-Supabase (`vsswwdauxyjsefuhvtgr.supabase.co`) is not in the allowed domains yet, so sign-in and trip sync can't be tested from here.
+## Live Supabase project (2026-09-30)
+- **Setup.** The project was created with `supabase/setup/all-in-one.sql`, which reported 11 destinations and 77 listings.
+- **App configuration.** The app reads the project URL and the publishable key from the gitignored `apps/mobile/.env.local`. The AI service verifies signed-in travellers against the project's JWKS (ES256) through `SUPABASE_URL`. The secret key is never used.
+- **Live checks.** `node scripts/check-supabase-live.mjs` passes against the live project:
+  - public catalogue readable
+  - trips, profiles, bookings and AI history invisible to guests
+  - analytics, affiliate clicks and audit log denied to guests
+  - `sync_trip` refused without an account
+  - With `SUPABASE_TEST_ACCESS_TOKEN` it also round-trips a trip for a signed-in user.
+- **Sign-in.** It now accepts the 6-digit code from the email as well as the link, so it works without deep-link setup. This needs `{{ .Token }}` in the Supabase "Magic Link" email template.
+- **Fixed.**
+  - With Supabase configured, web server rendering crashed because it read the session from browser storage. The client is now skipped during server rendering.
+  - Destination tiles nested the save button inside the tile button, which is invalid on web. It's now a sibling.
