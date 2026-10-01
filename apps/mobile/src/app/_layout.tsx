@@ -64,6 +64,8 @@ function Root() {
         <Stack.Screen name="settings" options={{ headerShown: true, title: t('settings.title'), presentation: 'modal' }} />
         <Stack.Screen name="sign-in" options={{ headerShown: true, title: t('common.signIn'), presentation: 'modal' }} />
         <Stack.Screen name="destinations/[id]" options={{ headerShown: true, title: '' }} />
+        <Stack.Screen name="community/[id]" options={{ headerShown: true, title: '' }} />
+        <Stack.Screen name="community/new" options={{ headerShown: true, title: t('community.newPost'), presentation: 'modal' }} />
       </Stack>
     </ThemeProvider>
   );

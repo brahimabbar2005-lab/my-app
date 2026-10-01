@@ -197,6 +197,128 @@ do $$ begin
 end $$;
 commit;
 
+-- Community moderation (v0.3) ---------------------------------------------------
+-- D writes, E/F/H report, M moderates.
+insert into auth.users (id, email) values
+  ('00000000-0000-0000-0000-00000000000d', 'd@example.com'),
+  ('00000000-0000-0000-0000-00000000000e', 'e@example.com'),
+  ('00000000-0000-0000-0000-00000000000f', 'f@example.com'),
+  ('00000000-0000-0000-0000-000000000011', 'h@example.com'),
+  ('00000000-0000-0000-0000-000000000099', 'm@example.com');
+insert into public.admin_users (user_id) values ('00000000-0000-0000-0000-000000000099');
+
+begin;
+set local role authenticated;
+select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-00000000000d","role":"authenticated"}', true);
+insert into public.community_posts (id, author_id, kind, destination_id, title, body)
+  values ('50000000-0000-0000-0000-00000000000d', auth.uid(), 'question', 'rabat', 'Rabat in winter?', 'Is Rabat worth a day in January?');
+insert into public.community_posts (id, author_id, title, body)
+  values ('50000000-0000-0000-0000-0000000000d2', auth.uid(), 'Cheap riads', 'Message me on wa.me/212600000000 for deals');
+select pg_temp.expect((select status from public.community_posts where id = '50000000-0000-0000-0000-00000000000d') = 'published', 'normal posts publish');
+select pg_temp.expect((select status from public.community_posts where id = '50000000-0000-0000-0000-0000000000d2') = 'pending', 'scam keywords hold a post as pending');
+select pg_temp.expect((select count(*) from public.community_feed where id = '50000000-0000-0000-0000-0000000000d2') = 1, 'authors see their own pending post');
+do $$ begin
+  begin perform 1 from public.content_flags limit 1; raise exception 'FAIL: user read content_flags';
+  exception when insufficient_privilege then null; end;
+end $$;
+do $$ begin
+  begin perform public.moderation_queue(); raise exception 'FAIL: non-admin read the moderation queue';
+  exception when insufficient_privilege then null; end;
+end $$;
+commit;
+select pg_temp.expect(exists (select 1 from public.content_flags where target_id = '50000000-0000-0000-0000-0000000000d2' and reason = 'scam_keyword'), 'screening records a flag');
+
+begin;
+set local role anon;
+select set_config('request.jwt.claims', '{"role":"anon"}', true);
+select pg_temp.expect((select count(*) from public.community_feed where author_id = '00000000-0000-0000-0000-00000000000d') = 1, 'guests see only published posts in the feed');
+commit;
+
+-- Rate limit: the 6th post within ten minutes is held.
+begin;
+set local role authenticated;
+select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-000000000011","role":"authenticated"}', true);
+insert into public.community_posts (author_id, title, body) select auth.uid(), 'Post ' || n, 'Body ' || n from generate_series(1, 6) n;
+select pg_temp.expect((select count(*) from public.community_posts where author_id = auth.uid() and status = 'pending') = 1, 'posting faster than the rate limit is held');
+commit;
+
+-- Three different reporters hide a post; the same person cannot report twice.
+do $$
+declare reporter uuid;
+begin
+  foreach reporter in array array['00000000-0000-0000-0000-00000000000e', '00000000-0000-0000-0000-00000000000f', '00000000-0000-0000-0000-000000000011']::uuid[] loop
+    perform set_config('request.jwt.claims', json_build_object('sub', reporter, 'role', 'authenticated')::text, true);
+    set local role authenticated;
+    insert into public.community_reports (reporter_id, target_type, target_id, reason)
+      values (reporter, 'post', '50000000-0000-0000-0000-00000000000d', 'misinformation');
+    reset role;
+  end loop;
+end $$;
+select pg_temp.expect((select status from public.community_posts where id = '50000000-0000-0000-0000-00000000000d') = 'hidden', 'three reports hide a post');
+select pg_temp.expect(exists (select 1 from public.content_flags where target_id = '50000000-0000-0000-0000-00000000000d' and source = 'report_threshold'), 'the threshold is recorded as a flag');
+
+begin;
+set local role authenticated;
+select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-00000000000e","role":"authenticated"}', true);
+do $$ begin
+  begin
+    insert into public.community_reports (reporter_id, target_type, target_id, reason)
+      values (auth.uid(), 'post', '50000000-0000-0000-0000-00000000000d', 'spam');
+    raise exception 'FAIL: duplicate report accepted';
+  exception when unique_violation then null; end;
+end $$;
+select pg_temp.expect((select count(*) from public.community_feed where id = '50000000-0000-0000-0000-00000000000d') = 0, 'hidden posts leave the feed');
+commit;
+
+begin;
+set local role authenticated;
+select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-00000000000d","role":"authenticated"}', true);
+update public.community_posts set status = 'published' where id = '50000000-0000-0000-0000-00000000000d';
+select pg_temp.expect((select status from public.community_posts where id = '50000000-0000-0000-0000-00000000000d') = 'hidden', 'authors cannot un-hide');
+do $$ begin
+  begin perform public.moderate('post', '50000000-0000-0000-0000-00000000000d', 'restore'); raise exception 'FAIL: non-admin moderated';
+  exception when insufficient_privilege then null; end;
+end $$;
+commit;
+
+-- The moderator reviews the queue, restores the post and suspends D.
+begin;
+set local role authenticated;
+select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-000000000099","role":"authenticated"}', true);
+select pg_temp.expect((select count(*) from public.moderation_queue() where target_id in
+  ('50000000-0000-0000-0000-00000000000d', '50000000-0000-0000-0000-0000000000d2')) = 2, 'queue lists reported and held posts');
+select pg_temp.expect((select open_reports from public.moderation_queue() where target_id = '50000000-0000-0000-0000-00000000000d') = 3, 'queue counts open reports');
+select public.moderate('post', '50000000-0000-0000-0000-00000000000d', 'restore', 'accurate question');
+select public.moderate('post', '50000000-0000-0000-0000-0000000000d2', 'remove', 'scam');
+select public.moderate('user', '00000000-0000-0000-0000-00000000000d', 'suspend', 'scam links');
+commit;
+select pg_temp.expect((select status from public.community_posts where id = '50000000-0000-0000-0000-00000000000d') = 'published', 'restore republishes');
+select pg_temp.expect((select status from public.community_posts where id = '50000000-0000-0000-0000-0000000000d2') = 'removed', 'remove removes');
+select pg_temp.expect(not exists (select 1 from public.community_reports where target_id = '50000000-0000-0000-0000-00000000000d' and status = 'open'), 'restore resolves the reports');
+select pg_temp.expect((select count(*) from public.moderation_queue()) >= 0, 'the SQL Editor (database owner) can read the queue');
+select pg_temp.expect((select count(*) from public.moderation_actions where moderator_id = '00000000-0000-0000-0000-000000000099') = 3, 'every action is recorded');
+select pg_temp.expect((select count(*) from public.audit_log where action like 'moderation.%') = 3, 'every action is audited');
+
+begin;
+set local role authenticated;
+select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-00000000000d","role":"authenticated"}', true);
+do $$ begin
+  begin
+    insert into public.community_comments (post_id, author_id, body) values ('50000000-0000-0000-0000-00000000000d', auth.uid(), 'still here');
+    raise exception 'FAIL: suspended user commented';
+  exception when insufficient_privilege then null; end;
+end $$;
+commit;
+
+begin;
+set local role authenticated;
+select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-00000000000e","role":"authenticated"}', true);
+insert into public.community_votes (user_id, target_type, target_id, value) values (auth.uid(), 'post', '50000000-0000-0000-0000-00000000000d', 1);
+insert into public.community_comments (post_id, author_id, body) values ('50000000-0000-0000-0000-00000000000d', auth.uid(), 'Yes, the Kasbah of the Udayas is lovely.');
+select pg_temp.expect((select score from public.community_feed where id = '50000000-0000-0000-0000-00000000000d') = 1, 'feed shows the vote score');
+select pg_temp.expect((select comment_count from public.community_feed where id = '50000000-0000-0000-0000-00000000000d') = 1, 'feed counts comments');
+commit;
+
 -- Every public table has RLS forced on.
 select pg_temp.expect(not exists (
   select 1 from pg_class c join pg_namespace n on n.oid = c.relnamespace
