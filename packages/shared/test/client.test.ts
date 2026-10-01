@@ -80,7 +80,9 @@ describe('streamChat', () => {
     );
     const events: ChatStreamEvent[] = [];
     await streamChat({ baseUrl: 'http://ai.test', fetch }, { message: 'hi' }, (e) => events.push(e));
-    expect(events).toEqual([{ type: 'error', data: { answer: 'Slow down a little.' } }]);
+    expect(events).toEqual([
+      { type: 'error', data: { answer: 'Slow down a little.', detail: 'http://ai.test: HTTP 429' } },
+    ]);
   });
 
   it('turns a network failure into an error event', async () => {
@@ -90,6 +92,8 @@ describe('streamChat', () => {
     const events: ChatStreamEvent[] = [];
     await streamChat({ baseUrl: 'http://ai.test', fetch }, { message: 'hi' }, (e) => events.push(e));
     expect(events[0]?.type).toBe('error');
+    // The address and reason, so a development build can show what failed.
+    expect(events[0]).toMatchObject({ data: { detail: 'http://ai.test: network down' } });
   });
 
   it('rejects an empty message before any request', async () => {
