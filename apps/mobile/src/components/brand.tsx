@@ -6,9 +6,11 @@
  */
 import { radii, spacing } from '@comemorocco/ui';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { Image } from 'expo-image';
 import { Pressable, StyleSheet, View, type ViewStyle } from 'react-native';
 
 import { type Destination, destinationName, destinationTagline, type Listing } from '@/data/catalog';
+import { pageImage } from '@/data/images';
 import { useApp } from '@/lib/app-state';
 
 import { AddToTripButton, SaveButton } from './trip-buttons';
@@ -49,6 +51,7 @@ export function DestinationTile({
 }) {
   const { locale } = useApp();
   const name = destinationName(destination, locale);
+  const photo = pageImage(destination.guide_url);
   // The heart sits beside the tile's pressable, not inside it: nested
   // buttons are invalid on web and confuse screen readers.
   return (
@@ -58,8 +61,18 @@ export function DestinationTile({
         accessibilityRole="button"
         accessibilityLabel={name}
         style={({ pressed }) => [styles.tile, { backgroundColor: destination.hue, opacity: pressed ? 0.9 : 1 }]}>
-        <ZelligeStar size={width * 0.9} color="#FFFFFF" opacity={0.12} style={styles.tileStar} />
-        <ZelligeStar size={width * 0.35} color="#FFFFFF" opacity={0.2} style={styles.tileStarSmall} />
+        {photo ? (
+          <>
+            <Image source={photo} style={StyleSheet.absoluteFill} contentFit="cover" transition={200} accessible={false} />
+            {/* Keeps the white text readable on any photo. */}
+            <View style={[StyleSheet.absoluteFill, styles.tileShade]} />
+          </>
+        ) : (
+          <>
+            <ZelligeStar size={width * 0.9} color="#FFFFFF" opacity={0.12} style={styles.tileStar} />
+            <ZelligeStar size={width * 0.35} color="#FFFFFF" opacity={0.2} style={styles.tileStarSmall} />
+          </>
+        )}
         <View style={styles.tileText}>
           <T variant="bodyStrong" style={{ color: '#FFFFFF' }} numberOfLines={2}>
             {name}
@@ -131,18 +144,31 @@ export function ListingRow({ listing, onPress }: { listing: Listing; onPress: ()
 export function ArticleCard({
   title,
   excerpt,
+  url,
   onPress,
   width,
 }: {
   title: string;
   excerpt?: string;
+  /** The article's page; its photo is shown when we have one. */
+  url?: string;
   onPress: () => void;
   width?: number;
 }) {
   const { colors, t } = useApp();
+  const photo = pageImage(url);
   return (
     <Pressable onPress={onPress} accessibilityRole="link" style={({ pressed }) => [{ width, opacity: pressed ? 0.85 : 1 }]}>
       <Card style={{ height: '100%' }}>
+        {photo ? (
+          <Image
+            source={photo}
+            style={[styles.articlePhoto, { backgroundColor: colors.surfaceAlt }]}
+            contentFit="cover"
+            transition={200}
+            accessible={false}
+          />
+        ) : null}
         <Row>
           <ZelligeStar size={14} color={colors.accent} />
           <T variant="label" tone="muted">
@@ -170,6 +196,8 @@ const styles = StyleSheet.create({
   tileStar: { position: 'absolute', top: -30, end: -40 },
   tileStarSmall: { position: 'absolute', top: 24, start: 16 },
   tileText: { padding: spacing.md, gap: 2 },
+  tileShade: { backgroundColor: 'rgba(0,0,0,0.35)' },
+  articlePhoto: { height: 130, borderRadius: radii.md },
   tileHeart: { position: 'absolute', top: spacing.md, end: spacing.md },
   listingIcon: { width: 44, height: 44, borderRadius: radii.md, alignItems: 'center', justifyContent: 'center' },
   cta: {

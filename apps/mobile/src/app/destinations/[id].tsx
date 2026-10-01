@@ -77,7 +77,7 @@ export default function DestinationScreen() {
         <View style={{ gap: spacing.md }}>
           <SectionHeader title={t('explore.guides')} />
           {articles.items.map((a) => (
-            <ArticleCard key={a.id} title={a.title} excerpt={a.excerpt} onPress={() => openArticle(a.canonical_url)} />
+            <ArticleCard key={a.id} title={a.title} excerpt={a.excerpt} url={a.canonical_url} onPress={() => openArticle(a.canonical_url)} />
           ))}
         </View>
       ) : null}

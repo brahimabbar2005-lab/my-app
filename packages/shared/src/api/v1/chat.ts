@@ -143,7 +143,9 @@ export type ChatStreamEvent =
   | { type: 'meta'; data: z.infer<typeof StreamMeta> }
   | { type: 'delta'; data: z.infer<typeof StreamDelta> }
   | { type: 'done'; data: z.infer<typeof StreamDone> }
-  | { type: 'error'; data: z.infer<typeof StreamError> };
+  // `detail` is set by the client (not the service) when the request itself
+  // failed: the address and reason, for development builds to display.
+  | { type: 'error'; data: z.infer<typeof StreamError> & { detail?: string } };
 
 export const FeedbackRequest = z.object({
   message_id: z.string(),

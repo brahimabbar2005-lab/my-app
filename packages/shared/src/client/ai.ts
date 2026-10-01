@@ -130,12 +130,16 @@ export async function streamChat(
     });
   } catch (err) {
     if (signal?.aborted) throw err;
-    onEvent({ type: 'error', data: { answer: FALLBACK_ANSWER } });
+    const reason = err instanceof Error ? err.message : String(err);
+    onEvent({ type: 'error', data: { answer: FALLBACK_ANSWER, detail: `${opts.baseUrl}: ${reason}` } });
     return 'stream';
   }
 
   if (!response.ok) {
-    onEvent({ type: 'error', data: { answer: await errorAnswer(response) } });
+    onEvent({
+      type: 'error',
+      data: { answer: await errorAnswer(response), detail: `${opts.baseUrl}: HTTP ${response.status}` },
+    });
     return 'stream';
   }
 

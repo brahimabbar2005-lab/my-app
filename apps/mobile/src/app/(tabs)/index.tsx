@@ -77,7 +77,7 @@ export default function Explore() {
             <ListingRow key={l.id} listing={l} onPress={() => openPartner(l.id, 'search', prefs.anonymousId)} />
           ))}
           {results.articles.map((a) => (
-            <ArticleCard key={a.id} title={a.title} excerpt={a.excerpt} onPress={() => openArticle(a.canonical_url)} />
+            <ArticleCard key={a.id} title={a.title} excerpt={a.excerpt} url={a.canonical_url} onPress={() => openArticle(a.canonical_url)} />
           ))}
           {!results.destinations.length && !results.listings.length && !results.articles.length ? (
             <Card>
@@ -124,6 +124,7 @@ export default function Explore() {
                   width={260}
                   title={a.title}
                   excerpt={a.excerpt}
+                  url={a.canonical_url}
                   onPress={() => openArticle(a.canonical_url)}
                 />
               ))}

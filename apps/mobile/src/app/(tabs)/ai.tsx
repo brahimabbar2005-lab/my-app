@@ -17,13 +17,13 @@ import {
 } from '@comemorocco/shared';
 import { radii, spacing } from '@comemorocco/ui';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useHeaderHeight } from 'expo-router/react-navigation';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { type RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
-  KeyboardAvoidingView,
+  Keyboard,
+  Platform,
   Pressable,
   StyleSheet,
   TextInput,
@@ -80,7 +80,8 @@ export default function AiScreen() {
   const conversationId = useRef<string | null>(null);
   const abort = useRef<AbortController | null>(null);
   const list = useRef<FlatList<Turn>>(null);
-  const headerHeight = useHeaderHeight();
+  const container = useRef<View>(null);
+  const keyboardInset = useKeyboardInset(container);
   const handledQuery = useRef<string | null>(null);
 
   useEffect(() => {
@@ -131,7 +132,13 @@ export default function AiScreen() {
             patchLast((turn) => ({ ...turn, pending: false, messageId: event.data.message_id }));
             break;
           case 'error':
-            patchLast((turn) => ({ ...turn, pending: false, failed: true, text: turn.text || event.data.answer }));
+            patchLast((turn) => ({
+              ...turn,
+              pending: false,
+              failed: true,
+              // Development builds show where the request went and why it failed.
+              text: turn.text || (__DEV__ && event.data.detail ? `${event.data.answer}\n\n[dev] ${event.data.detail}` : event.data.answer),
+            }));
             break;
         }
       };
@@ -182,12 +189,7 @@ export default function AiScreen() {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1, backgroundColor: colors.background }}
-      // Android draws edge-to-edge, so the window no longer resizes for the
-      // keyboard: pad on both platforms, offset by the header above us.
-      behavior="padding"
-      keyboardVerticalOffset={headerHeight}>
+    <View ref={container} style={{ flex: 1, backgroundColor: colors.background, paddingBottom: keyboardInset }}>
       <FlatList
         ref={list}
         data={turns}
@@ -235,7 +237,7 @@ export default function AiScreen() {
           {busy ? <ActivityIndicator color={colors.onPrimary} /> : <Ionicons name="arrow-up" size={22} color={colors.onPrimary} />}
         </Pressable>
       </View>
-    </KeyboardAvoidingView>
+    </View>
   );
 }
 
@@ -459,4 +461,28 @@ function ActionButton({ action }: { action: AIAction | undefined }) {
       </T>
     </Pressable>
   );
+}
+
+/**
+ * How far the keyboard overlaps this view. Measured in window coordinates when
+ * the keyboard opens, so it is right whether or not the system resized the
+ * window (Android edge-to-edge does not) and whatever sits below (tab bar).
+ */
+function useKeyboardInset(view: RefObject<View | null>): number {
+  const [inset, setInset] = useState(0);
+  useEffect(() => {
+    const showEvent = Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
+    const hideEvent = Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
+    const show = Keyboard.addListener(showEvent, (e) => {
+      view.current?.measureInWindow((_x, y, _w, height) => {
+        setInset(Math.max(0, y + height - e.endCoordinates.screenY));
+      });
+    });
+    const hide = Keyboard.addListener(hideEvent, () => setInset(0));
+    return () => {
+      show.remove();
+      hide.remove();
+    };
+  }, [view]);
+  return inset;
 }

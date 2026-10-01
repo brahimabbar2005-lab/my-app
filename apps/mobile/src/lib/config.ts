@@ -7,7 +7,7 @@
  * (Master Plan §32, §42).
  */
 import Constants from 'expo-constants';
-import { Platform } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 
 import { devHostUrl } from './dev-host';
 
@@ -15,7 +15,17 @@ function env(value: string | undefined, fallback = ''): string {
   return (value ?? '').trim() || fallback;
 }
 
-const hostUri = __DEV__ ? Constants.expoConfig?.hostUri : null;
+/** Where the development server runs, as "host:port". Expo reports it in
+ * several places depending on SDK and client; the bundle URL always has it. */
+function devServerHost(): string | null {
+  if (!__DEV__) return null;
+  const goConfig = Constants.expoGoConfig as { debuggerHost?: string } | null;
+  const scriptUrl: string | undefined = NativeModules.SourceCode?.scriptURL ?? NativeModules.SourceCode?.getConstants?.().scriptURL;
+  const fromScript = scriptUrl?.match(/^[a-z]+:\/\/([^/]+)/i)?.[1];
+  return Constants.expoConfig?.hostUri ?? goConfig?.debuggerHost ?? fromScript ?? null;
+}
+
+const hostUri = devServerHost();
 
 export const config = {
   aiUrl: devHostUrl(env(process.env.EXPO_PUBLIC_AI_URL, 'http://localhost:8000'), hostUri, Platform.OS),
