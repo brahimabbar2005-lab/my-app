@@ -146,3 +146,50 @@ export async function blockUser(userId: string, blockedId: string): Promise<Resu
   const { error } = await client().from('user_blocks').upsert({ blocker_id: userId, blocked_id: blockedId });
   return error ? { error: error.message } : { data: true };
 }
+
+// ---------------------------------------------------------------- moderation
+// Admin-only: the database refuses these for everyone else (42501).
+
+export interface QueueItem {
+  target_type: 'post' | 'comment';
+  target_id: string;
+  status: FeedPost['status'];
+  title: string | null;
+  body: string;
+  author_id: string;
+  open_reports: number;
+  report_reasons: string[];
+  flag_reasons: string[];
+  last_activity: string;
+}
+
+export type ModerationAction = 'restore' | 'hide' | 'remove' | 'dismiss_report' | 'suspend' | 'unsuspend';
+
+export async function isAdmin(): Promise<boolean> {
+  if (!supabase) return false;
+  const { data } = await supabase.rpc('is_admin');
+  return data === true;
+}
+
+export async function fetchQueue(): Promise<Result<QueueItem[]>> {
+  try {
+    const { data, error } = await client().rpc('moderation_queue');
+    return error ? { error: error.message } : { data: (data ?? []) as QueueItem[] };
+  } catch (e) {
+    return { error: String((e as Error).message) };
+  }
+}
+
+export async function moderate(
+  target: { type: 'post' | 'comment' | 'user'; id: string },
+  action: ModerationAction,
+  reason?: string,
+): Promise<Result<true>> {
+  const { error } = await client().rpc('moderate', {
+    p_target_type: target.type,
+    p_target_id: target.id,
+    p_action: action,
+    p_reason: reason?.trim() || null,
+  });
+  return error ? { error: error.message } : { data: true };
+}

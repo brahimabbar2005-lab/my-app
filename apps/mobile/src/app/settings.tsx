@@ -8,13 +8,14 @@ import { LOCALE_NAMES, LOCALES } from '@comemorocco/i18n';
 import { spacing } from '@comemorocco/ui';
 import Constants from 'expo-constants';
 import { router } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Pressable, Share, View } from 'react-native';
 
 import { Button, Card, Chip, Row, Screen, SectionHeader, T } from '@/components/ui';
 import { track } from '@/lib/analytics';
 import { type ThemePreference, useApp } from '@/lib/app-state';
 import { useAuth } from '@/lib/auth';
+import { isAdmin } from '@/lib/community';
 import { config } from '@/lib/config';
 import { openArticle } from '@/lib/links';
 import { removeKeys } from '@/lib/storage';
@@ -26,6 +27,16 @@ export default function Settings() {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const [admin, setAdmin] = useState(false);
+
+  // The moderation entry appears only for accounts in admin_users.
+  useEffect(() => {
+    let alive = true;
+    if (session) isAdmin().then((yes) => alive && setAdmin(yes));
+    return () => {
+      alive = false;
+    };
+  }, [session]);
 
   const themes: ThemePreference[] = ['system', 'light', 'dark'];
 
@@ -73,6 +84,9 @@ export default function Settings() {
         {session ? (
           <>
             <T variant="bodyStrong">{session.user.email}</T>
+            {admin ? (
+              <Button label="Moderation queue" kind="secondary" icon="shield-checkmark-outline" onPress={() => router.push('/admin')} />
+            ) : null}
             <Button label={t('common.signOut')} kind="secondary" icon="log-out-outline" onPress={signOut} />
           </>
         ) : (

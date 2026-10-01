@@ -38,11 +38,16 @@
 1. Supabase → SQL Editor → New query → paste `supabase/migrations/20261001000006_community.sql` → Run.
 2. To moderate from the app later, make yourself an admin (Authentication → Users → copy your user id):
    `insert into public.admin_users (user_id) values ('<your user id>');`
-3. Until the admin screen exists, moderate in the SQL Editor:
-   `select * from public.moderation_queue();` then
-   `select public.moderate('post', '<id>', 'restore', 'ok');`
+3. Moderate in the app: Profile & settings → **Moderation queue** (shown only to admins).
+   The SQL Editor still works too: `select * from public.moderation_queue();`.
+
+## Moderation screen
+- **Who sees it.** `apps/mobile/src/app/admin.tsx` opens from Profile & settings for accounts in `admin_users`. The database checks admin rights again on every call; anyone else who opens the route sees "Moderators only".
+- **The queue.** Each item shows its type, status, open reports, report reasons and automatic flags.
+- **Actions.** Restore, Hide, Remove, or Suspend the author for 7 days, with an optional reason that is stored in the audit log.
+- **Verified in the browser** with simulated answers: the button shows for admins only; Remove and Suspend send the right `moderate()` calls; the queue updates after each action. Screenshot: `docs/screenshots/admin-moderation.png`.
+- It is a staff tool, so it's English only.
 
 ## Not in this milestone
-- An admin moderation screen. The functions it will call exist and are tested.
 - Photos in posts. `community_media` and its RLS exist; uploads need Storage rules and image moderation first.
 - AI answers that cite community posts.
