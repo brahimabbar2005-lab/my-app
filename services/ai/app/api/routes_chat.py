@@ -135,6 +135,7 @@ async def chat(payload: ChatRequest, request: Request, db: OrmSession = Depends(
         trip_state=result.trip.to_dict(),
         notices=result.notices,
         actions=result.actions,
+        photos=result.photos,
         latency_ms=result.latency_ms,
     )
 

@@ -38,4 +38,8 @@ The app uses only modules that are built into Expo Go, so no app-store build is 
 - **Community:** post a question, reply, vote; try a post containing `wa.me/123` and it is held for review.
 - **Moderation:** Profile & settings → Moderation queue (admins only).
 
-The **AI tab** needs the AI service running on a server, which isn't set up for phones yet, so its answers fail in this test.
+## AI answers and partner links (optional, on the same Mac)
+- **AI** (Terminal tab 2): `cd ~/comemorocco/services/ai && source .venv/bin/activate && make run-lan`.
+  The private `services/ai/.env` holds the provider keys. Add `UNSPLASH_ACCESS_KEY=…` there for photos in answers.
+- **"View options" partner links** (Terminal tab 3): `cd ~/comemorocco && pnpm worker:lan`.
+- In development the app finds these services on the Mac by itself, as long as the phone is on the same Wi-Fi (not `--tunnel`).

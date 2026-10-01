@@ -10,7 +10,7 @@ import { Image } from 'expo-image';
 import { Pressable, StyleSheet, View, type ViewStyle } from 'react-native';
 
 import { type Destination, destinationName, destinationTagline, type Listing } from '@/data/catalog';
-import { pageImage } from '@/data/images';
+import { listingImage, pageImage } from '@/data/images';
 import { useApp } from '@/lib/app-state';
 
 import { AddToTripButton, SaveButton } from './trip-buttons';
@@ -99,12 +99,24 @@ const CATEGORY_ICON: Record<Listing['category'], keyof typeof Ionicons.glyphMap>
 
 export function ListingRow({ listing, onPress }: { listing: Listing; onPress: () => void }) {
   const { colors, t } = useApp();
+  const photo = listingImage(listing.id);
   return (
     <Card>
+      {photo ? (
+        <Image
+          source={photo}
+          style={[styles.listingPhoto, { backgroundColor: colors.surfaceAlt }]}
+          contentFit="cover"
+          transition={200}
+          accessible={false}
+        />
+      ) : null}
       <Row style={{ alignItems: 'flex-start', gap: spacing.md }}>
-        <View style={[styles.listingIcon, { backgroundColor: colors.surfaceAlt }]}>
-          <Ionicons name={CATEGORY_ICON[listing.category]} size={22} color={colors.primary} />
-        </View>
+        {photo ? null : (
+          <View style={[styles.listingIcon, { backgroundColor: colors.surfaceAlt }]}>
+            <Ionicons name={CATEGORY_ICON[listing.category]} size={22} color={colors.primary} />
+          </View>
+        )}
         <View style={{ flex: 1, gap: spacing.xs }}>
           <T variant="bodyStrong" numberOfLines={2}>
             {listing.title}
@@ -159,7 +171,7 @@ export function ArticleCard({
   const photo = pageImage(url);
   return (
     <Pressable onPress={onPress} accessibilityRole="link" style={({ pressed }) => [{ width, opacity: pressed ? 0.85 : 1 }]}>
-      <Card style={{ height: '100%' }}>
+      <Card style={{ flex: 1 }}>
         {photo ? (
           <Image
             source={photo}
@@ -198,6 +210,7 @@ const styles = StyleSheet.create({
   tileText: { padding: spacing.md, gap: 2 },
   tileShade: { backgroundColor: 'rgba(0,0,0,0.35)' },
   articlePhoto: { height: 130, borderRadius: radii.md },
+  listingPhoto: { height: 150, borderRadius: radii.md },
   tileHeart: { position: 'absolute', top: spacing.md, end: spacing.md },
   listingIcon: { width: 44, height: 44, borderRadius: radii.md, alignItems: 'center', justifyContent: 'center' },
   cta: {

@@ -10,6 +10,7 @@ import {
   type AffiliateCard,
   type AIAction,
   type ChatStreamEvent,
+  type Photo,
   getStarters,
   type ResourceCard,
   sendFeedback,
@@ -31,6 +32,7 @@ import {
 } from 'react-native';
 
 import { ZelligeStar } from '@/components/brand';
+import { PhotoStrip } from '@/components/photos';
 import { SimpleMarkdown } from '@/components/markdown';
 import { Card, Chip, Row, T } from '@/components/ui';
 import { aiClient } from '@/lib/ai';
@@ -50,6 +52,7 @@ interface Turn {
   affiliates?: AffiliateCard[];
   notices?: string[];
   actions?: AIAction[];
+  photos?: Photo[];
   messageId?: string;
   pending?: boolean;
   failed?: boolean;
@@ -81,7 +84,7 @@ export default function AiScreen() {
   const abort = useRef<AbortController | null>(null);
   const list = useRef<FlatList<Turn>>(null);
   const container = useRef<View>(null);
-  const keyboardInset = useKeyboardInset(container);
+  const keyboard = useKeyboardInset(container);
   const handledQuery = useRef<string | null>(null);
 
   useEffect(() => {
@@ -122,6 +125,7 @@ export default function AiScreen() {
               affiliates: event.data.affiliates,
               notices: event.data.notices,
               actions: event.data.actions,
+              photos: event.data.photos,
             }));
             break;
           case 'delta':
@@ -189,7 +193,10 @@ export default function AiScreen() {
   };
 
   return (
-    <View ref={container} style={{ flex: 1, backgroundColor: colors.background, paddingBottom: keyboardInset }}>
+    <View
+      ref={container}
+      onLayout={keyboard.onLayout}
+      style={{ flex: 1, backgroundColor: colors.background, paddingBottom: keyboard.inset }}>
       <FlatList
         ref={list}
         data={turns}
@@ -288,6 +295,7 @@ function AssistantTurn({ turn, onRate }: { turn: Turn; onRate: (helpful: boolean
           {t('ai.title')}
         </T>
       </Row>
+      {turn.photos?.length ? <PhotoStrip photos={turn.photos} /> : null}
       <Card style={turn.failed ? { borderColor: colors.warning } : undefined}>
         {turn.text ? (
           <SimpleMarkdown text={turn.text} />
@@ -464,25 +472,40 @@ function ActionButton({ action }: { action: AIAction | undefined }) {
 }
 
 /**
- * How far the keyboard overlaps this view. Measured in window coordinates when
- * the keyboard opens, so it is right whether or not the system resized the
- * window (Android edge-to-edge does not) and whatever sits below (tab bar).
+ * How far the keyboard overlaps this view, measured in window coordinates, so
+ * it is right whether or not the system resized the window (Android
+ * edge-to-edge does not). Re-measured when the view's own layout changes,
+ * because the tab bar hides once the keyboard is up and the view grows.
  */
-function useKeyboardInset(view: RefObject<View | null>): number {
+function useKeyboardInset(view: RefObject<View | null>): { inset: number; onLayout: () => void } {
   const [inset, setInset] = useState(0);
+  const keyboardTop = useRef<number | null>(null);
+
+  const measure = useCallback(() => {
+    const top = keyboardTop.current;
+    if (top === null) return;
+    view.current?.measureInWindow((_x, y, _w, height) => {
+      // Our own padding is inside the frame, so the frame is stable to measure.
+      if (keyboardTop.current !== null) setInset(Math.max(0, y + height - top));
+    });
+  }, [view]);
+
   useEffect(() => {
     const showEvent = Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
     const hideEvent = Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
     const show = Keyboard.addListener(showEvent, (e) => {
-      view.current?.measureInWindow((_x, y, _w, height) => {
-        setInset(Math.max(0, y + height - e.endCoordinates.screenY));
-      });
+      keyboardTop.current = e.endCoordinates.screenY;
+      measure();
     });
-    const hide = Keyboard.addListener(hideEvent, () => setInset(0));
+    const hide = Keyboard.addListener(hideEvent, () => {
+      keyboardTop.current = null;
+      setInset(0);
+    });
     return () => {
       show.remove();
       hide.remove();
     };
-  }, [view]);
-  return inset;
+  }, [measure]);
+
+  return { inset, onLayout: measure };
 }

@@ -92,6 +92,18 @@ export const TripState = z.object({
 });
 export type TripState = z.infer<typeof TripState>;
 
+/** A photo shown with an answer (Unsplash). Wherever it is shown, the
+ * photographer and Unsplash must be credited, both linked. */
+export const Photo = z.object({
+  url: z.url(),
+  thumb_url: z.url(),
+  alt: z.string().default(''),
+  photographer: z.string(),
+  photographer_url: z.url(),
+  source_url: z.url(),
+});
+export type Photo = z.infer<typeof Photo>;
+
 export const ChatResponse = z.object({
   session_id: z.string(),
   conversation_id: z.string(),
@@ -104,6 +116,7 @@ export const ChatResponse = z.object({
   trip_state: TripState.default({}),
   notices: z.array(z.string()).default([]),
   actions: z.array(AIAction).default([]),
+  photos: z.array(Photo).default([]),
   latency_ms: z.number().default(0),
 });
 export type ChatResponse = z.infer<typeof ChatResponse>;
@@ -123,6 +136,7 @@ export const StreamMeta = z.object({
   session_id: z.string(),
   conversation_id: z.string(),
   actions: z.array(AIAction).default([]),
+  photos: z.array(Photo).default([]),
   resources: z.array(ResourceCard).default([]),
   affiliates: z.array(AffiliateCard).default([]),
   notices: z.array(z.string()).default([]),

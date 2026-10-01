@@ -80,6 +80,7 @@ class Settings:
     admin_key: str | None
     sync_secret: str | None
     wordpress_url: str
+    unsplash_access_key: str | None
     # Verifying signed-in app users (app/infra/auth.py). Either is enough.
     supabase_url: str | None
     supabase_jwt_secret: str | None
@@ -208,6 +209,7 @@ def load_settings() -> Settings:
         admin_key=_str("ADMIN_KEY"),
         sync_secret=_str("SYNC_SECRET"),
         wordpress_url=_str("WORDPRESS_URL", "https://comemorocco.com"),
+        unsplash_access_key=_str("UNSPLASH_ACCESS_KEY"),
         llm_provider=provider,
         anthropic_api_key=_str("ANTHROPIC_API_KEY"),
         answer_model=_str("ANSWER_MODEL", "claude-sonnet-4-6"),

@@ -79,6 +79,7 @@ export const en = {
     priceIndicative: 'Price & availability on the partner site.',
   },
   ai: {
+    photoBy: 'Photo:',
     title: 'ComeMorocco AI',
     subtitle: 'Ask anything about Morocco',
     placeholder: 'Ask about cities, routes, food, prices…',

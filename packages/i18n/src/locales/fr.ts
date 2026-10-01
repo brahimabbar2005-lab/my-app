@@ -77,6 +77,7 @@ export const fr: Messages = {
     priceIndicative: 'Prix et disponibilités sur le site partenaire.',
   },
   ai: {
+    photoBy: 'Photo :',
     title: 'ComeMorocco IA',
     subtitle: 'Posez vos questions sur le Maroc',
     placeholder: 'Villes, trajets, cuisine, prix…',

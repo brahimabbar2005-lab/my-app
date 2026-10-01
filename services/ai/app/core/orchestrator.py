@@ -34,10 +34,12 @@ from app.knowledge.affiliates import select_affiliates
 from app.knowledge.links import detect_content_gap, select_links
 from app.knowledge.retriever import get_retriever
 from app.core.actions import propose_actions
+from app.infra import unsplash
 from app.schemas import (
     AffiliateCard,
     AIActionOut,
     Classification,
+    PhotoOut,
     ResourceCard,
     TripState,
 )
@@ -59,6 +61,7 @@ class AnswerResult:
     quality_issues: list[dict[str, str]] = field(default_factory=list)
     content_gap: dict[str, Any] | None = None
     actions: list[AIActionOut] = field(default_factory=list)
+    photos: list[PhotoOut] = field(default_factory=list)
     debug: dict[str, Any] = field(default_factory=dict)
     message_id: str = field(default_factory=lambda: uuid.uuid4().hex)
 
@@ -69,6 +72,30 @@ NOTICE_NO_LIVE_DATA = (
 NOTICE_OFFICIAL_SOURCE = (
     "For visas and entry rules, always confirm with the Moroccan consulate for your nationality."
 )
+
+
+async def photos_for(message: str, trip: TripState, history: list[dict[str, str]]) -> list[PhotoOut]:
+    """Unsplash photos when the traveller asks to see something. "Show me
+    pictures of the place" names no place, so it falls back to the trip's
+    destinations and then to the previous question's subject."""
+    if not unsplash.wants_photos(message):
+        return []
+    query = unsplash.photo_query(message, trip.destinations)
+    if not query:
+        previous = [h["content"] for h in history if h.get("role") == "user"]
+        if previous:
+            query = unsplash.photo_query(previous[-1], [])
+    return await unsplash.search_photos(query)
+
+
+def photo_note(photos: list[PhotoOut]) -> str:
+    if not photos:
+        return ""
+    return (
+        f"\n\nPHOTOS: the app is showing {len(photos)} photos next to your answer "
+        "(from Unsplash, credited to their photographers). Do not say you cannot show "
+        "images; you may refer to the photos in one short sentence, then answer as usual."
+    )
 
 
 def retrieval_query_with_trip(message: str, trip: TripState) -> str:
@@ -209,6 +236,7 @@ class Orchestrator:
             message, classification, trip, page_url, already_linked
         )
 
+        photos = await photos_for(message, trip, history)
         system = build_system_prompt(
             classification,
             trip,
@@ -218,7 +246,7 @@ class Orchestrator:
             live_data_enabled=settings.live_data_enabled,
             site_url=settings.site_url,
             contact_url=settings.contact_url,
-        )
+        ) + photo_note(photos)
         if verdict.guidance:
             system += f"\n\nHANDLE WITH CARE: {verdict.guidance}"
 
@@ -237,6 +265,7 @@ class Orchestrator:
                 trip=trip,
                 resources=resources,
                 actions=propose_actions(classification, resources, []),
+                photos=photos,
                 notices=self._notices(classification, settings.live_data_enabled),
                 latency_ms=int((time.perf_counter() - started) * 1000),
                 flagged_for_review=True,
@@ -260,6 +289,7 @@ class Orchestrator:
             resources=resources,
             affiliates=affiliates,
             actions=propose_actions(classification, resources, affiliates),
+            photos=photos,
             notices=self._notices(classification, settings.live_data_enabled),
             usage=usage,
             latency_ms=int((time.perf_counter() - started) * 1000),
@@ -324,8 +354,10 @@ class Orchestrator:
         notices = self._notices(classification, settings.live_data_enabled)
 
         actions = propose_actions(classification, resources, affiliates)
+        photos = await photos_for(message, trip, history)
         yield "meta", {
             "actions": [a.model_dump() for a in actions],
+            "photos": [p.model_dump() for p in photos],
             "resources": [r.model_dump() for r in resources],
             "affiliates": [a.model_dump() for a in affiliates],
             "notices": notices,
@@ -338,7 +370,7 @@ class Orchestrator:
             classification, trip, context_items, resources, affiliates,
             live_data_enabled=settings.live_data_enabled,
             site_url=settings.site_url, contact_url=settings.contact_url,
-        )
+        ) + photo_note(photos)
         if verdict.guidance:
             system += f"\n\nHANDLE WITH CARE: {verdict.guidance}"
 
@@ -357,7 +389,7 @@ class Orchestrator:
             yield "done", AnswerResult(
                 answer="".join(chunks) or message_text, classification=classification,
                 trip=trip, resources=resources, affiliates=affiliates, notices=notices, actions=actions,
-                usage=usage, latency_ms=int((time.perf_counter() - started) * 1000),
+                photos=photos, usage=usage, latency_ms=int((time.perf_counter() - started) * 1000),
                 flagged_for_review=True, debug={"error": str(exc)},
             )
             return
@@ -374,6 +406,7 @@ class Orchestrator:
             affiliates=affiliates,
             notices=notices,
             actions=actions,
+            photos=photos,
             usage=usage,
             latency_ms=int((time.perf_counter() - started) * 1000),
             flagged_for_review=flagged,

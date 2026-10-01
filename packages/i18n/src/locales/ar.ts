@@ -77,6 +77,7 @@ export const ar: Messages = {
     priceIndicative: 'السعر والتوفر على موقع الشريك.',
   },
   ai: {
+    photoBy: 'تصوير:',
     title: 'مساعد ComeMorocco الذكي',
     subtitle: 'اسأل أي شيء عن المغرب',
     placeholder: 'اسأل عن المدن، الطرق، الطعام، الأسعار…',

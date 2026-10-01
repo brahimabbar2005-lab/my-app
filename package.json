@@ -13,6 +13,7 @@
     "check": "pnpm typecheck && pnpm lint && pnpm test",
     "mobile": "pnpm --filter @comemorocco/mobile start",
     "worker": "pnpm --filter @comemorocco/worker-platform dev",
-    "secrets:scan": "node scripts/scan-secrets.mjs"
+    "secrets:scan": "node scripts/scan-secrets.mjs",
+    "worker:lan": "pnpm --filter @comemorocco/worker-platform dev:lan"
   }
 }

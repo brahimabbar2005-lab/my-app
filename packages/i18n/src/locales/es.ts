@@ -76,6 +76,7 @@ export const es: Messages = {
     priceIndicative: 'Precio y disponibilidad en la web del socio.',
   },
   ai: {
+    photoBy: 'Foto:',
     title: 'ComeMorocco IA',
     subtitle: 'Pregunta lo que quieras sobre Marruecos',
     placeholder: 'Ciudades, rutas, comida, precios…',

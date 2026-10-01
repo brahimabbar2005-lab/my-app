@@ -12,3 +12,8 @@ export function pageImage(url: string | null | undefined): string | undefined {
   const withSlash = url.endsWith('/') ? url : `${url}/`;
   return images[url] ?? images[withSlash];
 }
+
+/** A partner activity's photo: the closest-matching site page's photo. */
+export function listingImage(listingId: string): string | undefined {
+  return images[`listing:${listingId}`];
+}

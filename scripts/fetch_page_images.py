@@ -89,6 +89,37 @@ def og_image(url: str) -> str | None:
     return None
 
 
+STOP = {"and", "the", "from", "with", "tour", "tours", "trip", "day", "morocco", "moroccan", "guide",
+        "best", "in", "of", "to", "a", "for", "your", "private", "small", "group", "full", "half"}
+
+
+def words(text: str) -> set[str]:
+    return {w for w in re.findall(r"[a-z]+", text.lower()) if len(w) > 2 and w not in STOP}
+
+
+def listing_photos(catalog: dict, found: dict[str, str]) -> dict[str, str]:
+    """Partner offers have no photos of their own: give each one the photo of
+    the site page whose title (or address) shares the most words with the
+    offer, else its destination guide's photo. Keys are "listing:<id>"."""
+    pages = []
+    for article in catalog["articles"]:
+        image = found.get(article["canonical_url"])
+        if image:
+            pages.append((words(article["title"] + " " + article["canonical_url"]), image))
+    guides = {d["id"]: found.get(d["guide_url"] or "") for d in catalog["destinations"]}
+    out: dict[str, str] = {}
+    for listing in catalog["listings"]:
+        if listing.get("kind") != "activity":
+            continue  # brand partners (Booking.com, car rental sites) keep their icon
+        wanted = words(f"{listing['title']} {listing.get('subtitle', '')}")
+        best = max(pages, key=lambda p: len(wanted & p[0]), default=None)
+        if best and len(wanted & best[0]) >= 2:
+            out[f"listing:{listing['id']}"] = best[1]
+        elif guides.get(listing.get("destination") or ""):
+            out[f"listing:{listing['id']}"] = guides[listing["destination"]]
+    return out
+
+
 def main() -> None:
     catalog = json.loads(CATALOG.read_text())
     pages = sorted(
@@ -99,8 +130,11 @@ def main() -> None:
     with ThreadPoolExecutor(max_workers=8) as pool:
         images = dict(zip(pages, pool.map(og_image, pages)))
     found = {page: image for page, image in sorted(images.items()) if image}
+    pages_with_photo = len(found)
+    found.update(listing_photos(catalog, found))
     OUT.write_text(json.dumps(found, indent=1, ensure_ascii=False) + "\n")
-    print(f"wrote {OUT.relative_to(ROOT)}: {len(found)}/{len(pages)} pages have a photo")
+    print(f"wrote {OUT.relative_to(ROOT)}: {pages_with_photo}/{len(pages)} pages and "
+          f"{len(found) - pages_with_photo} activities have a photo")
 
 
 if __name__ == "__main__":

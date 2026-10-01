@@ -7,7 +7,8 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "dev:lan": "wrangler dev --ip 0.0.0.0 --port 8787"
   },
   "dependencies": {
     "@comemorocco/shared": "workspace:*",

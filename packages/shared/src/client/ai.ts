@@ -188,6 +188,7 @@ async function jsonAsEvents(
       affiliates: result.affiliates,
       notices: result.notices,
       actions: result.actions,
+      photos: result.photos,
       intents: result.intents,
       language: result.language,
       trip_state: result.trip_state,

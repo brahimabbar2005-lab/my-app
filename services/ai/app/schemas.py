@@ -83,6 +83,18 @@ class AffiliateCard(BaseModel):
     disclosure: str = "Partner link — ComeMorocco may earn a commission if you book through it."
 
 
+class PhotoOut(BaseModel):
+    """A photo shown with an answer. The app must show the credit
+    (photographer + Unsplash, both linked) wherever it shows the photo."""
+
+    url: str
+    thumb_url: str
+    alt: str = ""
+    photographer: str
+    photographer_url: str
+    source_url: str
+
+
 class ChatResponse(BaseModel):
     # Returned so the caller can send it back on the next turn. The widget
     # generates its own and keeps it in localStorage; other clients should
@@ -100,6 +112,7 @@ class ChatResponse(BaseModel):
     # forecast" style notes without the model having to remember to say it.
     notices: list[str] = []
     actions: list[AIActionOut] = []
+    photos: list[PhotoOut] = []
     latency_ms: int = 0
 
 
