@@ -1,6 +1,6 @@
 # APTK keyword research — Agafay Desert tours
 
-The research behind `posts/agafay-desert-tours-from-marrakech.html`. It follows the
+The research behind `posts/agafay-desert-marrakech.html`. It follows the
 five-step method: keyword formats → APTK → autocomplete validation → ChatGPT query
 fan-outs → (optional) creative mode in Ahrefs/Semrush.
 
@@ -46,66 +46,72 @@ Chosen topic: **Agafay Desert (bookable experiences from Marrakech)**.
 
 ## 4. Keywords by funnel stage
 
-| Stage | Keyword idea | Status |
-|---|---|---|
-| BOFU | **agafay desert tour from marrakech** (primary) | SERP checked ✅ · autocomplete ⏳ |
-| BOFU | agafay desert tours / best agafay desert tours | SERP checked ✅ · autocomplete ⏳ |
-| BOFU | agafay desert dinner (camel ride sunset dinner) | SERP checked ✅ · autocomplete ⏳ |
-| BOFU | agafay quad biking / agafay buggy | SERP checked ✅ · autocomplete ⏳ |
-| BOFU | agafay desert camp / luxury camp agafay | ⏳ — strong candidate for a separate roundup post |
-| MOFU | how to get to agafay desert from marrakech | ⏳ — answered inside the post |
-| MOFU | agafay vs merzouga | SERP checked ✅ — crowded (≈9 dedicated pages). Covered as one section, not its own post |
-| TOFU | is agafay desert worth it | SERP checked ✅ — answered in section 1 and the FAQ |
-| TOFU | what is the agafay desert / is agafay a real desert | ⏳ — FAQ |
+### Google autocomplete results (checked by the site owner, 1 Oct 2026)
 
-### What the SERP for "agafay desert tour from marrakech" looks like
+`agaf…` → agafay luxury camp · agafay desert · agafay marrakech · agafay valley ·
+agafay desert luxury camp · agafay valley camp · agafay quad
 
-TripAdvisor, Viator, GetYourGuide, a handful of operator sites (feelmorocco, marrakech-desert-trips,
-puremoroccotours, daysinmorocco), and **two independent blogs**: backpackmoments.com
-(`/agafay-desert-day-trip/`) and theadventuremanual.com (`/best-agafay-desert-tours-morocco`).
-Most pages are operators selling one tour, not guides that help you pick between tour types.
-That gap is the angle of the post: *"which Agafay tour should I book?"*
+`agafay desert…` → agafay desert luxury camp · agafay desert hotel · agafay desert camp ·
+agafay desert marrakech · agafay desert quad · *(business listing: "AGAFAY DESERT: Dinner, Camel Ride, Berber…")* ·
+agafay desert camp marrakech
 
-## 5. What YOU need to validate (I couldn't — Google/Bing autocomplete is blocked from my environment)
+**What the check changed (step 3 of the method):** Claude's idea, *"agafay desert tour from marrakech"*,
+**did not autocomplete**. As in the video's "best no-code prototyping tools" example, the check
+turned up better keywords: searchers say **camp**, **luxury camp**, **hotel**, **marrakech** and **quad**.
+The post was re-angled around those keywords.
 
-In a private/incognito window, type each phrase slowly and note what appears:
+| Stage | Keyword | Autocomplete | Where it's used |
+|---|---|---|---|
+| BOFU/MOFU | **agafay desert marrakech** (focus) | ✅ | Title, slug, H1, intro, getting-there section |
+| BOFU | agafay desert camp / agafay desert camp marrakech | ✅ | H2 "Agafay desert camps" + Booking.com |
+| BOFU | agafay luxury camp / agafay desert luxury camp | ✅ (top suggestion) | H3 tier. **Deserves its own roundup post** (see 7) |
+| BOFU | agafay desert quad / agafay quad | ✅ | H2 "Agafay desert quad and buggy tours" + GYG widget |
+| BOFU | agafay desert dinner (camel ride) | ✅ (a business named for it) | H2 "sunset camel ride and dinner" + GYG widget |
+| TOFU | agafay valley | ✅ | Explained in "what it is" section |
+| BOFU | agafay desert hotel | ✅ | Covered by the camps section. Later: a hotel/camp roundup |
+| MOFU | agafay vs merzouga | SERP ✅ (crowded) | H3 only |
+| BOFU | agafay desert tour from marrakech | ❌ not in autocomplete | Dropped as the focus keyword |
 
-1. `agafay desert ` → do **tour**, **dinner**, **camp**, **quad** show up? In what order?
-2. `agafay desert tour` → is **from marrakech** suggested? Any price modifiers?
-3. `agafay ` → anything unexpected (e.g. *balloon*, *buggy*, *luxury*, *with kids*)?
-4. `best agafay` → does a roundup query exist?
-5. Repeat 1–3 in **Bing** and **Perplexity**.
+Per the video: for a topic that is new to the site, target a suggestion from the **middle of the list**
+(*agafay desert marrakech*), not the top one (*agafay luxury camp*), which is the most competitive.
+Once this post builds topical authority, go after the top suggestion.
 
-If **"agafay desert tour"** doesn't autocomplete but **"agafay desert dinner"** or
-**"agafay desert camp"** does, tell me and I'll re-angle the title, slug and H2s around the validated phrase.
-The body already covers all of them.
+## 5. Affiliate placement
+
+- GetYourGuide widgets (partner 7BARAIK): `agafay desert quad biking`, `agafay desert dinner camel ride sunset`,
+  `agafay desert marrakech` (booking box). "Powered by" links use real GYG pages:
+  `/agafay-desert-l166143/`, `/agafay-desert-l166143/sunset-tours-tc306/`, `/marrakesh-l208/quad-atv-tours-tc38/`.
+- Booking.com (Travelpayouts) link and search widget in the camps section.
+- Kiwitaxi link in "Getting there".
+- Every partner link has `rel="sponsored noopener"`, and the disclosure links to `/affiliate-disclaimer/`
+  (the template's `/affiliate-disclosure/` returns 404, so fix it in the template too).
 
 ## 6. ChatGPT query fan-out check (step 4 — for you to run)
 
 Prompts to run in ChatGPT (with search on), then Inspect → Network → filter by the
 conversation ID → search `queries`:
 
-- "What's the best Agafay desert tour from Marrakech?"
-- "Is the Agafay desert worth it or should I go to Merzouga?"
-- "Best sunset dinner in the desert near Marrakech"
+- "What are the best camps in the Agafay desert near Marrakech?"
+- "Is a night in the Agafay desert worth it?"
+- "Best quad biking in Agafay desert"
 
 Paste me the `queries` lists. Any recurring query the post doesn't answer becomes a new H2 or a new post.
 
 ## 7. Next posts in this cluster (in priority order)
 
-1. **Best luxury camps in Agafay** (BOFU, hotel affiliate)
+1. **Best luxury camps in Agafay** — top autocomplete suggestion. BOFU roundup with Booking.com. Needs real camp research (names, prices, reviews)
 2. **Hot air balloon Marrakech** — prices, what's included, is it worth it (BOFU, high ticket)
 3. **Quad biking in Marrakech: Agafay vs Palmeraie** (BOFU comparison)
 4. **Agafay Desert with kids** (MOFU, links to `/marrakech-with-kids-family-guide/`)
 
 ## WordPress fields for this post
 
-- **Title (H1):** Agafay Desert Tours from Marrakech: Which One Should You Book?
-- **Slug:** `agafay-desert-tours-from-marrakech`
-- **Rank Math focus keyword:** agafay desert tour from marrakech
-- **Secondary keywords:** agafay desert dinner, agafay quad biking, agafay vs merzouga, is agafay desert worth it
-- **Meta title (≤60):** Agafay Desert Tours from Marrakech (2026): Which to Book
-- **Meta description (≤155):** Sunset dinner, quad bikes, a full day or a night in camp? How each Agafay Desert tour from Marrakech works, what it costs, and which one fits your trip.
-- **Excerpt:** The closest desert to Marrakech is 45 minutes away. Here is how the four kinds of Agafay tour compare, and how to pick the right one for your trip.
+- **Title (H1):** Agafay Desert, Marrakech: Camps, Quad Bikes and Sunset Dinners (2026)
+- **Slug:** `agafay-desert-marrakech`
+- **Rank Math focus keyword:** agafay desert marrakech
+- **Secondary keywords:** agafay desert camp, agafay desert quad, agafay luxury camp, agafay valley
+- **Meta title (≤60):** Agafay Desert Marrakech: Camps, Quads & Dinners (2026)
+- **Meta description (≤155):** Marrakech's own desert is under an hour away. Agafay desert camps, quad tours and sunset dinners compared, with prices and how to get there.
+- **Excerpt:** Under an hour from the medina, Agafay is Marrakech's stone desert. Here is how its camps, quad tours and sunset dinners compare, and which one fits your trip.
 - **Category:** Desert / Marrakech
 - **Featured image:** wide shot of Agafay's stony hills at sunset with the Atlas behind
