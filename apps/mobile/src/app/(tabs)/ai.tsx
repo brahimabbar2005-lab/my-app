@@ -17,13 +17,13 @@ import {
 } from '@comemorocco/shared';
 import { radii, spacing } from '@comemorocco/ui';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useHeaderHeight } from 'expo-router/react-navigation';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
   KeyboardAvoidingView,
-  Platform,
   Pressable,
   StyleSheet,
   TextInput,
@@ -80,6 +80,7 @@ export default function AiScreen() {
   const conversationId = useRef<string | null>(null);
   const abort = useRef<AbortController | null>(null);
   const list = useRef<FlatList<Turn>>(null);
+  const headerHeight = useHeaderHeight();
   const handledQuery = useRef<string | null>(null);
 
   useEffect(() => {
@@ -183,8 +184,10 @@ export default function AiScreen() {
   return (
     <KeyboardAvoidingView
       style={{ flex: 1, backgroundColor: colors.background }}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}>
+      // Android draws edge-to-edge, so the window no longer resizes for the
+      // keyboard: pad on both platforms, offset by the header above us.
+      behavior="padding"
+      keyboardVerticalOffset={headerHeight}>
       <FlatList
         ref={list}
         data={turns}

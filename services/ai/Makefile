@@ -1,4 +1,4 @@
-.PHONY: help install build run test eval eval-gate eval-full eval-model check-model lint sync purge clean
+.PHONY: help install build run run-lan test eval eval-gate eval-full eval-model check-model lint sync purge clean
 
 help:
 	@echo "install     install dependencies"
@@ -24,6 +24,10 @@ build:
 
 run:
 	uvicorn app.main:app --reload --port 8000
+
+# Reachable from a phone on the same Wi-Fi (Expo Go testing).
+run-lan:
+	uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 test:
 	pytest -q

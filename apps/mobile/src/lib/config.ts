@@ -6,14 +6,21 @@
  * keys, AI provider keys and affiliate secrets never reach the app
  * (Master Plan §32, §42).
  */
+import Constants from 'expo-constants';
+import { Platform } from 'react-native';
+
+import { devHostUrl } from './dev-host';
+
 function env(value: string | undefined, fallback = ''): string {
   return (value ?? '').trim() || fallback;
 }
 
+const hostUri = __DEV__ ? Constants.expoConfig?.hostUri : null;
+
 export const config = {
-  aiUrl: env(process.env.EXPO_PUBLIC_AI_URL, 'http://localhost:8000'),
+  aiUrl: devHostUrl(env(process.env.EXPO_PUBLIC_AI_URL, 'http://localhost:8000'), hostUri, Platform.OS),
   appKey: env(process.env.EXPO_PUBLIC_APP_KEY),
-  platformUrl: env(process.env.EXPO_PUBLIC_PLATFORM_URL, 'http://localhost:8787'),
+  platformUrl: devHostUrl(env(process.env.EXPO_PUBLIC_PLATFORM_URL, 'http://localhost:8787'), hostUri, Platform.OS),
   supabaseUrl: env(process.env.EXPO_PUBLIC_SUPABASE_URL),
   supabaseAnonKey: env(process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY),
   siteUrl: 'https://comemorocco.com',

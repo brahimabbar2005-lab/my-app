@@ -15,7 +15,6 @@ import { destinationName, getDestination } from '@/data/catalog';
 import { useApp } from '@/lib/app-state';
 import { useAuth } from '@/lib/auth';
 import { type FeedPost, fetchFeed, POST_KINDS, type PostKind } from '@/lib/community';
-import { openArticle } from '@/lib/links';
 import { supabase } from '@/lib/supabase';
 
 const GUIDELINES = [
@@ -109,12 +108,6 @@ export default function Community() {
             <T style={{ flex: 1 }}>{g}</T>
           </Row>
         ))}
-        <Button
-          label={t('community.guidelines')}
-          kind="ghost"
-          icon="open-outline"
-          onPress={() => openArticle('https://comemorocco.com/community-guidelines/', 'community')}
-        />
       </Card>
     </Screen>
   );
