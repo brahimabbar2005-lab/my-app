@@ -80,6 +80,8 @@ export const ar: Messages = {
     priceIndicative: 'السعر والتوفر على موقع الشريك.',
   },
   ai: {
+    savePlan: 'أضف خطة {n} أيام إلى رحلتي',
+    planSaved: 'أُضيفت إلى رحلتي ({n} أيام) — افتح',
     photoBy: 'تصوير:',
     title: 'مساعد ComeMorocco الذكي',
     subtitle: 'اسأل أي شيء عن المغرب',

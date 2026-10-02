@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest';
 
 import {
   addItem,
+  applyPlan,
   createTrip,
   deterministicUuid,
   EMPTY_STATE,
@@ -153,5 +154,26 @@ describe('Supabase mapping', () => {
     expect(deterministicUuid('x')).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/);
     expect(deterministicUuid('x')).toBe(deterministicUuid('x'));
     expect(deterministicUuid('x')).not.toBe(deterministicUuid('y'));
+  });
+});
+
+describe('applyPlan', () => {
+  it('adds days, a note per day and each city once', () => {
+    let n = 0;
+    const ids = { id: () => `id-${(n += 1)}`, now: () => '2026-10-02T00:00:00.000Z' };
+    const plan = [
+      { day: 1, text: 'Marrakech — medina', destinations: [{ id: 'marrakech', title: 'Marrakech' }] },
+      { day: 2, text: 'Marrakech — gardens', destinations: [{ id: 'marrakech', title: 'Marrakech' }] },
+      { day: 3, text: 'Atlas foothills', destinations: [] },
+    ];
+    const state = applyPlan(EMPTY_STATE, ids, plan);
+    expect(state.trip!.dayCount).toBe(3);
+    expect(state.trip!.items.filter((i) => i.type === 'destination').map((i) => [i.refId, i.day])).toEqual([['marrakech', 1]]);
+    expect(state.trip!.items.filter((i) => i.type === 'note').map((i) => [i.day, i.title])).toEqual([
+      [1, 'Marrakech — medina'],
+      [2, 'Marrakech — gardens'],
+      [3, 'Atlas foothills'],
+    ]);
+    expect(applyPlan(state, ids, []).trip).toBe(state.trip);
   });
 });

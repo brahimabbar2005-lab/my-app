@@ -79,6 +79,8 @@ export const es: Messages = {
     priceIndicative: 'Precio y disponibilidad en la web del socio.',
   },
   ai: {
+    savePlan: 'Añadir este plan de {n} días a Mi viaje',
+    planSaved: 'Añadido a Mi viaje ({n} días) — abrir',
     photoBy: 'Foto:',
     title: 'ComeMorocco IA',
     subtitle: 'Pregunta lo que quieras sobre Marruecos',

@@ -44,6 +44,7 @@ interface TripStore {
   moveItem: (id: string, direction: -1 | 1) => void;
   setItemDay: (id: string, day: number | null) => void;
   setDayCount: (n: number) => void;
+  applyPlan: (plan: model.PlanToApply[]) => void;
   updateTrip: (patch: Parameters<typeof model.updateTrip>[2]) => void;
   deleteTrip: () => void;
   toggleSaved: (place: { refType: model.SavedRefType; refId: string; title: string }) => void;
@@ -142,6 +143,11 @@ export function TripProvider({ children }: { children: ReactNode }) {
       moveItem: (id, direction) => apply((s) => model.moveItem(s, ids, id, direction)),
       setItemDay: (id, day) => apply((s) => model.setItemDay(s, ids, id, day)),
       setDayCount: (n) => apply((s) => model.setDayCount(s, ids, n)),
+      applyPlan: (plan) => {
+        if (!state.trip) track('trip_created');
+        track('trip_item_added', { properties: { type: 'ai_plan', days: plan.length } });
+        apply((s) => model.applyPlan(s, ids, plan));
+      },
       updateTrip: (patch) => apply((s) => model.updateTrip(s, ids, patch)),
       deleteTrip: () => {
         const tripId = state.trip?.id;

@@ -20,7 +20,7 @@ import { radii, spacing } from '@comemorocco/ui';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useBottomTabBarHeight } from 'expo-router/build/react-navigation/bottom-tabs';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -38,11 +38,14 @@ import { ZelligeStar } from '@/components/brand';
 import { PhotoStrip } from '@/components/photos';
 import { SimpleMarkdown } from '@/components/markdown';
 import { Card, Chip, Row, T } from '@/components/ui';
+import { catalog, destinationName, getDestination } from '@/data/catalog';
 import { aiClient } from '@/lib/ai';
 import { track } from '@/lib/analytics';
 import { useApp } from '@/lib/app-state';
 import { useAuth } from '@/lib/auth';
 import { isActionDone, runAction } from '@/lib/ai-actions';
+import { ACTIVITY_TERMS, type LinkTerm } from '@/lib/autolink';
+import { parseItinerary } from '@/lib/itinerary';
 import { openArticle, openPartner } from '@/lib/links';
 import { tripContext } from '@/lib/trip-model';
 import { useTrip } from '@/lib/trip-store';
@@ -297,7 +300,7 @@ function AssistantTurn({ turn, onRate }: { turn: Turn; onRate: (helpful: boolean
       {turn.photos?.length ? <PhotoStrip photos={turn.photos} /> : null}
       <Card style={turn.failed ? { borderColor: colors.warning } : undefined}>
         {turn.text ? (
-          <SimpleMarkdown text={turn.text} />
+          <SimpleMarkdown text={turn.text} linkTerms={LINK_TERMS} onLink={(url) => openArticle(url, 'ai')} />
         ) : (
           <Row>
             <ActivityIndicator color={colors.primary} />
@@ -313,6 +316,8 @@ function AssistantTurn({ turn, onRate }: { turn: Turn; onRate: (helpful: boolean
           </Row>
         ))}
       </Card>
+
+      {!turn.pending && !turn.failed ? <SavePlanButton text={turn.text} /> : null}
 
       {turn.resources?.length ? (
         <View style={{ gap: spacing.sm }}>
@@ -494,4 +499,47 @@ function useKeyboardLift(): number {
   if (!keyboardHeight) return 0;
   const navigationBar = Platform.OS === 'android' ? insets.bottom : 0;
   return Math.max(0, keyboardHeight + navigationBar - tabBarHeight);
+}
+
+/** Words linked in answers: activity pages, and city names to their guides. */
+const LINK_TERMS: LinkTerm[] = [
+  ...ACTIVITY_TERMS,
+  ...catalog.destinations
+    .filter((d) => d.guide_url)
+    .map((d) => ({
+      url: d.guide_url!,
+      phrases: [...new Set([d.id.replace(/_/g, ' '), ...Object.values(d.name)].map((n) => n.toLowerCase()))],
+    })),
+];
+
+const PLACES = catalog.destinations.map((d) => ({
+  id: d.id,
+  names: [d.id.replace(/_/g, ' '), ...Object.values(d.name)],
+}));
+
+/** "Add this plan to My Trip" under answers that contain a day-by-day plan. */
+function SavePlanButton({ text }: { text: string }) {
+  const { t, locale } = useApp();
+  const trip = useTrip();
+  const [saved, setSaved] = useState(false);
+  const plan = useMemo(() => parseItinerary(text, PLACES), [text]);
+  if (!plan.length) return null;
+  const save = () => {
+    trip.applyPlan(
+      plan.map((d) => ({
+        day: d.day,
+        text: d.text,
+        destinations: d.destinations.map((id) => {
+          const place = getDestination(id);
+          return { id, title: place ? destinationName(place, locale) : id };
+        }),
+      })),
+    );
+    setSaved(true);
+  };
+  return saved ? (
+    <Chip label={t('ai.planSaved', { n: plan.length })} icon="checkmark-circle" onPress={() => router.push('/trip')} />
+  ) : (
+    <Chip label={t('ai.savePlan', { n: plan.length })} icon="calendar-outline" onPress={save} selected />
+  );
 }

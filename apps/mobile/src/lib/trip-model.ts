@@ -310,3 +310,29 @@ export function formatUuid(hex32: string): string {
   const s = h.join('');
   return `${s.slice(0, 8)}-${s.slice(8, 12)}-${s.slice(12, 16)}-${s.slice(16, 20)}-${s.slice(20, 32)}`;
 }
+
+export interface PlanToApply {
+  day: number;
+  text: string;
+  destinations: { id: string; title: string }[];
+}
+
+/**
+ * Saves a day-by-day plan (from an AI answer) into the trip: enough days for
+ * the plan, each day's plan as a note on that day, and each city once, on the
+ * first day it appears. Existing items stay; tapping twice adds nothing new
+ * except the notes, which the screen prevents by disabling the button.
+ */
+export function applyPlan(state: TripState, ids: Ids, plan: PlanToApply[]): TripState {
+  if (!plan.length) return state;
+  const lastDay = Math.max(...plan.map((p) => p.day));
+  let next = state.trip ? state : createTrip(state, ids, { dayCount: lastDay });
+  if (next.trip!.dayCount < lastDay) next = setDayCount(next, ids, lastDay);
+  for (const day of plan) {
+    for (const place of day.destinations) {
+      next = addItem(next, ids, { type: 'destination', refId: place.id, title: place.title, day: day.day });
+    }
+    next = addItem(next, ids, { type: 'note', title: day.text, day: day.day });
+  }
+  return next;
+}

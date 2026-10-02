@@ -80,6 +80,8 @@ export const fr: Messages = {
     priceIndicative: 'Prix et disponibilités sur le site partenaire.',
   },
   ai: {
+    savePlan: 'Ajouter ce plan de {n} jours à Mon voyage',
+    planSaved: 'Ajouté à Mon voyage ({n} jours) — ouvrir',
     photoBy: 'Photo :',
     title: 'ComeMorocco IA',
     subtitle: 'Posez vos questions sur le Maroc',

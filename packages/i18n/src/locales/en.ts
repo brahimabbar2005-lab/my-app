@@ -82,6 +82,8 @@ export const en = {
     priceIndicative: 'Price & availability on the partner site.',
   },
   ai: {
+    savePlan: 'Add this {n}-day plan to My Trip',
+    planSaved: 'Added to My Trip ({n} days) — open',
     photoBy: 'Photo:',
     title: 'ComeMorocco AI',
     subtitle: 'Ask anything about Morocco',
