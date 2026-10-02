@@ -22,14 +22,26 @@ export interface Destination {
   article_count: number;
 }
 
+export type ListingSubtype =
+  | 'hotel' | 'riad' | 'hostel' | 'guesthouse' | 'camp' | 'apartment' | 'villa'
+  | 'tour' | 'day_trip' | 'activity' | 'class' | 'car' | 'transfer' | 'driver';
+
 export interface Listing {
   id: string;
-  kind: 'program' | 'activity';
+  /** program/activity: bundled partner offers; direct: added by an admin. */
+  kind: 'program' | 'activity' | 'direct';
   category: ListingCategory;
   title: string;
   subtitle: string;
   destination: string | null;
   partner: string;
+  subtype?: ListingSubtype | null;
+  description?: string | null;
+  priceFromMinor?: number | null;
+  currency?: string | null;
+  imageUrl?: string | null;
+  /** A direct booking page, opened as is (partner links go through /go). */
+  websiteUrl?: string | null;
 }
 
 export interface Article {
@@ -62,11 +74,27 @@ export function getDestination(id: string): Destination | undefined {
   return catalog.destinations.find((d) => d.id === id);
 }
 
-/** Listings for a category/city. City-specific experiences come before country-wide partners. */
-export function listingsFor({ category, destination }: { category?: ListingCategory; destination?: string | null }) {
-  return catalog.listings
-    .filter((l) => (!category || l.category === category) && (!destination || l.destination === destination))
+export interface ListingFilter {
+  category?: ListingCategory;
+  destination?: string | null;
+  subtype?: ListingSubtype | null;
+}
+
+/** Filters a list of offers. City-specific offers come before country-wide partners. */
+export function filterListings(list: Listing[], { category, destination, subtype }: ListingFilter): Listing[] {
+  return list
+    .filter(
+      (l) =>
+        (!category || l.category === category) &&
+        (!destination || l.destination === destination) &&
+        (!subtype || l.subtype === subtype),
+    )
     .sort((a, b) => Number(a.destination === null) - Number(b.destination === null));
+}
+
+/** Bundled offers only (see lib/listings for the live catalogue). */
+export function listingsFor(filter: ListingFilter) {
+  return filterListings(catalog.listings, filter);
 }
 
 export function articlesFor(destination?: string | null, limit = 10): Article[] {

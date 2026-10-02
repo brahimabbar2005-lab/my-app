@@ -99,7 +99,7 @@ const CATEGORY_ICON: Record<Listing['category'], keyof typeof Ionicons.glyphMap>
 
 export function ListingRow({ listing, onPress }: { listing: Listing; onPress: () => void }) {
   const { colors, t } = useApp();
-  const photo = listingImage(listing.id);
+  const photo = listing.imageUrl ?? listingImage(listing.id);
   return (
     <Card>
       {photo ? (
@@ -122,7 +122,8 @@ export function ListingRow({ listing, onPress }: { listing: Listing; onPress: ()
             {listing.title}
           </T>
           <Row style={{ flexWrap: 'wrap' }}>
-            <Pill label={listing.subtitle} />
+            {listing.subtype ? <Pill label={t(`book.subtype_${listing.subtype}`)} tone="accent" /> : null}
+            {listing.subtitle ? <Pill label={listing.subtitle} /> : null}
             {listing.partner !== listing.title ? (
               <T variant="caption" tone="muted">
                 {listing.partner}
@@ -136,9 +137,16 @@ export function ListingRow({ listing, onPress }: { listing: Listing; onPress: ()
         <AddToTripButton item={{ type: 'listing', refId: listing.id, title: listing.title }} />
       ) : null}
       <Row style={{ justifyContent: 'space-between' }}>
-        <T variant="caption" tone="muted" style={{ flex: 1 }}>
-          {t('common.sponsored')} · {t('book.priceIndicative')}
-        </T>
+        <View style={{ flex: 1 }}>
+          {listing.priceFromMinor != null ? (
+            <T variant="bodyStrong">
+              {t('book.from')} {Math.round(listing.priceFromMinor / 100)} {listing.currency ?? 'MAD'}
+            </T>
+          ) : null}
+          <T variant="caption" tone="muted">
+            {listing.websiteUrl ? t('book.priceIndicative') : `${t('common.sponsored')} · ${t('book.priceIndicative')}`}
+          </T>
+        </View>
         <Pressable
           onPress={onPress}
           accessibilityRole="link"

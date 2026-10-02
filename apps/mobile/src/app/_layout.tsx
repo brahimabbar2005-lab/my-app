@@ -66,6 +66,8 @@ function Root() {
         <Stack.Screen name="destinations/[id]" options={{ headerShown: true, title: '' }} />
         <Stack.Screen name="community/[id]" options={{ headerShown: true, title: '' }} />
         <Stack.Screen name="admin" options={{ headerShown: true, title: 'Moderation' }} />
+        <Stack.Screen name="admin-listings" options={{ headerShown: true, title: 'Manage offers' }} />
+        <Stack.Screen name="admin-listing" options={{ headerShown: true, title: 'Offer' }} />
         <Stack.Screen name="community/new" options={{ headerShown: true, title: t('community.newPost'), presentation: 'modal' }} />
       </Stack>
     </ThemeProvider>

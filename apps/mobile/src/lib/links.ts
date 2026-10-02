@@ -2,6 +2,8 @@ import { goUrl, isSiteUrl, type Source, withAppUtm } from '@comemorocco/shared';
 import * as WebBrowser from 'expo-web-browser';
 import { Platform } from 'react-native';
 
+import type { Listing } from '@/data/catalog';
+
 import { track } from './analytics';
 import { config } from './config';
 
@@ -26,4 +28,14 @@ export async function openPartner(listingId: string, source: Source, anonymousId
     ...(anonymousId ? { aid: anonymousId } : {}),
   });
   await WebBrowser.openBrowserAsync(url);
+}
+
+/** Opens an offer: its direct booking page if it has one, else the partner redirect. */
+export async function openListing(listing: Pick<Listing, 'id' | 'websiteUrl'>, source: Source, anonymousId?: string) {
+  if (listing.websiteUrl) {
+    track('affiliate_clicked', { listing_id: listing.id, properties: { source, direct: true } });
+    await WebBrowser.openBrowserAsync(listing.websiteUrl);
+    return;
+  }
+  await openPartner(listing.id, source, anonymousId);
 }

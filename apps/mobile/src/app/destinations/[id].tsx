@@ -10,17 +10,19 @@ import { StyleSheet, View } from 'react-native';
 import { ArticleCard, ListingRow, ZelligeStar } from '@/components/brand';
 import { AddToTripButton, SaveButton } from '@/components/trip-buttons';
 import { Button, EmptyState, Screen, SectionHeader, T } from '@/components/ui';
-import { destinationName, destinationTagline, getDestination, listingsFor } from '@/data/catalog';
+import { destinationName, destinationTagline, filterListings, getDestination } from '@/data/catalog';
 import { useArticles } from '@/data/content';
 import { pageImage } from '@/data/images';
 import { useApp } from '@/lib/app-state';
-import { openArticle, openPartner } from '@/lib/links';
+import { openArticle, openListing } from '@/lib/links';
+import { useListings } from '@/lib/listings';
 
 export default function DestinationScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { t, locale, prefs } = useApp();
   const destination = id ? getDestination(id) : undefined;
   const articles = useArticles(destination?.id ?? null, 6);
+  const listings = useListings();
 
   if (!destination) {
     return (
@@ -35,7 +37,9 @@ export default function DestinationScreen() {
 
   const name = destinationName(destination, locale);
   const photo = pageImage(destination.guide_url);
-  const experiences = listingsFor({ destination: destination.id });
+  const here = filterListings(listings, { destination: destination.id });
+  const stays = here.filter((l) => l.category === 'stay');
+  const experiences = here.filter((l) => l.category !== 'stay');
 
   return (
     <Screen edges={[]}>
@@ -74,11 +78,24 @@ export default function DestinationScreen() {
         />
       </View>
 
+      {stays.length ? (
+        <View style={{ gap: spacing.md }}>
+          <SectionHeader
+            title={t('book.stays')}
+            action={t('common.seeAll')}
+            onAction={() => router.push({ pathname: '/book', params: { category: 'stay', destination: destination.id } })}
+          />
+          {stays.slice(0, 4).map((l) => (
+            <ListingRow key={l.id} listing={l} onPress={() => openListing(l, 'explore', prefs.anonymousId)} />
+          ))}
+        </View>
+      ) : null}
+
       {experiences.length ? (
         <View style={{ gap: spacing.md }}>
           <SectionHeader title={t('book.experiences')} />
           {experiences.map((l) => (
-            <ListingRow key={l.id} listing={l} onPress={() => openPartner(l.id, 'explore', prefs.anonymousId)} />
+            <ListingRow key={l.id} listing={l} onPress={() => openListing(l, 'explore', prefs.anonymousId)} />
           ))}
         </View>
       ) : null}

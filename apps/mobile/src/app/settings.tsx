@@ -85,7 +85,10 @@ export default function Settings() {
           <>
             <T variant="bodyStrong">{session.user.email}</T>
             {admin ? (
-              <Button label="Moderation queue" kind="secondary" icon="shield-checkmark-outline" onPress={() => router.push('/admin')} />
+              <>
+                <Button label="Moderation queue" kind="secondary" icon="shield-checkmark-outline" onPress={() => router.push('/admin')} />
+                <Button label="Manage offers (hotels, riads, tours…)" kind="secondary" icon="business-outline" onPress={() => router.push('/admin-listings')} />
+              </>
             ) : null}
             <Button label={t('common.signOut')} kind="secondary" icon="log-out-outline" onPress={signOut} />
           </>

@@ -319,6 +319,60 @@ select pg_temp.expect((select score from public.community_feed where id = '50000
 select pg_temp.expect((select comment_count from public.community_feed where id = '50000000-0000-0000-0000-00000000000d') = 1, 'feed counts comments');
 commit;
 
+-- Admin catalogue (v0.4) ---------------------------------------------------------
+begin;
+set local role authenticated;
+select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-00000000000e","role":"authenticated"}', true);
+do $$ begin
+  begin perform public.admin_save_listing('{"title":"Fake riad","category":"stay"}'); raise exception 'FAIL: non-admin saved a listing';
+  exception when insufficient_privilege then null; end;
+end $$;
+do $$ begin
+  begin perform public.admin_listings(); raise exception 'FAIL: non-admin listed admin listings';
+  exception when insufficient_privilege then null; end;
+end $$;
+commit;
+
+begin;
+set local role authenticated;
+select set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-000000000099","role":"authenticated"}', true);
+create temp table saved_ids (name text, id text) on commit drop;
+insert into saved_ids select 'riad', public.admin_save_listing(jsonb_build_object(
+  'title', 'Riad Dar Test', 'category', 'stay', 'subtype', 'riad', 'destination_id', 'fes', 'status', 'published',
+  'price_from_minor', 90000, 'image_url', 'https://comemorocco.com/x.jpg',
+  'link_url', 'https://www.booking.com/hotel/ma/dar-test.html', 'link_is_partner', true, 'partner_name', 'Booking.com'));
+insert into saved_ids select 'hostel', public.admin_save_listing(jsonb_build_object(
+  'title', 'Draft hostel', 'category', 'stay', 'subtype', 'hostel', 'link_url', 'https://hostel.example/book'));
+do $$ begin
+  begin perform public.admin_save_listing('{"title":"Bad link","category":"stay","link_url":"http://insecure.example"}');
+    raise exception 'FAIL: accepted a non-https link';
+  exception when invalid_parameter_value then null; end;
+end $$;
+select pg_temp.expect((select count(*) from public.admin_listings() where id in (select id from saved_ids)) = 2, 'admin sees drafts too');
+select pg_temp.expect((select partner_url from public.admin_listings() where id = (select id from saved_ids where name = 'riad'))
+  = 'https://www.booking.com/hotel/ma/dar-test.html', 'partner link stored privately');
+select pg_temp.expect((select website_url from public.listings where id = (select id from saved_ids where name = 'hostel'))
+  = 'https://hostel.example/book', 'direct link is public');
+-- Switching the riad to a direct link removes its partner link.
+select public.admin_save_listing(jsonb_build_object('id', (select id from saved_ids where name = 'riad'), 'title', 'Riad Dar Test',
+  'category', 'stay', 'subtype', 'riad', 'status', 'published', 'link_url', 'https://riad.example', 'link_is_partner', false));
+select pg_temp.expect((select partner_url from public.admin_listings() where id = (select id from saved_ids where name = 'riad')) is null,
+  'switching to a direct link drops the partner link');
+do $$ begin
+  begin perform 1 from public.affiliate_links limit 1; raise exception 'FAIL: app users read affiliate_links';
+  exception when insufficient_privilege then null; end;
+end $$;
+commit;
+
+begin;
+set local role anon;
+select set_config('request.jwt.claims', '{"role":"anon"}', true);
+select pg_temp.expect(exists (select 1 from public.listings where title = 'Riad Dar Test' and subtype = 'riad' and status = 'published'),
+  'guests see published stays');
+select pg_temp.expect(not exists (select 1 from public.listings where title = 'Draft hostel'), 'guests do not see drafts');
+commit;
+select pg_temp.expect((select count(*) from public.audit_log where action = 'catalog.save_listing') = 3, 'catalogue saves are audited');
+
 -- Every public table has RLS forced on.
 select pg_temp.expect(not exists (
   select 1 from pg_class c join pg_namespace n on n.oid = c.relnamespace
