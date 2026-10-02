@@ -50,6 +50,9 @@ export const en = {
     family: 'Family trip',
   },
   explore: {
+    locationDenied: "Location is off for ComeMorocco. Pick a city below, or allow location in your phone's settings.",
+    locationOutside: "You don't seem to be in Morocco yet — pick the city you're heading to.",
+    locationError: "Couldn't get your location. Pick a city below.",
     greeting: 'Where to next?',
     searchPlaceholder: 'Search cities, tours, riads…',
     destinations: 'Destinations',

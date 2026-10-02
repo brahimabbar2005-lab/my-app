@@ -47,6 +47,9 @@ export const fr: Messages = {
     family: 'En famille',
   },
   explore: {
+    locationDenied: 'La localisation est désactivée pour ComeMorocco. Choisissez une ville ci-dessous, ou autorisez-la dans les réglages.',
+    locationOutside: 'Vous ne semblez pas encore être au Maroc — choisissez la ville où vous allez.',
+    locationError: "Impossible d'obtenir votre position. Choisissez une ville ci-dessous.",
     greeting: 'Où aller ensuite ?',
     searchPlaceholder: 'Villes, excursions, riads…',
     destinations: 'Destinations',

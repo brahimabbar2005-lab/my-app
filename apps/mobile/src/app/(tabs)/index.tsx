@@ -6,6 +6,7 @@
  */
 import { spacing } from '@comemorocco/ui';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { FlatList, Modal, Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
@@ -16,6 +17,7 @@ import { articlesForInterests, catalog, destinationName, destinationTagline, lis
 import { useArticles } from '@/data/content';
 import { track } from '@/lib/analytics';
 import { useApp } from '@/lib/app-state';
+import { byDistance, OUTSIDE_KM } from '@/lib/nearby';
 import { openArticle, openPartner } from '@/lib/links';
 
 export default function Explore() {
@@ -164,13 +166,43 @@ function NearMeSheet({
   onChooseCity: (id: string) => void;
 }) {
   const { t, colors, locale } = useApp();
+  const [locating, setLocating] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+
+  const locate = async () => {
+    setLocating(true);
+    setMessage(null);
+    track('location_permission_requested');
+    try {
+      const permission = await Location.requestForegroundPermissionsAsync();
+      track('location_permission_result', { properties: { granted: permission.granted } });
+      if (!permission.granted) {
+        setMessage(t('explore.locationDenied'));
+        return;
+      }
+      const position = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
+      // Only the nearest city is used; the position itself is not stored or sent.
+      const nearest = byDistance({ lat: position.coords.latitude, lng: position.coords.longitude }, catalog.destinations)[0];
+      if (!nearest || nearest.km > OUTSIDE_KM) {
+        setMessage(t('explore.locationOutside'));
+        return;
+      }
+      onChooseCity(nearest.id);
+    } catch {
+      setMessage(t('explore.locationError'));
+    } finally {
+      setLocating(false);
+    }
+  };
+
   return (
     <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
       <Pressable style={styles.backdrop} onPress={onClose} accessibilityLabel={t('common.cancel')} />
       <View style={[styles.sheet, { backgroundColor: colors.background }]}>
         <T variant="title">{t('explore.locationWhyTitle')}</T>
         <T tone="muted">{t('explore.locationWhy')}</T>
-        <Button label={`${t('explore.useMyLocation')} · ${t('common.comingSoon')}`} icon="navigate" disabled />
+        <Button label={t('explore.useMyLocation')} icon="navigate" onPress={locate} loading={locating} />
+        {message ? <T tone="warning">{message}</T> : null}
         <T variant="heading">{t('explore.chooseManually')}</T>
         <Row style={{ flexWrap: 'wrap' }}>
           {catalog.destinations.map((d) => (

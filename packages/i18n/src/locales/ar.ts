@@ -48,6 +48,9 @@ export const ar: Messages = {
     family: 'رحلة عائلية',
   },
   explore: {
+    locationDenied: 'الموقع غير مفعّل لتطبيق ComeMorocco. اختر مدينة أدناه أو فعّل الموقع من الإعدادات.',
+    locationOutside: 'يبدو أنك لست في المغرب بعد — اختر المدينة التي تتجه إليها.',
+    locationError: 'تعذر تحديد موقعك. اختر مدينة أدناه.',
     greeting: 'إلى أين بعد ذلك؟',
     searchPlaceholder: 'ابحث عن مدن، جولات، رياضات…',
     destinations: 'الوجهات',

@@ -70,6 +70,12 @@
         {
           "supportsRTL": true
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "ComeMorocco uses your location only to show the nearest city and places around you. It is never stored."
+        }
       ]
     ],
     "experiments": {

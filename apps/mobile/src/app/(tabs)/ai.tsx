@@ -19,7 +19,8 @@ import {
 import { radii, spacing } from '@comemorocco/ui';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router, useLocalSearchParams } from 'expo-router';
-import { type RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { useBottomTabBarHeight } from 'expo-router/build/react-navigation/bottom-tabs';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -30,6 +31,8 @@ import {
   TextInput,
   View,
 } from 'react-native';
+
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ZelligeStar } from '@/components/brand';
 import { PhotoStrip } from '@/components/photos';
@@ -83,8 +86,7 @@ export default function AiScreen() {
   const conversationId = useRef<string | null>(null);
   const abort = useRef<AbortController | null>(null);
   const list = useRef<FlatList<Turn>>(null);
-  const container = useRef<View>(null);
-  const keyboard = useKeyboardInset(container);
+  const keyboardLift = useKeyboardLift();
   const handledQuery = useRef<string | null>(null);
 
   useEffect(() => {
@@ -193,10 +195,7 @@ export default function AiScreen() {
   };
 
   return (
-    <View
-      ref={container}
-      onLayout={keyboard.onLayout}
-      style={{ flex: 1, backgroundColor: colors.background, paddingBottom: keyboard.inset }}>
+    <View style={{ flex: 1, backgroundColor: colors.background, paddingBottom: keyboardLift }}>
       <FlatList
         ref={list}
         data={turns}
@@ -472,40 +471,27 @@ function ActionButton({ action }: { action: AIAction | undefined }) {
 }
 
 /**
- * How far the keyboard overlaps this view, measured in window coordinates, so
- * it is right whether or not the system resized the window (Android
- * edge-to-edge does not). Re-measured when the view's own layout changes,
- * because the tab bar hides once the keyboard is up and the view grows.
+ * How much to lift the composer while the keyboard is up. The tab bar stays
+ * in place under the keyboard, so the keyboard covers (keyboard height − tab
+ * bar height) of this view. Android reports the keyboard height without the
+ * navigation bar below it (edge-to-edge), so that bar is added back there.
+ * No screen coordinates: they differ between Android versions and modes.
  */
-function useKeyboardInset(view: RefObject<View | null>): { inset: number; onLayout: () => void } {
-  const [inset, setInset] = useState(0);
-  const keyboardTop = useRef<number | null>(null);
-
-  const measure = useCallback(() => {
-    const top = keyboardTop.current;
-    if (top === null) return;
-    view.current?.measureInWindow((_x, y, _w, height) => {
-      // Our own padding is inside the frame, so the frame is stable to measure.
-      if (keyboardTop.current !== null) setInset(Math.max(0, y + height - top));
-    });
-  }, [view]);
-
+function useKeyboardLift(): number {
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+  const tabBarHeight = useBottomTabBarHeight();
+  const insets = useSafeAreaInsets();
   useEffect(() => {
     const showEvent = Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
     const hideEvent = Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
-    const show = Keyboard.addListener(showEvent, (e) => {
-      keyboardTop.current = e.endCoordinates.screenY;
-      measure();
-    });
-    const hide = Keyboard.addListener(hideEvent, () => {
-      keyboardTop.current = null;
-      setInset(0);
-    });
+    const show = Keyboard.addListener(showEvent, (e) => setKeyboardHeight(e.endCoordinates.height));
+    const hide = Keyboard.addListener(hideEvent, () => setKeyboardHeight(0));
     return () => {
       show.remove();
       hide.remove();
     };
-  }, [measure]);
-
-  return { inset, onLayout: measure };
+  }, []);
+  if (!keyboardHeight) return 0;
+  const navigationBar = Platform.OS === 'android' ? insets.bottom : 0;
+  return Math.max(0, keyboardHeight + navigationBar - tabBarHeight);
 }

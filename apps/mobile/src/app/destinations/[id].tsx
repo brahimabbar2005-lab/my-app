@@ -3,6 +3,7 @@
  * https://comemorocco.com/destinations/<id> (Universal / App Links).
  */
 import { radii, spacing } from '@comemorocco/ui';
+import { Image } from 'expo-image';
 import { router, Stack, useLocalSearchParams } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
@@ -11,6 +12,7 @@ import { AddToTripButton, SaveButton } from '@/components/trip-buttons';
 import { Button, EmptyState, Screen, SectionHeader, T } from '@/components/ui';
 import { destinationName, destinationTagline, getDestination, listingsFor } from '@/data/catalog';
 import { useArticles } from '@/data/content';
+import { pageImage } from '@/data/images';
 import { useApp } from '@/lib/app-state';
 import { openArticle, openPartner } from '@/lib/links';
 
@@ -32,13 +34,21 @@ export default function DestinationScreen() {
   }
 
   const name = destinationName(destination, locale);
+  const photo = pageImage(destination.guide_url);
   const experiences = listingsFor({ destination: destination.id });
 
   return (
     <Screen edges={[]}>
       <Stack.Screen options={{ title: name }} />
       <View style={[styles.hero, { backgroundColor: destination.hue }]}>
-        <ZelligeStar size={260} color="#FFFFFF" opacity={0.12} style={{ position: 'absolute', top: -70, end: -60 }} />
+        {photo ? (
+          <>
+            <Image source={photo} style={StyleSheet.absoluteFill} contentFit="cover" transition={200} accessible={false} />
+            <View style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(0,0,0,0.38)' }]} />
+          </>
+        ) : (
+          <ZelligeStar size={260} color="#FFFFFF" opacity={0.12} style={{ position: 'absolute', top: -70, end: -60 }} />
+        )}
         <View style={{ position: 'absolute', top: spacing.lg, end: spacing.lg }}>
           <SaveButton refType="destination" refId={destination.id} title={name} size={28} onDark />
         </View>
